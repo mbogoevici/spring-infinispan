@@ -45,7 +45,7 @@ import org.springframework.util.Assert;
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>
  *
  */
-class SpringEmbeddedCacheManager extends AbstractCacheManager {
+public class SpringEmbeddedCacheManager extends AbstractCacheManager {
 
 	private final EmbeddedCacheManager nativeCacheManager;
 

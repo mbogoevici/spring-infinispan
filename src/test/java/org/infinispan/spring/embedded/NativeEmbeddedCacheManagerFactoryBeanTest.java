@@ -19,10 +19,18 @@
 
 package org.infinispan.spring.embedded;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+import org.infinispan.Cache;
+import org.infinispan.config.Configuration;
+import org.infinispan.config.Configuration.CacheMode;
+import org.infinispan.lifecycle.ComponentStatus;
 import org.infinispan.manager.EmbeddedCacheManager;
 import org.junit.Test;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 /**
  * <p>
@@ -33,6 +41,9 @@ import org.junit.Test;
  *
  */
 public class NativeEmbeddedCacheManagerFactoryBeanTest {
+
+	private static final String CACHE_NAME_FROM_CONFIGURATION_FILE = "asyncCache";
+	private static final String NAMED_ASYNC_CACHE_CONFIG_LOCATION = "named-async-cache.xml";
 
 	/**
 	 * Test method for {@link org.infinispan.spring.embedded.NativeEmbeddedCacheManagerFactoryBean#setDefaultConfigurationLocation(org.springframework.core.io.Resource)}.
@@ -51,37 +62,60 @@ public class NativeEmbeddedCacheManagerFactoryBeanTest {
 						+ "has been specified. However, it returned null.", embeddedCacheManager);
 	}
 
-	//	/**
-	//	 * Test method for {@link org.infinispan.spring.embedded.NativeEmbeddedCacheManagerFactoryBean#afterPropertiesSet()}.
-	//	 */
-	//	@Test
-	//	public final void testAfterPropertiesSet() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-	//
-	//	/**
-	//	 * Test method for {@link org.infinispan.spring.embedded.NativeEmbeddedCacheManagerFactoryBean#getObject()}.
-	//	 */
-	//	@Test
-	//	public final void testGetObject() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-	//
-	//	/**
-	//	 * Test method for {@link org.infinispan.spring.embedded.NativeEmbeddedCacheManagerFactoryBean#getObjectType()}.
-	//	 */
-	//	@Test
-	//	public final void testGetObjectType() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
-	//
-	//	/**
-	//	 * Test method for {@link org.infinispan.spring.embedded.NativeEmbeddedCacheManagerFactoryBean#isSingleton()}.
-	//	 */
-	//	@Test
-	//	public final void testIsSingleton() {
-	//		fail("Not yet implemented"); // TODO
-	//	}
+	/**
+	 * Test method for {@link org.infinispan.spring.embedded.NativeEmbeddedCacheManagerFactoryBean#setDefaultConfigurationLocation(org.springframework.core.io.Resource)}.
+	 * @throws Exception 
+	 */
+	@Test
+	public final void nativeEmbeddedCacheManagerFactoryBeanShouldCreateACustomizedCacheManagerIfGivenADefaultConfigurationLocation()
+			throws Exception {
+		final Resource infinispanConfig = new ClassPathResource(NAMED_ASYNC_CACHE_CONFIG_LOCATION, getClass());
+
+		final NativeEmbeddedCacheManagerFactoryBean objectUnderTest = new NativeEmbeddedCacheManagerFactoryBean();
+		objectUnderTest.setDefaultConfigurationLocation(infinispanConfig);
+		objectUnderTest.afterPropertiesSet();
+
+		final EmbeddedCacheManager embeddedCacheManager = objectUnderTest.getObject();
+		assertNotNull(
+				"getObject() should have returned a valid EmbeddedCacheManager, configured using the configuration file "
+						+ "set on NativeEmbeddedCacheManagerFactoryBean. However, it returned null.",
+				embeddedCacheManager);
+		final Cache<Object, Object> cacheDefinedInCustomConfiguration = embeddedCacheManager
+				.getCache(CACHE_NAME_FROM_CONFIGURATION_FILE);
+		final Configuration configuration = cacheDefinedInCustomConfiguration.getConfiguration();
+		assertEquals("The cache named [" + CACHE_NAME_FROM_CONFIGURATION_FILE
+				+ "] is configured to have asynchonous replication cache mode. Yet, the cache returned from getCache("
+				+ CACHE_NAME_FROM_CONFIGURATION_FILE
+				+ ") has a different cache mode. Obviously, NativeEmbeddedCacheManagerFactoryBean did not use "
+				+ "the configuration file when instantiating EmbeddedCacheManager.", CacheMode.REPL_ASYNC,
+				configuration.getCacheMode());
+	}
+
+	/**
+	 * Test method for {@link org.infinispan.spring.embedded.NativeEmbeddedCacheManagerFactoryBean#getObjectType()}.
+	 * @throws Exception 
+	 */
+	@Test
+	public final void nativeEmbeddedCacheManagerFactoryBeanShouldReportTheCorrectObjectType() throws Exception {
+		final NativeEmbeddedCacheManagerFactoryBean objectUnderTest = new NativeEmbeddedCacheManagerFactoryBean();
+		objectUnderTest.afterPropertiesSet();
+
+		final EmbeddedCacheManager embeddedCacheManager = objectUnderTest.getObject();
+
+		assertEquals("getObjectType() should return the most derived class of the actual EmbeddedCacheManager "
+				+ "implementation returned from getObject(). However, it didn't.", embeddedCacheManager.getClass(),
+				objectUnderTest.getObjectType());
+	}
+
+	/**
+	 * Test method for {@link org.infinispan.spring.embedded.NativeEmbeddedCacheManagerFactoryBean#isSingleton()}.
+	 */
+	@Test
+	public final void nativeEmbeddedCacheManagerFactoryBeanShouldDeclareItselfToOnlyProduceSingletons() {
+		final NativeEmbeddedCacheManagerFactoryBean objectUnderTest = new NativeEmbeddedCacheManagerFactoryBean();
+
+		assertTrue("isSingleton() should always return true. However, it returned false", objectUnderTest.isSingleton());
+	}
 
 	/**
 	 * Test method for {@link org.infinispan.spring.embedded.NativeEmbeddedCacheManagerFactoryBean#destroy()}.
@@ -94,12 +128,13 @@ public class NativeEmbeddedCacheManagerFactoryBeanTest {
 		objectUnderTest.afterPropertiesSet();
 
 		final EmbeddedCacheManager embeddedCacheManager = objectUnderTest.getObject();
+		embeddedCacheManager.getCache(); // Implicitly starts EmbeddedCacheManager
 		objectUnderTest.destroy();
 
-		// FIXME: Why does this fail?
-		//		assertEquals(
-		//				"NativeEmbeddedCacheManagerFactoryBean should stop the created EmbeddedCacheManager when being destroyed. However, the created EmbeddedCacheManager is still not terminated.",
-		//				ComponentStatus.TERMINATED, embeddedCacheManager.getStatus());
+		assertEquals(
+				"NativeEmbeddedCacheManagerFactoryBean should stop the created EmbeddedCacheManager when being destroyed. "
+						+ "However, the created EmbeddedCacheManager is still not terminated.",
+				ComponentStatus.TERMINATED, embeddedCacheManager.getStatus());
 	}
 
 }
