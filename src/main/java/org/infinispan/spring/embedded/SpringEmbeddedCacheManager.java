@@ -52,7 +52,7 @@ public class SpringEmbeddedCacheManager extends AbstractCacheManager {
 	/**
 	 * @param nativeCacheManager
 	 */
-	SpringEmbeddedCacheManager(final EmbeddedCacheManager nativeCacheManager) {
+	public SpringEmbeddedCacheManager(final EmbeddedCacheManager nativeCacheManager) {
 		Assert.notNull(nativeCacheManager, "A non-null instance of EmbeddedCacheManager needs to be supplied");
 		checkNativeCacheManagerStatus(nativeCacheManager);
 		this.nativeCacheManager = nativeCacheManager;

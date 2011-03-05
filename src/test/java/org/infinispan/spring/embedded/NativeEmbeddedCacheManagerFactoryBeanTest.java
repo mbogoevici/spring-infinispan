@@ -43,6 +43,7 @@ import org.springframework.core.io.Resource;
 public class NativeEmbeddedCacheManagerFactoryBeanTest {
 
 	private static final String CACHE_NAME_FROM_CONFIGURATION_FILE = "asyncCache";
+
 	private static final String NAMED_ASYNC_CACHE_CONFIG_LOCATION = "named-async-cache.xml";
 
 	/**
