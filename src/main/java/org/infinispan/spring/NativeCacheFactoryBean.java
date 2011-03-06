@@ -23,7 +23,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.infinispan.Cache;
 import org.infinispan.manager.CacheContainer;
-import org.infinispan.manager.EmbeddedCacheManager;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.FactoryBean;
@@ -32,13 +31,18 @@ import org.springframework.util.StringUtils;
 
 /**
  * <p>
- * TODO: Document InfinispanCacheFactoryBean.
+ * A {@link org.springframework.beans.factory.FactoryBean <code>FactoryBean</code>} for creating a native
+ * {@link #setCacheName(String) named} INFINISPAN {@link org.infinispan.Cache <code>org.infinispan.Cache</code>}, 
+ * delegating to a {@link #setInfinispanCacheContainer(CacheContainer) <code>configurable</code>} 
+ * {@link org.infinispan.manager.CacheContainer <code>org.infinispan.manager.CacheContainer</code>}. If no
+ * cache name is explicitly set, this <code>FactoryBean</code>'s {@link #setBeanName(String) <code>beanName</code>}
+ * will be used instead.
  * </p>
  *
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>
  *
  */
-public class SpringCacheFactoryBean implements FactoryBean<Cache<Object, Object>>, BeanNameAware, InitializingBean,
+public class NativeCacheFactoryBean implements FactoryBean<Cache<Object, Object>>, BeanNameAware, InitializingBean,
 		DisposableBean {
 
 	protected final Log logger = LogFactory.getLog(getClass());
@@ -53,28 +57,28 @@ public class SpringCacheFactoryBean implements FactoryBean<Cache<Object, Object>
 
 	/**
 	 * <p>
-	 * Sets the {@link org.infinispan.manager.EmbeddedCacheManager <code>EmbeddedCacheManager</code>} to be
-	 * used for creating our {@link org.infinispan.Cache <code>Cache</code>} instance. If no <code>EmbeddedCacheManager</code>
-	 * is explicitly set a default <code>EmbeddedCacheManager</code> will be used.
+	 * Sets the {@link org.infinispan.manager.CacheContainer <code>org.infinispan.manager.CacheContainer</code>} to 
+	 * be used for creating our {@link org.infinispan.Cache <code>Cache</code>} instance. Note that this is a 
+	 * <strong>mandatory</strong> property.
 	 * </p>
 	 * 
 	 * @param infinispanCacheContainer 
-	 * 			The {@link org.infinispan.manager.EmbeddedCacheManager <code>EmbeddedCacheManager</code>} to be
-	 * 			used for creating our {@link org.infinispan.Cache <code>Cache</code>} instance
+	 * 			The {@link org.infinispan.manager.CacheContainer <code>org.infinispan.manager.CacheContainer</code>} to
+	 *          be used for creating our {@link org.infinispan.Cache <code>Cache</code>} instance
 	 */
-	public void setInfinispanCacheContainer(final EmbeddedCacheManager infinispanCacheContainer) {
+	public void setInfinispanCacheContainer(final CacheContainer infinispanCacheContainer) {
 		this.infinispanCacheContainer = infinispanCacheContainer;
 	}
 
 	/**
 	 * <p>
-	 * Sets the {@link org.infinispan.Cache#getName() name} of the {@link org.infinispan.Cache <code>Cache</code>}
+	 * Sets the {@link org.infinispan.Cache#getName() name} of the {@link org.infinispan.Cache <code>org.infinispan.Cache</code>}
 	 * to be created. If no explicit <code>cacheName</code> is set, this <code>FactoryBean</code> will use its
-	 * <code>beanName</code> as the <code>cacheName</code>.
+	 * {@link #setBeanName(String) <code>beanName</code>} as the <code>cacheName</code>.
 	 * </p>
 	 * 
 	 * @param cacheName 
-	 * 			The {@link org.infinispan.Cache#getName() name} of the {@link org.infinispan.Cache <code>Cache</code>}
+	 * 			The {@link org.infinispan.Cache#getName() name} of the {@link org.infinispan.Cache <code>org.infinispan.Cache</code>}
 	 * 			to be created
 	 */
 	public void setCacheName(final String cacheName) {
@@ -145,7 +149,7 @@ public class SpringCacheFactoryBean implements FactoryBean<Cache<Object, Object>
 	}
 
 	/**
-	 * Shuts down the <code>Cache</code> created by this <code>FactoryBean</code>.
+	 * Shuts down the <code>org.infinispan.Cache</code> created by this <code>FactoryBean</code>.
 	 * 
 	 * @see org.springframework.beans.factory.DisposableBean#destroy()
 	 * @see org.infinispan.Cache#stop()

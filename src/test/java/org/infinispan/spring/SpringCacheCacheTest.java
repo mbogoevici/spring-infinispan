@@ -34,7 +34,7 @@ public class SpringCacheCacheTest extends AbstractNativeCacheTest<org.infinispan
 
 	@Override
 	protected org.infinispan.Cache<Object, Object> createNativeCache() throws Exception {
-		final SpringCacheFactoryBean fb = new SpringCacheFactoryBean();
+		final NativeCacheFactoryBean fb = new NativeCacheFactoryBean();
 		fb.setInfinispanCacheContainer(new DefaultCacheManager());
 		fb.setBeanName(CACHE_NAME);
 		fb.setCacheName(CACHE_NAME);
