@@ -34,26 +34,26 @@ import org.springframework.core.io.Resource;
 
 /**
  * <p>
- * Test {@link NativeEmbeddedCacheManagerFactoryBean}.
+ * Test {@link EmbeddedInfinispanCacheManagerFactoryBean}.
  * </p>
  *
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>
  *
  */
-public class NativeEmbeddedCacheManagerFactoryBeanTest {
+public class EmbeddedInfinispanCacheManagerFactoryBeanTest {
 
 	private static final String CACHE_NAME_FROM_CONFIGURATION_FILE = "asyncCache";
 
 	private static final String NAMED_ASYNC_CACHE_CONFIG_LOCATION = "named-async-cache.xml";
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.NativeEmbeddedCacheManagerFactoryBean#setDefaultConfigurationLocation(org.springframework.core.io.Resource)}.
+	 * Test method for {@link org.infinispan.spring.embedded.EmbeddedInfinispanCacheManagerFactoryBean#setDefaultConfigurationLocation(org.springframework.core.io.Resource)}.
 	 * @throws Exception 
 	 */
 	@Test
-	public final void nativeEmbeddedCacheManagerFactoryBeanShouldCreateACacheManagerEvenIfNoDefaultConfigurationLocationHasBeenSet()
+	public final void embeddedInfinispanCacheManagerFactoryBeanShouldCreateACacheManagerEvenIfNoDefaultConfigurationLocationHasBeenSet()
 			throws Exception {
-		final NativeEmbeddedCacheManagerFactoryBean objectUnderTest = new NativeEmbeddedCacheManagerFactoryBean();
+		final EmbeddedInfinispanCacheManagerFactoryBean objectUnderTest = new EmbeddedInfinispanCacheManagerFactoryBean();
 		objectUnderTest.afterPropertiesSet();
 
 		final EmbeddedCacheManager embeddedCacheManager = objectUnderTest.getObject();
@@ -64,22 +64,22 @@ public class NativeEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.NativeEmbeddedCacheManagerFactoryBean#setDefaultConfigurationLocation(org.springframework.core.io.Resource)}.
+	 * Test method for {@link org.infinispan.spring.embedded.EmbeddedInfinispanCacheManagerFactoryBean#setDefaultConfigurationLocation(org.springframework.core.io.Resource)}.
 	 * @throws Exception 
 	 */
 	@Test
-	public final void nativeEmbeddedCacheManagerFactoryBeanShouldCreateACustomizedCacheManagerIfGivenADefaultConfigurationLocation()
+	public final void embeddedInfinispanCacheManagerFactoryBeanShouldCreateACustomizedCacheManagerIfGivenADefaultConfigurationLocation()
 			throws Exception {
 		final Resource infinispanConfig = new ClassPathResource(NAMED_ASYNC_CACHE_CONFIG_LOCATION, getClass());
 
-		final NativeEmbeddedCacheManagerFactoryBean objectUnderTest = new NativeEmbeddedCacheManagerFactoryBean();
+		final EmbeddedInfinispanCacheManagerFactoryBean objectUnderTest = new EmbeddedInfinispanCacheManagerFactoryBean();
 		objectUnderTest.setDefaultConfigurationLocation(infinispanConfig);
 		objectUnderTest.afterPropertiesSet();
 
 		final EmbeddedCacheManager embeddedCacheManager = objectUnderTest.getObject();
 		assertNotNull(
 				"getObject() should have returned a valid EmbeddedCacheManager, configured using the configuration file "
-						+ "set on NativeEmbeddedCacheManagerFactoryBean. However, it returned null.",
+						+ "set on EmbeddedInfinispanCacheManagerFactoryBean. However, it returned null.",
 				embeddedCacheManager);
 		final Cache<Object, Object> cacheDefinedInCustomConfiguration = embeddedCacheManager
 				.getCache(CACHE_NAME_FROM_CONFIGURATION_FILE);
@@ -87,18 +87,18 @@ public class NativeEmbeddedCacheManagerFactoryBeanTest {
 		assertEquals("The cache named [" + CACHE_NAME_FROM_CONFIGURATION_FILE
 				+ "] is configured to have asynchonous replication cache mode. Yet, the cache returned from getCache("
 				+ CACHE_NAME_FROM_CONFIGURATION_FILE
-				+ ") has a different cache mode. Obviously, NativeEmbeddedCacheManagerFactoryBean did not use "
+				+ ") has a different cache mode. Obviously, EmbeddedInfinispanCacheManagerFactoryBean did not use "
 				+ "the configuration file when instantiating EmbeddedCacheManager.", CacheMode.REPL_ASYNC,
 				configuration.getCacheMode());
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.NativeEmbeddedCacheManagerFactoryBean#getObjectType()}.
+	 * Test method for {@link org.infinispan.spring.embedded.EmbeddedInfinispanCacheManagerFactoryBean#getObjectType()}.
 	 * @throws Exception 
 	 */
 	@Test
-	public final void nativeEmbeddedCacheManagerFactoryBeanShouldReportTheCorrectObjectType() throws Exception {
-		final NativeEmbeddedCacheManagerFactoryBean objectUnderTest = new NativeEmbeddedCacheManagerFactoryBean();
+	public final void embeddedInfinispanCacheManagerFactoryBeanShouldReportTheCorrectObjectType() throws Exception {
+		final EmbeddedInfinispanCacheManagerFactoryBean objectUnderTest = new EmbeddedInfinispanCacheManagerFactoryBean();
 		objectUnderTest.afterPropertiesSet();
 
 		final EmbeddedCacheManager embeddedCacheManager = objectUnderTest.getObject();
@@ -109,23 +109,23 @@ public class NativeEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.NativeEmbeddedCacheManagerFactoryBean#isSingleton()}.
+	 * Test method for {@link org.infinispan.spring.embedded.EmbeddedInfinispanCacheManagerFactoryBean#isSingleton()}.
 	 */
 	@Test
-	public final void nativeEmbeddedCacheManagerFactoryBeanShouldDeclareItselfToOnlyProduceSingletons() {
-		final NativeEmbeddedCacheManagerFactoryBean objectUnderTest = new NativeEmbeddedCacheManagerFactoryBean();
+	public final void embeddedInfinispanCacheManagerFactoryBeanShouldDeclareItselfToOnlyProduceSingletons() {
+		final EmbeddedInfinispanCacheManagerFactoryBean objectUnderTest = new EmbeddedInfinispanCacheManagerFactoryBean();
 
 		assertTrue("isSingleton() should always return true. However, it returned false", objectUnderTest.isSingleton());
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.NativeEmbeddedCacheManagerFactoryBean#destroy()}.
+	 * Test method for {@link org.infinispan.spring.embedded.EmbeddedInfinispanCacheManagerFactoryBean#destroy()}.
 	 * @throws Exception 
 	 */
 	@Test
-	public final void nativeEmbeddedCacheManagerFactoryBeanShouldStopTheCreateEmbeddedCacheManagerWhenBeingDestroyed()
+	public final void embeddedInfinispanCacheManagerFactoryBeanShouldStopTheCreateEmbeddedCacheManagerWhenBeingDestroyed()
 			throws Exception {
-		final NativeEmbeddedCacheManagerFactoryBean objectUnderTest = new NativeEmbeddedCacheManagerFactoryBean();
+		final EmbeddedInfinispanCacheManagerFactoryBean objectUnderTest = new EmbeddedInfinispanCacheManagerFactoryBean();
 		objectUnderTest.afterPropertiesSet();
 
 		final EmbeddedCacheManager embeddedCacheManager = objectUnderTest.getObject();
@@ -133,7 +133,7 @@ public class NativeEmbeddedCacheManagerFactoryBeanTest {
 		objectUnderTest.destroy();
 
 		assertEquals(
-				"NativeEmbeddedCacheManagerFactoryBean should stop the created EmbeddedCacheManager when being destroyed. "
+				"EmbeddedInfinispanCacheManagerFactoryBean should stop the created EmbeddedCacheManager when being destroyed. "
 						+ "However, the created EmbeddedCacheManager is still not terminated.",
 				ComponentStatus.TERMINATED, embeddedCacheManager.getStatus());
 	}

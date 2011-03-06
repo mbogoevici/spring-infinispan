@@ -42,7 +42,7 @@ import org.springframework.util.StringUtils;
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>
  *
  */
-public class NativeCacheFactoryBean implements FactoryBean<Cache<Object, Object>>, BeanNameAware, InitializingBean,
+public class InfinispanCacheFactoryBean implements FactoryBean<Cache<Object, Object>>, BeanNameAware, InitializingBean,
 		DisposableBean {
 
 	protected final Log logger = LogFactory.getLog(getClass());

@@ -30,55 +30,55 @@ import org.junit.Test;
 
 /**
  * <p>
- * Test {@link NativeCacheFactoryBean}.
+ * Test {@link InfinispanCacheFactoryBean}.
  * </p>
  *
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>
  *
  */
-public class NativeCacheFactoryBeanTest {
+public class InfinispanCacheFactoryBeanTest {
 
 	/**
-	 * Test method for {@link org.infinispan.spring.NativeCacheFactoryBean#afterPropertiesSet()}.
+	 * Test method for {@link org.infinispan.spring.InfinispanCacheFactoryBean#afterPropertiesSet()}.
 	 * @throws Exception 
 	 */
 	@Test(expected = IllegalStateException.class)
-	public final void nativeCacheFactoryBeanShouldRecognizeThatNoCacheContainerHasBeenSet() throws Exception {
-		final NativeCacheFactoryBean objectUnderTest = new NativeCacheFactoryBean();
+	public final void infinispanCacheFactoryBeanShouldRecognizeThatNoCacheContainerHasBeenSet() throws Exception {
+		final InfinispanCacheFactoryBean objectUnderTest = new InfinispanCacheFactoryBean();
 		objectUnderTest.setCacheName("test.cache.Name");
 		objectUnderTest.setBeanName("test.bean.Name");
 		objectUnderTest.afterPropertiesSet();
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.NativeCacheFactoryBean#setBeanName(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.InfinispanCacheFactoryBean#setBeanName(java.lang.String)}.
 	 * @throws Exception 
 	 */
 	@Test
-	public final void nativeCacheFactoryBeanShouldUseBeanNameAsCacheNameIfNoCacheNameHasBeenSet() throws Exception {
+	public final void infinispanCacheFactoryBeanShouldUseBeanNameAsCacheNameIfNoCacheNameHasBeenSet() throws Exception {
 		final String beanName = "test.bean.Name";
 
-		final NativeCacheFactoryBean objectUnderTest = new NativeCacheFactoryBean();
+		final InfinispanCacheFactoryBean objectUnderTest = new InfinispanCacheFactoryBean();
 		objectUnderTest.setInfinispanCacheContainer(new DefaultCacheManager());
 		objectUnderTest.setBeanName(beanName);
 		objectUnderTest.afterPropertiesSet();
 
 		final Cache<Object, Object> cache = objectUnderTest.getObject();
 
-		assertEquals("NativeCacheFactoryBean should have used its bean name [" + beanName
+		assertEquals("InfinispanCacheFactoryBean should have used its bean name [" + beanName
 				+ "] as the name of the created cache. However, it didn't.", beanName, cache.getName());
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.NativeCacheFactoryBean#setCacheName(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.InfinispanCacheFactoryBean#setCacheName(java.lang.String)}.
 	 * @throws Exception 
 	 */
 	@Test
-	public final void nativeCacheFactoryBeanShouldPreferExplicitCacheNameToBeanName() throws Exception {
+	public final void infinispanCacheFactoryBeanShouldPreferExplicitCacheNameToBeanName() throws Exception {
 		final String cacheName = "test.cache.Name";
 		final String beanName = "test.bean.Name";
 
-		final NativeCacheFactoryBean objectUnderTest = new NativeCacheFactoryBean();
+		final InfinispanCacheFactoryBean objectUnderTest = new InfinispanCacheFactoryBean();
 		objectUnderTest.setInfinispanCacheContainer(new DefaultCacheManager());
 		objectUnderTest.setCacheName(cacheName);
 		objectUnderTest.setBeanName(beanName);
@@ -86,20 +86,20 @@ public class NativeCacheFactoryBeanTest {
 
 		final Cache<Object, Object> cache = objectUnderTest.getObject();
 
-		assertEquals("NativeCacheFactoryBean should have preferred its cache name [" + cacheName
+		assertEquals("InfinispanCacheFactoryBean should have preferred its cache name [" + cacheName
 				+ "] as the name of the created cache. However, it didn't.", cacheName, cache.getName());
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.NativeCacheFactoryBean#getObject()}.
+	 * Test method for {@link org.infinispan.spring.InfinispanCacheFactoryBean#getObject()}.
 	 * @throws Exception 
 	 */
 	@Test
-	public final void nativeCacheFactoryBeanShouldProduceANonNullInfinispanCache() throws Exception {
+	public final void infinispanCacheFactoryBeanShouldProduceANonNullInfinispanCache() throws Exception {
 		final String cacheName = "test.cache.Name";
 		final String beanName = "test.bean.Name";
 
-		final NativeCacheFactoryBean objectUnderTest = new NativeCacheFactoryBean();
+		final InfinispanCacheFactoryBean objectUnderTest = new InfinispanCacheFactoryBean();
 		objectUnderTest.setInfinispanCacheContainer(new DefaultCacheManager());
 		objectUnderTest.setCacheName(cacheName);
 		objectUnderTest.setBeanName(beanName);
@@ -107,31 +107,31 @@ public class NativeCacheFactoryBeanTest {
 
 		final Cache<Object, Object> cache = objectUnderTest.getObject();
 
-		assertNotNull("NativeCacheFactoryBean should have produced a proper Infinispan cache. "
+		assertNotNull("InfinispanCacheFactoryBean should have produced a proper Infinispan cache. "
 				+ "However, it produced a null Infinispan cache.", cache);
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.NativeCacheFactoryBean#isSingleton()}.
+	 * Test method for {@link org.infinispan.spring.InfinispanCacheFactoryBean#isSingleton()}.
 	 */
 	@Test
-	public final void nativeCacheFactoryBeanShouldDeclareItselfToBeSingleton() {
-		final NativeCacheFactoryBean objectUnderTest = new NativeCacheFactoryBean();
+	public final void infinispanCacheFactoryBeanShouldDeclareItselfToBeSingleton() {
+		final InfinispanCacheFactoryBean objectUnderTest = new InfinispanCacheFactoryBean();
 
-		assertTrue("NativeCacheFactoryBean should declare itself to produce a singleton. However, it didn't.",
+		assertTrue("InfinispanCacheFactoryBean should declare itself to produce a singleton. However, it didn't.",
 				objectUnderTest.isSingleton());
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.NativeCacheFactoryBean#destroy()}.
+	 * Test method for {@link org.infinispan.spring.InfinispanCacheFactoryBean#destroy()}.
 	 * @throws Exception 
 	 */
 	@Test
-	public final void nativeCacheFactoryBeanShouldStopTheCreatedInfinispanCacheWhenItIsDestroyed() throws Exception {
+	public final void infinispanCacheFactoryBeanShouldStopTheCreatedInfinispanCacheWhenItIsDestroyed() throws Exception {
 		final String cacheName = "test.cache.Name";
 		final String beanName = "test.bean.Name";
 
-		final NativeCacheFactoryBean objectUnderTest = new NativeCacheFactoryBean();
+		final InfinispanCacheFactoryBean objectUnderTest = new InfinispanCacheFactoryBean();
 		objectUnderTest.setInfinispanCacheContainer(new DefaultCacheManager());
 		objectUnderTest.setCacheName(cacheName);
 		objectUnderTest.setBeanName(beanName);
@@ -140,8 +140,9 @@ public class NativeCacheFactoryBeanTest {
 		final Cache<Object, Object> cache = objectUnderTest.getObject();
 		objectUnderTest.destroy();
 
-		assertEquals("NativeCacheFactoryBean should have stopped the created Infinispan cache when being destroyed. "
-				+ "However, the created Infinispan is not yet terminated.", ComponentStatus.TERMINATED,
+		assertEquals(
+				"InfinispanCacheFactoryBean should have stopped the created Infinispan cache when being destroyed. "
+						+ "However, the created Infinispan is not yet terminated.", ComponentStatus.TERMINATED,
 				cache.getStatus());
 	}
 
