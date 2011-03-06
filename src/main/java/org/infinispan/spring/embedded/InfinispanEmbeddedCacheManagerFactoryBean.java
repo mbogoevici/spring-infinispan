@@ -59,7 +59,7 @@ import org.springframework.core.io.Resource;
  * @see org.infinispan.config.Configuration
  *
  */
-public class EmbeddedInfinispanCacheManagerFactoryBean implements FactoryBean<EmbeddedCacheManager>, InitializingBean,
+public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<EmbeddedCacheManager>, InitializingBean,
 		DisposableBean {
 
 	protected final Log logger = LogFactory.getLog(getClass());
