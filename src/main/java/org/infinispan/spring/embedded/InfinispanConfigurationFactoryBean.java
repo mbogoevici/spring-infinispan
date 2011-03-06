@@ -66,7 +66,7 @@ public class InfinispanConfigurationFactoryBean implements FactoryBean<Configura
 
 	private Resource configurationFileLocation;
 
-	private final Configuration infinispanConfiguration = new Configuration();
+	private Configuration infinispanConfiguration = new Configuration();
 
 	// ------------------------------------------------------------------------
 	// org.springframework.beans.factory.InitializingBean
@@ -80,13 +80,15 @@ public class InfinispanConfigurationFactoryBean implements FactoryBean<Configura
 		if (this.configurationFileLocation != null) {
 			this.logger.info("Loading INFINISPAN configuration from configuration file located at ["
 					+ this.configurationFileLocation + "]");
-			final Configuration loadedConfiguration = loadConfigurationFromFile(this.configurationFileLocation);
-			this.infinispanConfiguration.applyOverrides(loadedConfiguration);
+			this.infinispanConfiguration = loadConfigurationFromFile(this.configurationFileLocation);
 			this.logger.info("Finished loading INFINISPAN configuration from configuration file ["
 					+ this.configurationFileLocation + "]");
 		} else {
 			this.logger
 					.info("No configuration file location has been set. Creating INFINISPAN configuration using explicitly set properties.");
+			if (this.infinispanConfiguration.getGlobalConfiguration() == null) {
+				this.infinispanConfiguration.setGlobalConfiguration(new GlobalConfiguration());
+			}
 		}
 		this.infinispanConfiguration.assertValid();
 	}
@@ -95,8 +97,12 @@ public class InfinispanConfigurationFactoryBean implements FactoryBean<Configura
 			IOException {
 		final InputStream configFileInputStream = configFileLocation.getInputStream();
 		try {
-			return InfinispanConfiguration.newInfinispanConfiguration(configFileInputStream)
-					.parseDefaultConfiguration();
+			final InfinispanConfiguration infinispanConfiguration = InfinispanConfiguration
+					.newInfinispanConfiguration(configFileInputStream);
+			final Configuration defaultConfiguration = infinispanConfiguration.parseDefaultConfiguration();
+			defaultConfiguration.setGlobalConfiguration(infinispanConfiguration.parseGlobalConfiguration());
+
+			return defaultConfiguration;
 		} finally {
 			configFileInputStream.close();
 		}
@@ -119,7 +125,7 @@ public class InfinispanConfigurationFactoryBean implements FactoryBean<Configura
 	 */
 	@Override
 	public Class<? extends Configuration> getObjectType() {
-		return this.infinispanConfiguration != null ? this.infinispanConfiguration.getClass() : Configuration.class;
+		return this.infinispanConfiguration.getClass();
 	}
 
 	/**
@@ -288,14 +294,6 @@ public class InfinispanConfigurationFactoryBean implements FactoryBean<Configura
 	 */
 	public void setSyncReplTimeout(final long syncReplTimeout) {
 		this.infinispanConfiguration.setSyncReplTimeout(syncReplTimeout);
-	}
-
-	/**
-	 * @param cacheMode
-	 * @see org.infinispan.config.Configuration#setCacheMode(java.lang.String)
-	 */
-	public void setCacheMode(final String cacheMode) {
-		this.infinispanConfiguration.setCacheMode(cacheMode);
 	}
 
 	/**
