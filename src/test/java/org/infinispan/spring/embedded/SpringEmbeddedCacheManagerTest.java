@@ -30,7 +30,7 @@ import org.junit.Test;
 
 /**
  * <p>
- * TODO: Document SpringEmbeddedCacheManagerTest.
+ * Test {@link SpringEmbeddedCacheManager}.
  * </p>
  *
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>
