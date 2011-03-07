@@ -47,18 +47,19 @@ import org.springframework.core.io.Resource;
  * <ol>
  * <li>
  * If the property {@link #setConfigurationFileLocation(Resource) <code>configurationFileLocation</code>} is
- * set to a non-null value, this factory bean will attempt to load the INFINISPAN configuration to create from
+ * set to a non-null value, this factory bean will attempt to load the INFINISPAN Configuration to create from
  * that configuration file.
  * </li>
  * <li>
  * Otherwise, <code>InfinispanConfigurationFactoryBean</code> offers setters for explicitly defining the
- * INFINISPAN configuration to create directly within the application context.
+ * INFINISPAN Configuration to create directly within the application context.
  * </li>
  * </ol>
  * </p>
  *
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>
  *
+ * @see org.infinispan.config.Configuration
  */
 public class InfinispanConfigurationFactoryBean implements FactoryBean<Configuration>, InitializingBean {
 
