@@ -22,18 +22,25 @@ package org.infinispan.spring.embedded;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.infinispan.config.CacheLoaderManagerConfig;
 import org.infinispan.config.Configuration;
 import org.infinispan.config.ConfigurationException;
+import org.infinispan.config.CustomInterceptorConfig;
 import org.infinispan.config.GlobalConfiguration;
 import org.infinispan.config.InfinispanConfiguration;
+import org.infinispan.eviction.EvictionStrategy;
+import org.infinispan.eviction.EvictionThreadPolicy;
 import org.infinispan.jmx.MBeanServerLookup;
 import org.infinispan.manager.DefaultCacheManager;
 import org.infinispan.manager.EmbeddedCacheManager;
+import org.infinispan.transaction.lookup.TransactionManagerLookup;
+import org.infinispan.util.concurrent.IsolationLevel;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -86,6 +93,8 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	private final GlobalConfigurationOverrides globalConfigurationOverrides = new GlobalConfigurationOverrides();
 
+	private final ConfigurationOverrides configurationOverrides = new ConfigurationOverrides();
+
 	// ------------------------------------------------------------------------
 	// org.springframework.beans.factory.InitializingBean
 	// ------------------------------------------------------------------------
@@ -100,6 +109,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 		final ConfigurationContainer templateConfiguration = createTemplateConfiguration();
 
 		this.globalConfigurationOverrides.applyOverridesTo(templateConfiguration.globalConfiguration);
+		this.configurationOverrides.applyOverridesTo(templateConfiguration.defaultConfiguration);
 
 		this.cacheManager = new DefaultCacheManager(templateConfiguration.globalConfiguration,
 				templateConfiguration.defaultConfiguration);
@@ -430,6 +440,436 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 	 */
 	public void setDistributedSyncTimeout(final long distributedSyncTimeout) {
 		this.globalConfigurationOverrides.distributedSyncTimeout = distributedSyncTimeout;
+	}
+
+	// ------------------------------------------------------------------------
+	// Setters for Configuration
+	// ------------------------------------------------------------------------
+
+	/**
+	 * @param eagerDeadlockSpinDuration
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setDeadlockDetectionSpinDuration(java.lang.Long)
+	 */
+	public void setDeadlockDetectionSpinDuration(final Long eagerDeadlockSpinDuration) {
+		this.configurationOverrides.setDeadlockDetectionSpinDuration(eagerDeadlockSpinDuration);
+	}
+
+	/**
+	 * @param useEagerDeadlockDetection
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setEnableDeadlockDetection(java.lang.Boolean)
+	 */
+	public void setEnableDeadlockDetection(final Boolean useEagerDeadlockDetection) {
+		this.configurationOverrides.setEnableDeadlockDetection(useEagerDeadlockDetection);
+	}
+
+	/**
+	 * @param useLockStriping
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setUseLockStriping(java.lang.Boolean)
+	 */
+	public void setUseLockStriping(final Boolean useLockStriping) {
+		this.configurationOverrides.setUseLockStriping(useLockStriping);
+	}
+
+	/**
+	 * @param unsafeUnreliableReturnValues
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setUnsafeUnreliableReturnValues(java.lang.Boolean)
+	 */
+	public void setUnsafeUnreliableReturnValues(final Boolean unsafeUnreliableReturnValues) {
+		this.configurationOverrides.setUnsafeUnreliableReturnValues(unsafeUnreliableReturnValues);
+	}
+
+	/**
+	 * @param rehashRpcTimeout
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setRehashRpcTimeout(java.lang.Long)
+	 */
+	public void setRehashRpcTimeout(final Long rehashRpcTimeout) {
+		this.configurationOverrides.setRehashRpcTimeout(rehashRpcTimeout);
+	}
+
+	/**
+	 * @param writeSkewCheck
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setWriteSkewCheck(java.lang.Boolean)
+	 */
+	public void setWriteSkewCheck(final Boolean writeSkewCheck) {
+		this.configurationOverrides.setWriteSkewCheck(writeSkewCheck);
+	}
+
+	/**
+	 * @param concurrencyLevel
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setConcurrencyLevel(java.lang.Integer)
+	 */
+	public void setConcurrencyLevel(final Integer concurrencyLevel) {
+		this.configurationOverrides.setConcurrencyLevel(concurrencyLevel);
+	}
+
+	/**
+	 * @param replQueueMaxElements
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setReplQueueMaxElements(java.lang.Integer)
+	 */
+	public void setReplQueueMaxElements(final Integer replQueueMaxElements) {
+		this.configurationOverrides.setReplQueueMaxElements(replQueueMaxElements);
+	}
+
+	/**
+	 * @param replQueueInterval
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setReplQueueInterval(java.lang.Long)
+	 */
+	public void setReplQueueInterval(final Long replQueueInterval) {
+		this.configurationOverrides.setReplQueueInterval(replQueueInterval);
+	}
+
+	/**
+	 * @param replQueueClass
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setReplQueueClass(java.lang.String)
+	 */
+	public void setReplQueueClass(final String replQueueClass) {
+		this.configurationOverrides.setReplQueueClass(replQueueClass);
+	}
+
+	/**
+	 * @param exposeJmxStatistics
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setExposeJmxStatistics(java.lang.Boolean)
+	 */
+	public void setExposeJmxStatistics(final Boolean exposeJmxStatistics) {
+		this.configurationOverrides.setExposeJmxStatistics(exposeJmxStatistics);
+	}
+
+	/**
+	 * @param invocationBatchingEnabled
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setInvocationBatchingEnabled(java.lang.Boolean)
+	 */
+	public void setInvocationBatchingEnabled(final Boolean invocationBatchingEnabled) {
+		this.configurationOverrides.setInvocationBatchingEnabled(invocationBatchingEnabled);
+	}
+
+	/**
+	 * @param fetchInMemoryState
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setFetchInMemoryState(java.lang.Boolean)
+	 */
+	public void setFetchInMemoryState(final Boolean fetchInMemoryState) {
+		this.configurationOverrides.setFetchInMemoryState(fetchInMemoryState);
+	}
+
+	/**
+	 * @param alwaysProvideInMemoryState
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setAlwaysProvideInMemoryState(java.lang.Boolean)
+	 */
+	public void setAlwaysProvideInMemoryState(final Boolean alwaysProvideInMemoryState) {
+		this.configurationOverrides.setAlwaysProvideInMemoryState(alwaysProvideInMemoryState);
+	}
+
+	/**
+	 * @param lockAcquisitionTimeout
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setLockAcquisitionTimeout(java.lang.Long)
+	 */
+	public void setLockAcquisitionTimeout(final Long lockAcquisitionTimeout) {
+		this.configurationOverrides.setLockAcquisitionTimeout(lockAcquisitionTimeout);
+	}
+
+	/**
+	 * @param syncReplTimeout
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setSyncReplTimeout(java.lang.Long)
+	 */
+	public void setSyncReplTimeout(final Long syncReplTimeout) {
+		this.configurationOverrides.setSyncReplTimeout(syncReplTimeout);
+	}
+
+	/**
+	 * @param cacheModeString
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setCacheModeString(java.lang.String)
+	 */
+	public void setCacheModeString(final String cacheModeString) {
+		this.configurationOverrides.setCacheModeString(cacheModeString);
+	}
+
+	/**
+	 * @param evictionWakeUpInterval
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setEvictionWakeUpInterval(java.lang.Long)
+	 */
+	public void setEvictionWakeUpInterval(final Long evictionWakeUpInterval) {
+		this.configurationOverrides.setEvictionWakeUpInterval(evictionWakeUpInterval);
+	}
+
+	/**
+	 * @param evictionStrategy
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setEvictionStrategy(org.infinispan.eviction.EvictionStrategy)
+	 */
+	public void setEvictionStrategy(final EvictionStrategy evictionStrategy) {
+		this.configurationOverrides.setEvictionStrategy(evictionStrategy);
+	}
+
+	/**
+	 * @param evictionStrategyClass
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setEvictionStrategyClass(java.lang.String)
+	 */
+	public void setEvictionStrategyClass(final String evictionStrategyClass) {
+		this.configurationOverrides.setEvictionStrategyClass(evictionStrategyClass);
+	}
+
+	/**
+	 * @param evictionThreadPolicy
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setEvictionThreadPolicy(org.infinispan.eviction.EvictionThreadPolicy)
+	 */
+	public void setEvictionThreadPolicy(final EvictionThreadPolicy evictionThreadPolicy) {
+		this.configurationOverrides.setEvictionThreadPolicy(evictionThreadPolicy);
+	}
+
+	/**
+	 * @param evictionThreadPolicyClass
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setEvictionThreadPolicyClass(java.lang.String)
+	 */
+	public void setEvictionThreadPolicyClass(final String evictionThreadPolicyClass) {
+		this.configurationOverrides.setEvictionThreadPolicyClass(evictionThreadPolicyClass);
+	}
+
+	/**
+	 * @param evictionMaxEntries
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setEvictionMaxEntries(java.lang.Integer)
+	 */
+	public void setEvictionMaxEntries(final Integer evictionMaxEntries) {
+		this.configurationOverrides.setEvictionMaxEntries(evictionMaxEntries);
+	}
+
+	/**
+	 * @param expirationLifespan
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setExpirationLifespan(java.lang.Long)
+	 */
+	public void setExpirationLifespan(final Long expirationLifespan) {
+		this.configurationOverrides.setExpirationLifespan(expirationLifespan);
+	}
+
+	/**
+	 * @param expirationMaxIdle
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setExpirationMaxIdle(java.lang.Long)
+	 */
+	public void setExpirationMaxIdle(final Long expirationMaxIdle) {
+		this.configurationOverrides.setExpirationMaxIdle(expirationMaxIdle);
+	}
+
+	/**
+	 * @param transactionManagerLookupClass
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setTransactionManagerLookupClass(java.lang.String)
+	 */
+	public void setTransactionManagerLookupClass(final String transactionManagerLookupClass) {
+		this.configurationOverrides.setTransactionManagerLookupClass(transactionManagerLookupClass);
+	}
+
+	/**
+	 * @param transactionManagerLookup
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setTransactionManagerLookup(org.infinispan.transaction.lookup.TransactionManagerLookup)
+	 */
+	public void setTransactionManagerLookup(final TransactionManagerLookup transactionManagerLookup) {
+		this.configurationOverrides.setTransactionManagerLookup(transactionManagerLookup);
+	}
+
+	/**
+	 * @param cacheLoaderManagerConfig
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setCacheLoaderManagerConfig(org.infinispan.config.CacheLoaderManagerConfig)
+	 */
+	public void setCacheLoaderManagerConfig(final CacheLoaderManagerConfig cacheLoaderManagerConfig) {
+		this.configurationOverrides.setCacheLoaderManagerConfig(cacheLoaderManagerConfig);
+	}
+
+	/**
+	 * @param syncCommitPhase
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setSyncCommitPhase(java.lang.Boolean)
+	 */
+	public void setSyncCommitPhase(final Boolean syncCommitPhase) {
+		this.configurationOverrides.setSyncCommitPhase(syncCommitPhase);
+	}
+
+	/**
+	 * @param syncRollbackPhase
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setSyncRollbackPhase(java.lang.Boolean)
+	 */
+	public void setSyncRollbackPhase(final Boolean syncRollbackPhase) {
+		this.configurationOverrides.setSyncRollbackPhase(syncRollbackPhase);
+	}
+
+	/**
+	 * @param useEagerLocking
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setUseEagerLocking(java.lang.Boolean)
+	 */
+	public void setUseEagerLocking(final Boolean useEagerLocking) {
+		this.configurationOverrides.setUseEagerLocking(useEagerLocking);
+	}
+
+	/**
+	 * @param eagerLockSingleNode
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setEagerLockSingleNode(java.lang.Boolean)
+	 */
+	public void setEagerLockSingleNode(final Boolean eagerLockSingleNode) {
+		this.configurationOverrides.setEagerLockSingleNode(eagerLockSingleNode);
+	}
+
+	/**
+	 * @param useReplQueue
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setUseReplQueue(java.lang.Boolean)
+	 */
+	public void setUseReplQueue(final Boolean useReplQueue) {
+		this.configurationOverrides.setUseReplQueue(useReplQueue);
+	}
+
+	/**
+	 * @param isolationLevel
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setIsolationLevel(org.infinispan.util.concurrent.IsolationLevel)
+	 */
+	public void setIsolationLevel(final IsolationLevel isolationLevel) {
+		this.configurationOverrides.setIsolationLevel(isolationLevel);
+	}
+
+	/**
+	 * @param stateRetrievalTimeout
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setStateRetrievalTimeout(java.lang.Long)
+	 */
+	public void setStateRetrievalTimeout(final Long stateRetrievalTimeout) {
+		this.configurationOverrides.setStateRetrievalTimeout(stateRetrievalTimeout);
+	}
+
+	/**
+	 * @param stateRetrievalLogFlushTimeout
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setStateRetrievalLogFlushTimeout(java.lang.Long)
+	 */
+	public void setStateRetrievalLogFlushTimeout(final Long stateRetrievalLogFlushTimeout) {
+		this.configurationOverrides.setStateRetrievalLogFlushTimeout(stateRetrievalLogFlushTimeout);
+	}
+
+	/**
+	 * @param stateRetrievalMaxNonProgressingLogWrites
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setStateRetrievalMaxNonProgressingLogWrites(java.lang.Integer)
+	 */
+	public void setStateRetrievalMaxNonProgressingLogWrites(final Integer stateRetrievalMaxNonProgressingLogWrites) {
+		this.configurationOverrides
+				.setStateRetrievalMaxNonProgressingLogWrites(stateRetrievalMaxNonProgressingLogWrites);
+	}
+
+	/**
+	 * @param stateRetrievalInitialRetryWaitTime
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setStateRetrievalInitialRetryWaitTime(java.lang.Long)
+	 */
+	public void setStateRetrievalInitialRetryWaitTime(final Long stateRetrievalInitialRetryWaitTime) {
+		this.configurationOverrides.setStateRetrievalInitialRetryWaitTime(stateRetrievalInitialRetryWaitTime);
+	}
+
+	/**
+	 * @param stateRetrievalRetryWaitTimeIncreaseFactor
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setStateRetrievalRetryWaitTimeIncreaseFactor(java.lang.Integer)
+	 */
+	public void setStateRetrievalRetryWaitTimeIncreaseFactor(final Integer stateRetrievalRetryWaitTimeIncreaseFactor) {
+		this.configurationOverrides
+				.setStateRetrievalRetryWaitTimeIncreaseFactor(stateRetrievalRetryWaitTimeIncreaseFactor);
+	}
+
+	/**
+	 * @param stateRetrievalNumRetries
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setStateRetrievalNumRetries(java.lang.Integer)
+	 */
+	public void setStateRetrievalNumRetries(final Integer stateRetrievalNumRetries) {
+		this.configurationOverrides.setStateRetrievalNumRetries(stateRetrievalNumRetries);
+	}
+
+	/**
+	 * @param isolationLevelClass
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setIsolationLevelClass(java.lang.String)
+	 */
+	public void setIsolationLevelClass(final String isolationLevelClass) {
+		this.configurationOverrides.setIsolationLevelClass(isolationLevelClass);
+	}
+
+	/**
+	 * @param useLazyDeserialization
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setUseLazyDeserialization(java.lang.Boolean)
+	 */
+	public void setUseLazyDeserialization(final Boolean useLazyDeserialization) {
+		this.configurationOverrides.setUseLazyDeserialization(useLazyDeserialization);
+	}
+
+	/**
+	 * @param l1CacheEnabled
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setL1CacheEnabled(java.lang.Boolean)
+	 */
+	public void setL1CacheEnabled(final Boolean l1CacheEnabled) {
+		this.configurationOverrides.setL1CacheEnabled(l1CacheEnabled);
+	}
+
+	/**
+	 * @param l1Lifespan
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setL1Lifespan(java.lang.Long)
+	 */
+	public void setL1Lifespan(final Long l1Lifespan) {
+		this.configurationOverrides.setL1Lifespan(l1Lifespan);
+	}
+
+	/**
+	 * @param l1OnRehash
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setL1OnRehash(java.lang.Boolean)
+	 */
+	public void setL1OnRehash(final Boolean l1OnRehash) {
+		this.configurationOverrides.setL1OnRehash(l1OnRehash);
+	}
+
+	/**
+	 * @param consistentHashClass
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setConsistentHashClass(java.lang.String)
+	 */
+	public void setConsistentHashClass(final String consistentHashClass) {
+		this.configurationOverrides.setConsistentHashClass(consistentHashClass);
+	}
+
+	/**
+	 * @param numOwners
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setNumOwners(java.lang.Integer)
+	 */
+	public void setNumOwners(final Integer numOwners) {
+		this.configurationOverrides.setNumOwners(numOwners);
+	}
+
+	/**
+	 * @param rehashEnabled
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setRehashEnabled(java.lang.Boolean)
+	 */
+	public void setRehashEnabled(final Boolean rehashEnabled) {
+		this.configurationOverrides.setRehashEnabled(rehashEnabled);
+	}
+
+	/**
+	 * @param rehashWaitTime
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setRehashWaitTime(java.lang.Long)
+	 */
+	public void setRehashWaitTime(final Long rehashWaitTime) {
+		this.configurationOverrides.setRehashWaitTime(rehashWaitTime);
+	}
+
+	/**
+	 * @param useAsyncMarshalling
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setUseAsyncMarshalling(java.lang.Boolean)
+	 */
+	public void setUseAsyncMarshalling(final Boolean useAsyncMarshalling) {
+		this.configurationOverrides.setUseAsyncMarshalling(useAsyncMarshalling);
+	}
+
+	/**
+	 * @param indexingEnabled
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setIndexingEnabled(java.lang.Boolean)
+	 */
+	public void setIndexingEnabled(final Boolean indexingEnabled) {
+		this.configurationOverrides.setIndexingEnabled(indexingEnabled);
+	}
+
+	/**
+	 * @param indexLocalOnly
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setIndexLocalOnly(java.lang.Boolean)
+	 */
+	public void setIndexLocalOnly(final Boolean indexLocalOnly) {
+		this.configurationOverrides.setIndexLocalOnly(indexLocalOnly);
+	}
+
+	/**
+	 * @param customInterceptors
+	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setCustomInterceptors(java.util.List)
+	 */
+	public void setCustomInterceptors(final List<CustomInterceptorConfig> customInterceptors) {
+		this.configurationOverrides.setCustomInterceptors(customInterceptors);
 	}
 
 	// ------------------------------------------------------------------------
