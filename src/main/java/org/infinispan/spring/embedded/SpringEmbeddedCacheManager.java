@@ -78,7 +78,7 @@ public class SpringEmbeddedCacheManager extends AbstractCacheManager {
 		final Collection<Cache<?, ?>> allCaches = new LinkedHashSet<Cache<?, ?>>();
 		for (final String cacheName : this.nativeCacheManager.getCacheNames()) {
 			final org.infinispan.Cache<Object, Object> namedNativeCache = this.nativeCacheManager.getCache(cacheName);
-			final Cache<?, ?> infinispanSpringCache = new SpringCache(namedNativeCache);
+			final Cache<?, ?> infinispanSpringCache = new SpringCache<Object, Object>(namedNativeCache);
 			allCaches.add(infinispanSpringCache);
 		}
 

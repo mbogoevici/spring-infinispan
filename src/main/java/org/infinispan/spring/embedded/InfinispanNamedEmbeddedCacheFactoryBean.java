@@ -96,7 +96,7 @@ import org.springframework.util.StringUtils;
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>
  *
  */
-public class InfinispanNamedCacheFactoryBean implements FactoryBean<Cache<Object, Object>>, BeanNameAware,
+public class InfinispanNamedEmbeddedCacheFactoryBean implements FactoryBean<Cache<Object, Object>>, BeanNameAware,
 		InitializingBean, DisposableBean {
 
 	/**

@@ -20,7 +20,7 @@
 package org.infinispan.spring;
 
 import org.infinispan.manager.DefaultCacheManager;
-import org.infinispan.spring.embedded.InfinispanNamedCacheFactoryBean;
+import org.infinispan.spring.embedded.InfinispanNamedEmbeddedCacheFactoryBean;
 import org.springframework.cache.Cache;
 
 /**
@@ -35,7 +35,7 @@ public class SpringCacheCacheTest extends AbstractNativeCacheTest<org.infinispan
 
 	@Override
 	protected org.infinispan.Cache<Object, Object> createNativeCache() throws Exception {
-		final InfinispanNamedCacheFactoryBean fb = new InfinispanNamedCacheFactoryBean();
+		final InfinispanNamedEmbeddedCacheFactoryBean fb = new InfinispanNamedEmbeddedCacheFactoryBean();
 		fb.setInfinispanEmbeddedCacheManager(new DefaultCacheManager());
 		fb.setBeanName(CACHE_NAME);
 		fb.setCacheName(CACHE_NAME);
@@ -45,6 +45,6 @@ public class SpringCacheCacheTest extends AbstractNativeCacheTest<org.infinispan
 
 	@Override
 	protected Cache<Object, Object> createCache(final org.infinispan.Cache<Object, Object> nativeCache) {
-		return new SpringCache(nativeCache);
+		return new SpringCache<Object, Object>(nativeCache);
 	}
 }

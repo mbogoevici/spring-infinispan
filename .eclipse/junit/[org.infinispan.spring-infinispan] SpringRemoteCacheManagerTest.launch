@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.jdt.junit.launchconfig">
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/org.infinispan.spring-infinispan/src/test/java/org/infinispan/spring/embedded/InfinispanNamedCacheFactoryBeanTest.java"/>
+<listEntry value="/org.infinispan.spring-infinispan/src/test/java/org/infinispan/spring/remote/SpringRemoteCacheManagerTest.java"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
@@ -11,8 +11,7 @@
 <stringAttribute key="org.eclipse.jdt.junit.TESTNAME" value=""/>
 <stringAttribute key="org.eclipse.jdt.junit.TEST_KIND" value="org.eclipse.jdt.junit.loader.junit4"/>
 <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.maven.ide.eclipse.launchconfig.classpathProvider"/>
-<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.infinispan.spring.embedded.InfinispanNamedCacheFactoryBeanTest"/>
-<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPEorg.infinispan.spring.embedded.InfinispanCacheFactoryBeanTestcheFactoryBeanTest" value=""/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.infinispan.spring.remote.SpringRemoteCacheManagerTest"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.infinispan.spring-infinispan"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.maven.ide.eclipse.launchconfig.sourcepathProvider"/>
 </launchConfiguration>

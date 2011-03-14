@@ -25,5 +25,5 @@
  * as beans in a Spring context.
  *
  */
-package org.infinispan.spring.embedded;
+package org.infinispan.spring.remote;
 
