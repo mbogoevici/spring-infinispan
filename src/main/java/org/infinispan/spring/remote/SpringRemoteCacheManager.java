@@ -19,12 +19,9 @@
 
 package org.infinispan.spring.remote;
 
-import java.lang.reflect.Field;
 import java.util.Collection;
-import java.util.Map;
 
 import org.infinispan.client.hotrod.RemoteCacheManager;
-import org.infinispan.client.hotrod.impl.RemoteCacheImpl;
 import org.infinispan.spring.SpringCache;
 import org.springframework.cache.Cache;
 import org.springframework.util.Assert;
@@ -52,35 +49,31 @@ public class SpringRemoteCacheManager implements org.springframework.cache.Cache
 		this.nativeCacheManager = nativeCacheManager;
 	}
 
-	/**
-	 * @param nativeCacheManager
-	 */
 	private void checkNativeCacheManagerStatus(final RemoteCacheManager nativeCacheManager) {
 		Assert.isTrue(nativeCacheManager.isStarted(), "The supplied RemoteCacheManager instance [" + nativeCacheManager
 				+ "] is required to be running");
 	}
 
+	/**
+	 * @see org.springframework.cache.CacheManager#getCache(java.lang.String)
+	 */
 	@Override
 	public <K, V> Cache<K, V> getCache(final String name) {
 		checkNativeCacheManagerStatus(this.nativeCacheManager);
 		return new SpringCache<K, V>(this.nativeCacheManager.<K, V> getCache(name));
 	}
 
+	/**
+	 * <p>
+	 * As of INFINISPAN 4.2.0.FINAL <code>org.infinispan.client.hotrod.RemoteCache</code> does <strong>not</strong>
+	 * support retrieving the set of all cache names from the hotrod server. This restriction may be lifted in
+	 * the future. Currently, this operation will always throw an <code>UnsupportedOperationException</code>.
+	 * </p>
+	 *  
+	 * @see org.springframework.cache.CacheManager#getCacheNames()
+	 */
 	@Override
 	public Collection<String> getCacheNames() {
-		checkNativeCacheManagerStatus(this.nativeCacheManager);
-		return getCacheMapViaReflection().keySet();
-	}
-
-	private final Map<String, RemoteCacheImpl<?, ?>> getCacheMapViaReflection() {
-		try {
-			final Field cacheName2CacheMapField = RemoteCacheManager.class.getDeclaredField("cacheName2RemoteCache");
-			cacheName2CacheMapField.setAccessible(true);
-
-			return (Map<String, RemoteCacheImpl<?, ?>>) cacheName2CacheMapField.get(this.nativeCacheManager);
-		} catch (final Exception e) {
-			throw new RuntimeException("Could not read map of known caches from RemoteCacheManager instance: "
-					+ e.getMessage(), e);
-		}
+		throw new UnsupportedOperationException("Operation getCacheNames() is currently not supported.");
 	}
 }

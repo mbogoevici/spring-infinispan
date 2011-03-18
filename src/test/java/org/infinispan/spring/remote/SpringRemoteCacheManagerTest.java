@@ -21,9 +21,6 @@ package org.infinispan.spring.remote;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Collection;
 
 import org.infinispan.client.hotrod.RemoteCacheManager;
 import org.junit.Test;
@@ -77,27 +74,12 @@ public class SpringRemoteCacheManagerTest {
 	/**
 	 * Test method for {@link org.infinispan.spring.remote.SpringRemoteCacheManager#getCacheNames()}.
 	 */
-	@Test
-	public final void springRemoteCacheManagerShouldReturnTheNamesOfAllCreatedCaches() {
-		final String cacheName1 = "spring.remote.cache.manager.Test1";
-		final String cacheName2 = "spring.remote.cache.manager.Test2";
-
+	@Test(expected = UnsupportedOperationException.class)
+	public final void getCacheNamesShouldThrowAnUnsupportedOperationException() {
 		final RemoteCacheManager nativeCacheManager = new RemoteCacheManager(true);
 		final SpringRemoteCacheManager objectUnderTest = new SpringRemoteCacheManager(nativeCacheManager);
-		objectUnderTest.getCache(cacheName1);
-		objectUnderTest.getCache(cacheName2);
 
-		final Collection<String> allCacheNames = objectUnderTest.getCacheNames();
-
-		assertNotNull("getCacheNames() should have returned the names of all known caches. However, it returned null.",
-				allCacheNames);
-		assertEquals(
-				"getCacheNames() should have returned exactly two cache names. However, it returned less or more than two cache names.",
-				2, allCacheNames.size());
-		assertTrue("The names of all known caches returned by getCacheNames() should include the cache name \""
-				+ cacheName1 + "\". However, it doesn't.", allCacheNames.contains(cacheName1));
-		assertTrue("The names of all known caches returned by getCacheNames() should include the cache name \""
-				+ cacheName2 + "\". However, it doesn't.", allCacheNames.contains(cacheName2));
+		objectUnderTest.getCacheNames();
 	}
 
 }
