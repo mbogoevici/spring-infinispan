@@ -29,6 +29,8 @@ import java.io.InputStream;
 import org.infinispan.Cache;
 import org.infinispan.lifecycle.ComponentStatus;
 import org.infinispan.manager.DefaultCacheManager;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 
@@ -47,13 +49,15 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 	private static final ClassPathResource NAMED_ASYNC_CACHE_CONFIG_LOCATION = new ClassPathResource(
 			"named-async-cache.xml", InfinispanNamedEmbeddedCacheFactoryBeanTest.class);
 
+	private static final DefaultCacheManager DEFAULT_CACHE_MANAGER = new DefaultCacheManager(false);
+
 	private static final DefaultCacheManager PRECONFIGURED_DEFAULT_CACHE_MANAGER;
 
 	static {
 		InputStream configStream = null;
 		try {
 			configStream = NAMED_ASYNC_CACHE_CONFIG_LOCATION.getInputStream();
-			PRECONFIGURED_DEFAULT_CACHE_MANAGER = new DefaultCacheManager(configStream);
+			PRECONFIGURED_DEFAULT_CACHE_MANAGER = new DefaultCacheManager(configStream, false);
 		} catch (final IOException e) {
 			throw new ExceptionInInitializerError(e);
 		} finally {
@@ -65,6 +69,18 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 				}
 			}
 		}
+	}
+
+	@BeforeClass
+	public static void startCacheManagers() {
+		DEFAULT_CACHE_MANAGER.start();
+		PRECONFIGURED_DEFAULT_CACHE_MANAGER.start();
+	}
+
+	@AfterClass
+	public static void stopCacheManagers() {
+		PRECONFIGURED_DEFAULT_CACHE_MANAGER.stop();
+		DEFAULT_CACHE_MANAGER.stop();
 	}
 
 	/**
@@ -90,7 +106,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 		final String beanName = "test.bean.Name";
 
 		final InfinispanNamedEmbeddedCacheFactoryBean objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean();
-		objectUnderTest.setInfinispanEmbeddedCacheManager(new DefaultCacheManager());
+		objectUnderTest.setInfinispanEmbeddedCacheManager(DEFAULT_CACHE_MANAGER);
 		objectUnderTest.setBeanName(beanName);
 		objectUnderTest.afterPropertiesSet();
 
@@ -110,7 +126,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 		final String beanName = "test.bean.Name";
 
 		final InfinispanNamedEmbeddedCacheFactoryBean objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean();
-		objectUnderTest.setInfinispanEmbeddedCacheManager(new DefaultCacheManager());
+		objectUnderTest.setInfinispanEmbeddedCacheManager(DEFAULT_CACHE_MANAGER);
 		objectUnderTest.setCacheName(cacheName);
 		objectUnderTest.setBeanName(beanName);
 		objectUnderTest.afterPropertiesSet();
@@ -131,7 +147,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 		final String beanName = "test.bean.Name";
 
 		final InfinispanNamedEmbeddedCacheFactoryBean objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean();
-		objectUnderTest.setInfinispanEmbeddedCacheManager(new DefaultCacheManager());
+		objectUnderTest.setInfinispanEmbeddedCacheManager(DEFAULT_CACHE_MANAGER);
 		objectUnderTest.setCacheName(cacheName);
 		objectUnderTest.setBeanName(beanName);
 		objectUnderTest.afterPropertiesSet();
@@ -165,7 +181,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 		final String beanName = "test.bean.Name";
 
 		final InfinispanNamedEmbeddedCacheFactoryBean objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean();
-		objectUnderTest.setInfinispanEmbeddedCacheManager(new DefaultCacheManager());
+		objectUnderTest.setInfinispanEmbeddedCacheManager(DEFAULT_CACHE_MANAGER);
 		objectUnderTest.setCacheName(cacheName);
 		objectUnderTest.setBeanName(beanName);
 		objectUnderTest.afterPropertiesSet();

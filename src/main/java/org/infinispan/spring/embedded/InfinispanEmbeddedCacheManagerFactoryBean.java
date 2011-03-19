@@ -181,6 +181,10 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 		return true;
 	}
 
+	// ------------------------------------------------------------------------
+	// org.springframework.beans.factory.DisposableBean
+	// ------------------------------------------------------------------------
+
 	/**
 	 * Shuts down the <code>EmbeddedCacheManager</code> instance created by this <code>FactoryBean</code>.
 	 * 

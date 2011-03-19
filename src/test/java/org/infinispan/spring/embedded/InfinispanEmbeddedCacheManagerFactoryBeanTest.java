@@ -72,6 +72,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 		assertNotNull(
 				"getObject() should have returned a valid EmbeddedCacheManager, even if no defaulConfigurationLocation "
 						+ "has been specified. However, it returned null.", embeddedCacheManager);
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -101,6 +102,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 				+ ") has a different cache mode. Obviously, InfinispanEmbeddedCacheManagerFactoryBean did not use "
 				+ "the configuration file when instantiating EmbeddedCacheManager.", CacheMode.REPL_ASYNC,
 				configuration.getCacheMode());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -117,6 +119,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 		assertEquals("getObjectType() should return the most derived class of the actual EmbeddedCacheManager "
 				+ "implementation returned from getObject(). However, it didn't.", embeddedCacheManager.getClass(),
 				objectUnderTest.getObjectType());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -147,6 +150,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 				"InfinispanEmbeddedCacheManagerFactoryBean should stop the created EmbeddedCacheManager when being destroyed. "
 						+ "However, the created EmbeddedCacheManager is still not terminated.",
 				ComponentStatus.TERMINATED, embeddedCacheManager.getStatus());
+		embeddedCacheManager.stop();
 	}
 
 	// ~~~~ Testing overriding setters
@@ -168,6 +172,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set ExposeGlobalJmxStatistics. However, it didn't.",
 				expectedExposeGlobalJmxStatistics, embeddedCacheManager.getGlobalConfiguration()
 						.isExposeGlobalJmxStatistics());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -185,6 +190,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 		assertEquals(
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set JmxDomain. However, it didn't.",
 				expectedJmxDomain, embeddedCacheManager.getGlobalConfiguration().getJmxDomain());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -204,6 +210,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 		assertEquals(
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set MBeanServerProperties. However, it didn't.",
 				expectedMBeanServerProperties, embeddedCacheManager.getGlobalConfiguration().getMBeanServerProperties());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -228,6 +235,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set MBeanServerLookupClass. However, it didn't.",
 				expectedMBeanServerLookup.getClass().getName(), embeddedCacheManager.getGlobalConfiguration()
 						.getMBeanServerLookup());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -247,6 +255,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set MBeanServerLookup. However, it didn't.",
 				expectedMBeanServerLookup.getClass().getName(), embeddedCacheManager.getGlobalConfiguration()
 						.getMBeanServerLookup());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -265,6 +274,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 		assertEquals(
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set AllowDuplicateDomains. However, it didn't.",
 				expectedAllowDuplicateDomains, embeddedCacheManager.getGlobalConfiguration().isAllowDuplicateDomains());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -283,6 +293,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 		assertEquals(
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set CacheManagerName. However, it didn't.",
 				expectedCacheManagerName, embeddedCacheManager.getGlobalConfiguration().getCacheManagerName());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -301,6 +312,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 		assertEquals(
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set StrictPeerToPeer. However, it didn't.",
 				expectedStrictPeerToPeer, embeddedCacheManager.getGlobalConfiguration().isStrictPeerToPeer());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -320,6 +332,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set AsyncListenerExecutorFactoryClass. However, it didn't.",
 				expectedAsyncListenerExecutorFactoryClass, embeddedCacheManager.getGlobalConfiguration()
 						.getAsyncListenerExecutorFactoryClass());
+		embeddedCacheManager.stop();
 	}
 
 	public static final class DummyExecutorFactory implements ExecutorFactory {
@@ -346,6 +359,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set AsyncTransportExecutorFactoryClass. However, it didn't.",
 				expectedAsyncTransportExecutorFactoryClass, embeddedCacheManager.getGlobalConfiguration()
 						.getAsyncTransportExecutorFactoryClass());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -365,6 +379,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set EvictionScheduledExecutorFactoryClass. However, it didn't.",
 				expectedEvictionScheduledExecutorFactoryClass, embeddedCacheManager.getGlobalConfiguration()
 						.getEvictionScheduledExecutorFactoryClass());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -385,6 +400,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set ReplicationQueueScheduledExecutorFactoryClass. However, it didn't.",
 				expectedReplicationQueueScheduledExecutorFactoryClass, embeddedCacheManager.getGlobalConfiguration()
 						.getReplicationQueueScheduledExecutorFactoryClass());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -403,6 +419,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 		assertEquals(
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set MarshallerClass. However, it didn't.",
 				expectedMarshallerClass, embeddedCacheManager.getGlobalConfiguration().getMarshallerClass());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -421,6 +438,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 		assertEquals(
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set TransportNodeName. However, it didn't.",
 				expectedTransportNodeName, embeddedCacheManager.getGlobalConfiguration().getTransportNodeName());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -439,6 +457,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 		assertEquals(
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set TransportClass. However, it didn't.",
 				expectedTransportClass, embeddedCacheManager.getGlobalConfiguration().getTransportClass());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -458,6 +477,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 		assertEquals(
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set TransportProperties. However, it didn't.",
 				expectedTransportProperties, embeddedCacheManager.getGlobalConfiguration().getTransportProperties());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -476,6 +496,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 		assertEquals(
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set ClusterName. However, it didn't.",
 				expectedClusterName, embeddedCacheManager.getGlobalConfiguration().getClusterName());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -493,6 +514,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 		assertEquals(
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set MachineId. However, it didn't.",
 				expectedMachineId, embeddedCacheManager.getGlobalConfiguration().getMachineId());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -510,6 +532,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 		assertEquals(
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set RackId. However, it didn't.",
 				expectedRackId, embeddedCacheManager.getGlobalConfiguration().getRackId());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -527,6 +550,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 		assertEquals(
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set SiteId. However, it didn't.",
 				expectedSiteId, embeddedCacheManager.getGlobalConfiguration().getSiteId());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -544,6 +568,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set ShutdownHookBehavior. However, it didn't.",
 				ShutdownHookBehavior.DONT_REGISTER, embeddedCacheManager.getGlobalConfiguration()
 						.getShutdownHookBehavior());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -564,6 +589,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set AsyncListenerExecutorProperties. However, it didn't.",
 				expectedAsyncListenerExecutorProperties, embeddedCacheManager.getGlobalConfiguration()
 						.getAsyncListenerExecutorProperties());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -584,6 +610,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set AsyncTransportExecutorProperties. However, it didn't.",
 				expectedAsyncTransportExecutorProperties, embeddedCacheManager.getGlobalConfiguration()
 						.getAsyncTransportExecutorProperties());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -604,6 +631,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set EvictionScheduledExecutorProperties. However, it didn't.",
 				expectedEvictionScheduledExecutorProperties, embeddedCacheManager.getGlobalConfiguration()
 						.getEvictionScheduledExecutorProperties());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -625,6 +653,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set ReplicationQueueScheduledExecutorProperties. However, it didn't.",
 				expectedReplicationQueueScheduledExecutorProperties, embeddedCacheManager.getGlobalConfiguration()
 						.getReplicationQueueScheduledExecutorProperties());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -645,6 +674,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 		assertEquals(
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set MarshallVersion. However, it didn't.",
 				expectedMarshallVersion, embeddedCacheManager.getGlobalConfiguration().getMarshallVersion());
+		embeddedCacheManager.stop();
 	}
 
 	/**
@@ -664,6 +694,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 				"InfinispanEmbeddedCacheManagerFactoryBean should have used explicitly set DistributedSyncTimeout. However, it didn't.",
 				expectedDistributedSyncTimeout, embeddedCacheManager.getGlobalConfiguration()
 						.getDistributedSyncTimeout());
+		embeddedCacheManager.stop();
 	}
 
 }

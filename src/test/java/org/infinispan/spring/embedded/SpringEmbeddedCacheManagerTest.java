@@ -81,6 +81,7 @@ public class SpringEmbeddedCacheManagerTest {
 						+ "native cache manager. However, it does not know about the cache named "
 						+ CACHE_NAME_FROM_CONFIGURATION_FILE + " defined in said configuration file.",
 				cacheNames.contains(CACHE_NAME_FROM_CONFIGURATION_FILE));
+		nativeCacheManager.stop();
 	}
 
 }

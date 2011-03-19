@@ -69,6 +69,7 @@ public class SpringRemoteCacheManagerTest {
 				defaultCache);
 		assertEquals("getCache(" + cacheName + ") should have returned a cache name \"" + cacheName
 				+ "\". However, the returned cache has a different name.", cacheName, defaultCache.getName());
+		nativeCacheManager.stop();
 	}
 
 	/**
@@ -78,6 +79,7 @@ public class SpringRemoteCacheManagerTest {
 	public final void getCacheNamesShouldThrowAnUnsupportedOperationException() {
 		final RemoteCacheManager nativeCacheManager = new RemoteCacheManager(true);
 		final SpringRemoteCacheManager objectUnderTest = new SpringRemoteCacheManager(nativeCacheManager);
+		nativeCacheManager.stop();
 
 		objectUnderTest.getCacheNames();
 	}
