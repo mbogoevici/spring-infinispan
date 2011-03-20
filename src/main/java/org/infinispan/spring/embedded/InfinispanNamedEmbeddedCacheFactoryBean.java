@@ -96,7 +96,7 @@ import org.springframework.util.StringUtils;
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>
  *
  */
-public class InfinispanNamedEmbeddedCacheFactoryBean implements FactoryBean<Cache<Object, Object>>, BeanNameAware,
+public class InfinispanNamedEmbeddedCacheFactoryBean<K, V> implements FactoryBean<Cache<K, V>>, BeanNameAware,
 		InitializingBean, DisposableBean {
 
 	/**
@@ -157,7 +157,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBean implements FactoryBean<Cach
 
 	private final ConfigurationOverrides configurationOverrides = new ConfigurationOverrides();
 
-	private Cache<Object, Object> infinispanCache;
+	private Cache<K, V> infinispanCache;
 
 	// ------------------------------------------------------------------------
 	// org.springframework.beans.factory.InitializingBean
@@ -177,7 +177,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBean implements FactoryBean<Cach
 		this.logger.info("New INFINISPAN embedded cache [" + this.infinispanCache + "] initialized");
 	}
 
-	private Cache<Object, Object> configureAndCreateNamedCache(final String cacheName) {
+	private Cache<K, V> configureAndCreateNamedCache(final String cacheName) {
 		switch (this.configurationTemplateMode) {
 		case NONE:
 			this.logger.debug("ConfigurationTemplateMode is NONE: starting with a fresh Configuration");
@@ -239,7 +239,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBean implements FactoryBean<Cach
 	 * @see org.springframework.beans.factory.FactoryBean#getObject()
 	 */
 	@Override
-	public Cache<Object, Object> getObject() throws Exception {
+	public Cache<K, V> getObject() throws Exception {
 		return this.infinispanCache;
 	}
 

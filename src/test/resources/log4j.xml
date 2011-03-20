@@ -40,7 +40,7 @@
 		<level value="debug" />
 	</logger>
 
-	<logger name="org.infinispan">
+	<logger name="org.infinispan.spring">
 		<level value="debug" />
 	</logger>
 

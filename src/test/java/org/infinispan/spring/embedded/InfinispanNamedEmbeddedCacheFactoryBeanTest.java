@@ -90,7 +90,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 	@Test(expected = IllegalStateException.class)
 	public final void infinispanNamedEmbeddedCacheFactoryBeanShouldRecognizeThatNoCacheContainerHasBeenSet()
 			throws Exception {
-		final InfinispanNamedEmbeddedCacheFactoryBean objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean();
+		final InfinispanNamedEmbeddedCacheFactoryBean<Object, Object> objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean<Object, Object>();
 		objectUnderTest.setCacheName("test.cache.Name");
 		objectUnderTest.setBeanName("test.bean.Name");
 		objectUnderTest.afterPropertiesSet();
@@ -105,7 +105,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 			throws Exception {
 		final String beanName = "test.bean.Name";
 
-		final InfinispanNamedEmbeddedCacheFactoryBean objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean();
+		final InfinispanNamedEmbeddedCacheFactoryBean<Object, Object> objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean<Object, Object>();
 		objectUnderTest.setInfinispanEmbeddedCacheManager(DEFAULT_CACHE_MANAGER);
 		objectUnderTest.setBeanName(beanName);
 		objectUnderTest.afterPropertiesSet();
@@ -125,7 +125,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 		final String cacheName = "test.cache.Name";
 		final String beanName = "test.bean.Name";
 
-		final InfinispanNamedEmbeddedCacheFactoryBean objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean();
+		final InfinispanNamedEmbeddedCacheFactoryBean<Object, Object> objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean<Object, Object>();
 		objectUnderTest.setInfinispanEmbeddedCacheManager(DEFAULT_CACHE_MANAGER);
 		objectUnderTest.setCacheName(cacheName);
 		objectUnderTest.setBeanName(beanName);
@@ -138,6 +138,22 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 	}
 
 	/**
+	 * Test method for {@link org.infinispan.spring.embedded.InfinispanNamedEmbeddedCacheFactoryBean#getObjectType()}.
+	 * @throws Exception 
+	 */
+	@Test
+	public final void infinispanNamedEmbeddedCacheFactoryBeanShouldReportTheMostDerivedObjectType() throws Exception {
+		final InfinispanNamedEmbeddedCacheFactoryBean<Object, Object> objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean<Object, Object>();
+		objectUnderTest.setInfinispanEmbeddedCacheManager(DEFAULT_CACHE_MANAGER);
+		objectUnderTest.setBeanName("test.bean.Name");
+		objectUnderTest.afterPropertiesSet();
+
+		assertEquals("getObjectType() should have returned the most derived class of the actual Cache "
+				+ "implementation returned from getObject(). However, it didn't.", objectUnderTest.getObject()
+				.getClass(), objectUnderTest.getObjectType());
+	}
+
+	/**
 	 * Test method for {@link org.infinispan.spring.embedded.InfinispanNamedEmbeddedCacheFactoryBean#getObject()}.
 	 * @throws Exception 
 	 */
@@ -146,7 +162,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 		final String cacheName = "test.cache.Name";
 		final String beanName = "test.bean.Name";
 
-		final InfinispanNamedEmbeddedCacheFactoryBean objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean();
+		final InfinispanNamedEmbeddedCacheFactoryBean<Object, Object> objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean<Object, Object>();
 		objectUnderTest.setInfinispanEmbeddedCacheManager(DEFAULT_CACHE_MANAGER);
 		objectUnderTest.setCacheName(cacheName);
 		objectUnderTest.setBeanName(beanName);
@@ -163,7 +179,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 	 */
 	@Test
 	public final void infinispanNamedEmbeddedCacheFactoryBeanShouldDeclareItselfToBeSingleton() {
-		final InfinispanNamedEmbeddedCacheFactoryBean objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean();
+		final InfinispanNamedEmbeddedCacheFactoryBean<Object, Object> objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean<Object, Object>();
 
 		assertTrue(
 				"InfinispanNamedEmbeddedCacheFactoryBean should declare itself to produce a singleton. However, it didn't.",
@@ -180,7 +196,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 		final String cacheName = "test.cache.Name";
 		final String beanName = "test.bean.Name";
 
-		final InfinispanNamedEmbeddedCacheFactoryBean objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean();
+		final InfinispanNamedEmbeddedCacheFactoryBean<Object, Object> objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean<Object, Object>();
 		objectUnderTest.setInfinispanEmbeddedCacheManager(DEFAULT_CACHE_MANAGER);
 		objectUnderTest.setCacheName(cacheName);
 		objectUnderTest.setBeanName(beanName);
@@ -202,7 +218,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 	@Test(expected = IllegalStateException.class)
 	public final void infinispanNamedEmbeddedCacheFactoryBeanShouldRejectConfigurationTemplateModeNONEIfCacheConfigurationAlreadyExistsInConfigurationFile()
 			throws Exception {
-		final InfinispanNamedEmbeddedCacheFactoryBean objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean();
+		final InfinispanNamedEmbeddedCacheFactoryBean<Object, Object> objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean<Object, Object>();
 		objectUnderTest.setInfinispanEmbeddedCacheManager(PRECONFIGURED_DEFAULT_CACHE_MANAGER);
 		objectUnderTest.setCacheName(CACHE_NAME_FROM_CONFIGURATION_FILE);
 		objectUnderTest.setBeanName(CACHE_NAME_FROM_CONFIGURATION_FILE);
@@ -217,7 +233,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 	@Test(expected = IllegalStateException.class)
 	public final void infinispanNamedEmbeddedCacheFactoryBeanShouldRejectConfigurationTemplateModeDEFAULTIfCacheConfigurationAlreadyExistsInConfigurationFile()
 			throws Exception {
-		final InfinispanNamedEmbeddedCacheFactoryBean objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean();
+		final InfinispanNamedEmbeddedCacheFactoryBean<Object, Object> objectUnderTest = new InfinispanNamedEmbeddedCacheFactoryBean<Object, Object>();
 		objectUnderTest.setInfinispanEmbeddedCacheManager(PRECONFIGURED_DEFAULT_CACHE_MANAGER);
 		objectUnderTest.setCacheName(CACHE_NAME_FROM_CONFIGURATION_FILE);
 		objectUnderTest.setBeanName(CACHE_NAME_FROM_CONFIGURATION_FILE);

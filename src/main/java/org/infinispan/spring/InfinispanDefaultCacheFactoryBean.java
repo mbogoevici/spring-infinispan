@@ -48,14 +48,14 @@ import org.springframework.beans.factory.InitializingBean;
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>
  *
  */
-public class InfinispanDefaultCacheFactoryBean implements FactoryBean<Cache<Object, Object>>, InitializingBean,
+public class InfinispanDefaultCacheFactoryBean<K, V> implements FactoryBean<Cache<K, V>>, InitializingBean,
 		DisposableBean {
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
 	private CacheContainer infinispanCacheContainer;
 
-	private Cache<Object, Object> infinispanCache;
+	private Cache<K, V> infinispanCache;
 
 	/**
 	 * <p>
@@ -89,7 +89,7 @@ public class InfinispanDefaultCacheFactoryBean implements FactoryBean<Cache<Obje
 	 * @see org.springframework.beans.factory.FactoryBean#getObject()
 	 */
 	@Override
-	public Cache<Object, Object> getObject() throws Exception {
+	public Cache<K, V> getObject() throws Exception {
 		return this.infinispanCache;
 	}
 

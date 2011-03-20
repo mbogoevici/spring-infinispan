@@ -39,6 +39,17 @@ import org.junit.Test;
 public class InfinispanDefaultCacheFactoryBeanTest {
 
 	/**
+	 * Test method for {@link org.infinispan.spring.InfinispanDefaultCacheFactoryBean#afterPropertiesSet()}.
+	 * @throws Exception 
+	 */
+	@Test(expected = IllegalStateException.class)
+	public final void afterPropertiesSetShouldThrowAnIllegalStateExceptionIfNoCacheContainerHasBeenSet()
+			throws Exception {
+		final InfinispanDefaultCacheFactoryBean objectUnderTest = new InfinispanDefaultCacheFactoryBean();
+		objectUnderTest.afterPropertiesSet();
+	}
+
+	/**
 	 * Test method for {@link org.infinispan.spring.InfinispanDefaultCacheFactoryBean#getObject()}.
 	 * @throws Exception 
 	 */
@@ -52,6 +63,22 @@ public class InfinispanDefaultCacheFactoryBeanTest {
 
 		assertNotNull("InfinispanDefaultCacheFactoryBean should have produced a proper Infinispan cache. "
 				+ "However, it produced a null Infinispan cache.", cache);
+	}
+
+	/**
+	 * Test method for {@link org.infinispan.spring.InfinispanDefaultCacheFactoryBean#getObjectType()}.
+	 * @throws Exception 
+	 */
+	@Test
+	public final void getObjectTypeShouldReturnTheMostDerivedTypeOfTheProducedInfinispanCache() throws Exception {
+		final InfinispanDefaultCacheFactoryBean objectUnderTest = new InfinispanDefaultCacheFactoryBean();
+		objectUnderTest.setInfinispanCacheContainer(new DefaultCacheManager());
+		objectUnderTest.afterPropertiesSet();
+
+		final Class<? extends Cache> cacheType = objectUnderTest.getObjectType();
+
+		assertEquals("getObjectType() should have returned the produced INFINISPAN cache's most derived type. "
+				+ "However, it returned a more generic type.", objectUnderTest.getObject().getClass(), cacheType);
 	}
 
 	/**

@@ -97,6 +97,20 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 	}
 
 	/**
+	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#getObjectType()}.
+	 * @throws Exception 
+	 */
+	@Test
+	public final void infinispanRemoteCacheFactoryBeanShouldReportTheMostDerivedObjectType() throws Exception {
+		final InfinispanRemoteCacheManagerFactoryBean objectUnderTest = new InfinispanRemoteCacheManagerFactoryBean();
+		objectUnderTest.afterPropertiesSet();
+
+		assertEquals("getObjectType() should have returned the most derived class of the actual RemoteCache "
+				+ "implementation returned from getObject(). However, it didn't.", objectUnderTest.getObject()
+				.getClass(), objectUnderTest.getObjectType());
+	}
+
+	/**
 	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#getObject()}.
 	 * @throws Exception 
 	 */
