@@ -21,6 +21,8 @@ package org.infinispan.spring.remote;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetSocketAddress;
+import java.util.Collection;
 import java.util.Properties;
 
 import org.apache.commons.logging.Log;
@@ -37,13 +39,25 @@ import org.springframework.core.io.Resource;
  * {@link org.infinispan.client.hotrod.RemoteCacheManager <code>INFINISPAN RemoteCacheManager</code>}
  * instance.
  * </p>
+ * <strong>Configuration</strong><br/>
  * <p>
- * A <code>RemoteCacheManager</code> is configured through a {@link java.util.Properties <code>Properties</code>}
- * object. For an exhaustive list of valid properties to be used see <code>RemoteCacheManager</code>'s 
- * {@link org.infinispan.client.hotrod.RemoteCacheManager javadocs}. This <code>FactoryBean</code> provides means
- * to either {@link #setConfigurationProperties(Properties) pass in} a user-defined <code>Properties</code> 
- * instance or to {@link #setConfigurationPropertiesFileLocation(Resource) set} the location of a properties file
- * to load those properties from. Note that it is <em>illegal</em> to use both mechanisms simultaneously. 
+ * A <code>RemoteCacheManager</code> is configured through a 
+ * {@link java.util.Properties <code>Properties</code>} object. For an exhaustive list of valid properties
+ * to be used see <code>RemoteCacheManager</code>'s {@link org.infinispan.client.hotrod.RemoteCacheManager javadocs}.
+ * This <code>FactoryBean</code> provides means to either {@link #setConfigurationProperties(Properties) inject}
+ * a user-defined <code>Properties</code> instance or to {@link #setConfigurationPropertiesFileLocation(Resource) set}
+ * the location of a properties file to load those properties from. Note that it is <em>illegal</em> to use
+ * both mechanisms simultaneously.<br/>
+ * </p>
+ * <p>
+ * Alternatively or in combination with {@link #setConfigurationPropertiesFileLocation(Resource) setting} 
+ * the location of a <code>Properties</code> file to load the configuration from, this <code>FactoryBean</code>
+ * provides (typed) setters for all configuration settings. Settings thus defined take precedence over those
+ * defined in the injected <code>Properties</code> instance. This flexibility enables users to use e.g. a
+ * company-wide <code>Properties</code> file containing default settings while simultaneously overriding
+ * select settings whenever special requirements warrant this.<br/>
+ * Note that it is illegal to use setters in conjunction with {@link #setConfigurationProperties(Properties) injecting}
+ * a <code>Properties</code> instance.
  * </p>
  * <p>
  * In addition to creating a <code>RemoteCacheManager</code> this <code>FactoryBean</code> does also
@@ -68,6 +82,8 @@ public class InfinispanRemoteCacheManagerFactoryBean implements FactoryBean<Remo
 
 	private Resource configurationPropertiesFileLocation;
 
+	private final ConfigurationPropertiesOverrides configurationPropertiesOverrides = new ConfigurationPropertiesOverrides();
+
 	private RemoteCacheManager nativeRemoteCacheManager;
 
 	// ------------------------------------------------------------------------
@@ -91,19 +107,27 @@ public class InfinispanRemoteCacheManagerFactoryBean implements FactoryBean<Remo
 			throw new IllegalStateException(
 					"You may only use either \"configurationProperties\" or \"configurationPropertiesFileLocation\" "
 							+ "to configure the RemoteCacheManager, not both.");
+		} else if ((this.configurationProperties != null) && !this.configurationPropertiesOverrides.isEmpty()) {
+			throw new IllegalStateException(
+					"You may only use either \"configurationProperties\" or setters on this FactoryBean "
+							+ "to configure the RemoteCacheManager, not both.");
 		}
 	}
 
 	private Properties configurationProperties() throws IOException {
 		final Properties answer;
 		if (this.configurationProperties != null) {
+			answer = this.configurationPropertiesOverrides.override(this.configurationProperties);
 			this.logger.debug("Using user-defined properties [" + this.configurationProperties
 					+ "] for configuring RemoteCacheManager");
-			answer = this.configurationProperties;
 		} else if (this.configurationPropertiesFileLocation != null) {
+			answer = loadPropertiesFromFile(this.configurationPropertiesFileLocation);
 			this.logger.debug("Loading properties from file [" + this.configurationProperties
 					+ "] for configuring RemoteCacheManager");
-			answer = loadPropertiesFromFile(this.configurationPropertiesFileLocation);
+		} else if (!this.configurationPropertiesOverrides.isEmpty()) {
+			answer = this.configurationPropertiesOverrides.override(new Properties());
+			this.logger.debug("Using explicitly set configuration settings [" + answer
+					+ "] for configuring RemoteCacheManager");
 		} else {
 			this.logger.debug("No configuration properties. RemoteCacheManager will use default configuration.");
 			answer = null;
@@ -203,5 +227,85 @@ public class InfinispanRemoteCacheManagerFactoryBean implements FactoryBean<Remo
 	 */
 	public void setStartAutomatically(final boolean startAutomatically) {
 		this.startAutomatically = startAutomatically;
+	}
+
+	/**
+	 * @param TransportFactory
+	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setTransportFactory(java.lang.String)
+	 */
+	public void setTransportFactory(final String TransportFactory) {
+		this.configurationPropertiesOverrides.setTransportFactory(TransportFactory);
+	}
+
+	/**
+	 * @param serverList
+	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setServerList(java.util.Collection)
+	 */
+	public void setServerList(final Collection<InetSocketAddress> serverList) {
+		this.configurationPropertiesOverrides.setServerList(serverList);
+	}
+
+	/**
+	 * @param marshaller
+	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setMarshaller(java.lang.String)
+	 */
+	public void setMarshaller(final String marshaller) {
+		this.configurationPropertiesOverrides.setMarshaller(marshaller);
+	}
+
+	/**
+	 * @param asyncExecutorFactory
+	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setAsyncExecutorFactory(java.lang.String)
+	 */
+	public void setAsyncExecutorFactory(final String asyncExecutorFactory) {
+		this.configurationPropertiesOverrides.setAsyncExecutorFactory(asyncExecutorFactory);
+	}
+
+	/**
+	 * @param tcpNoDelay
+	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setTcpNoDelay(boolean)
+	 */
+	public void setTcpNoDelay(final boolean tcpNoDelay) {
+		this.configurationPropertiesOverrides.setTcpNoDelay(tcpNoDelay);
+	}
+
+	/**
+	 * @param pingOnStartup
+	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setPingOnStartup(boolean)
+	 */
+	public void setPingOnStartup(final boolean pingOnStartup) {
+		this.configurationPropertiesOverrides.setPingOnStartup(pingOnStartup);
+	}
+
+	/**
+	 * @param requestBalancingStrategy
+	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setRequestBalancingStrategy(java.lang.String)
+	 */
+	public void setRequestBalancingStrategy(final String requestBalancingStrategy) {
+		this.configurationPropertiesOverrides.setRequestBalancingStrategy(requestBalancingStrategy);
+	}
+
+	/**
+	 * @param keySizeEstimate
+	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setKeySizeEstimate(int)
+	 */
+	public void setKeySizeEstimate(final int keySizeEstimate) {
+		this.configurationPropertiesOverrides.setKeySizeEstimate(keySizeEstimate);
+	}
+
+	/**
+	 * @param valueSizeEstimate
+	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setValueSizeEstimate(int)
+	 */
+	public void setValueSizeEstimate(final int valueSizeEstimate) {
+		this.configurationPropertiesOverrides.setValueSizeEstimate(valueSizeEstimate);
+	}
+
+	/**
+	 * @param forceReturnValues
+	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setForceReturnValues(boolean)
+	 */
+	public void setForceReturnValues(final boolean forceReturnValues) {
+		this.configurationPropertiesOverrides.setForceReturnValues(forceReturnValues);
 	}
 }
