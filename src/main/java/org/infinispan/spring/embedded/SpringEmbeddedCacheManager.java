@@ -20,13 +20,13 @@
 package org.infinispan.spring.embedded;
 
 import java.util.Collection;
-import java.util.LinkedHashSet;
+import java.util.Collections;
 
 import org.infinispan.lifecycle.ComponentStatus;
 import org.infinispan.manager.EmbeddedCacheManager;
 import org.infinispan.spring.SpringCache;
 import org.springframework.cache.Cache;
-import org.springframework.cache.support.AbstractCacheManager;
+import org.springframework.cache.CacheManager;
 import org.springframework.util.Assert;
 
 /**
@@ -36,16 +36,16 @@ import org.springframework.util.Assert;
  * instance.
  * </p>
  * <p>
- * Note that this <code>CacheManager</code> does <strong>not</strong> support adding new
+ * Note that this <code>CacheManager</code> <strong>does</strong> support adding new
  * {@link org.infinispan.Cache <code>Caches</code>} at runtime, i.e. <code>Caches</code> added programmatically
  * to the backing <code>EmbeddedCacheManager</code> after this <code>CacheManager</code> has been constructed 
- * will not be seen by this <code>CacheManager</code>.
+ * will be seen by this <code>CacheManager</code>.
  * </p>
  *
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>
  *
  */
-public class SpringEmbeddedCacheManager extends AbstractCacheManager {
+public class SpringEmbeddedCacheManager implements CacheManager {
 
 	private final EmbeddedCacheManager nativeCacheManager;
 
@@ -68,21 +68,15 @@ public class SpringEmbeddedCacheManager extends AbstractCacheManager {
 						+ "] is required to be in state RUNNING. Actual state: " + currentCacheManagerStatus);
 	}
 
-	/**
-	 * @see org.springframework.cache.support.AbstractCacheManager#loadCaches()
-	 */
 	@Override
-	protected Collection<Cache<?, ?>> loadCaches() {
+	public <K, V> Cache<K, V> getCache(final String name) {
 		checkNativeCacheManagerStatus(this.nativeCacheManager);
-
-		final Collection<Cache<?, ?>> allCaches = new LinkedHashSet<Cache<?, ?>>();
-		for (final String cacheName : this.nativeCacheManager.getCacheNames()) {
-			final org.infinispan.Cache<Object, Object> namedNativeCache = this.nativeCacheManager.getCache(cacheName);
-			final Cache<?, ?> infinispanSpringCache = new SpringCache<Object, Object>(namedNativeCache);
-			allCaches.add(infinispanSpringCache);
-		}
-
-		return allCaches;
+		return new SpringCache<K, V>(this.nativeCacheManager.<K, V> getCache(name));
 	}
 
+	@Override
+	public Collection<String> getCacheNames() {
+		checkNativeCacheManagerStatus(this.nativeCacheManager);
+		return Collections.unmodifiableSet(this.nativeCacheManager.getCacheNames());
+	}
 }

@@ -19,6 +19,7 @@
 
 package org.infinispan.spring.embedded;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -27,6 +28,7 @@ import java.util.Collection;
 import org.infinispan.manager.DefaultCacheManager;
 import org.infinispan.manager.EmbeddedCacheManager;
 import org.junit.Test;
+import org.springframework.cache.Cache;
 
 /**
  * <p>
@@ -62,17 +64,92 @@ public class SpringEmbeddedCacheManagerTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.SpringEmbeddedCacheManager#loadCaches()}.
+	 * Test method for {@link org.infinispan.spring.embedded.SpringEmbeddedCacheManager#getCache(String)}.
+	 * @throws IOException 
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public final void getCacheShouldThrowIllegalStateExceptionIfTheUnderlyingEmbeddedCacheManagerIsNotRunning()
+			throws IOException {
+		final EmbeddedCacheManager nativeCacheManager = new DefaultCacheManager(
+				SpringEmbeddedCacheManagerTest.class.getResourceAsStream(NAMED_ASYNC_CACHE_CONFIG_LOCATION), false);
+		final SpringEmbeddedCacheManager objectUnderTest = new SpringEmbeddedCacheManager(nativeCacheManager);
+
+		objectUnderTest.getCache(CACHE_NAME_FROM_CONFIGURATION_FILE);
+	}
+
+	/**
+	 * Test method for {@link org.infinispan.spring.embedded.SpringEmbeddedCacheManager#getCache(String)}.
 	 * @throws IOException 
 	 */
 	@Test
-	public final void springEmbeddedCacheManagerShouldLoadAllCachesDefinedInConfigurationFile() throws IOException {
+	public final void getCacheShouldReturnTheCacheHavingTheProvidedName() throws IOException {
 		final EmbeddedCacheManager nativeCacheManager = new DefaultCacheManager(
 				SpringEmbeddedCacheManagerTest.class.getResourceAsStream(NAMED_ASYNC_CACHE_CONFIG_LOCATION));
 		nativeCacheManager.getCache(); // Implicitly starts EmbeddedCacheManager
-
 		final SpringEmbeddedCacheManager objectUnderTest = new SpringEmbeddedCacheManager(nativeCacheManager);
-		objectUnderTest.afterPropertiesSet();
+
+		final Cache<Object, Object> cacheExpectedToHaveTheProvidedName = objectUnderTest
+				.getCache(CACHE_NAME_FROM_CONFIGURATION_FILE);
+
+		assertEquals(
+				"getCache("
+						+ CACHE_NAME_FROM_CONFIGURATION_FILE
+						+ ") should have returned the cache having the provided name. However, the cache returned has a different name.",
+				CACHE_NAME_FROM_CONFIGURATION_FILE, cacheExpectedToHaveTheProvidedName.getName());
+		nativeCacheManager.stop();
+	}
+
+	/**
+	 * Test method for {@link org.infinispan.spring.embedded.SpringEmbeddedCacheManager#getCache(String)}.
+	 * @throws IOException 
+	 */
+	@Test
+	public final void getCacheShouldReturnACacheAddedAfterCreatingTheSpringEmbeddedCache() throws IOException {
+		final String nameOfInfinispanCacheAddedLater = "infinispan.cache.addedLater";
+
+		final EmbeddedCacheManager nativeCacheManager = new DefaultCacheManager(
+				SpringEmbeddedCacheManagerTest.class.getResourceAsStream(NAMED_ASYNC_CACHE_CONFIG_LOCATION));
+		nativeCacheManager.getCache(); // Implicitly starts EmbeddedCacheManager
+		final SpringEmbeddedCacheManager objectUnderTest = new SpringEmbeddedCacheManager(nativeCacheManager);
+
+		final org.infinispan.Cache<Object, Object> infinispanCacheAddedLater = nativeCacheManager
+				.getCache(nameOfInfinispanCacheAddedLater);
+
+		final Cache<Object, Object> springCacheAddedLater = objectUnderTest.getCache(nameOfInfinispanCacheAddedLater);
+
+		assertEquals(
+				"getCache("
+						+ nameOfInfinispanCacheAddedLater
+						+ ") should have returned the Spring cache having the INFINISPAN cache added after creating "
+						+ "SpringEmbeddedCacheManager as its underlying native cache. However, the underlying native cache is different.",
+				infinispanCacheAddedLater, springCacheAddedLater.getNativeCache());
+		nativeCacheManager.stop();
+	}
+
+	/**
+	 * Test method for {@link org.infinispan.spring.embedded.SpringEmbeddedCacheManager#getCacheNames()}.
+	 * @throws IOException 
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public final void getCacheNamesShouldThrowIllegalStateExceptionIfTheUnderlyingEmbeddedCacheManagerIsNotRunning()
+			throws IOException {
+		final EmbeddedCacheManager nativeCacheManager = new DefaultCacheManager(
+				SpringEmbeddedCacheManagerTest.class.getResourceAsStream(NAMED_ASYNC_CACHE_CONFIG_LOCATION), false);
+		final SpringEmbeddedCacheManager objectUnderTest = new SpringEmbeddedCacheManager(nativeCacheManager);
+
+		objectUnderTest.getCacheNames();
+	}
+
+	/**
+	 * Test method for {@link org.infinispan.spring.embedded.SpringEmbeddedCacheManager#getCacheNames()}.
+	 * @throws IOException 
+	 */
+	@Test
+	public final void getCacheNamesShouldReturnAllCachesDefinedInConfigurationFile() throws IOException {
+		final EmbeddedCacheManager nativeCacheManager = new DefaultCacheManager(
+				SpringEmbeddedCacheManagerTest.class.getResourceAsStream(NAMED_ASYNC_CACHE_CONFIG_LOCATION));
+		nativeCacheManager.getCache(); // Implicitly starts EmbeddedCacheManager
+		final SpringEmbeddedCacheManager objectUnderTest = new SpringEmbeddedCacheManager(nativeCacheManager);
 
 		final Collection<String> cacheNames = objectUnderTest.getCacheNames();
 
