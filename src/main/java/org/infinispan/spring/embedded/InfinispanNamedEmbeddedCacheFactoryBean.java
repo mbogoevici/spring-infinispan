@@ -145,7 +145,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBean implements FactoryBean<Cach
 		NAMED
 	}
 
-	protected final Log logger = LogFactory.getLog(getClass());
+	private final Log logger = LogFactory.getLog(getClass());
 
 	private EmbeddedCacheManager infinispanEmbeddedCacheManager;
 
@@ -171,10 +171,10 @@ public class InfinispanNamedEmbeddedCacheFactoryBean implements FactoryBean<Cach
 		if (this.infinispanEmbeddedCacheManager == null) {
 			throw new IllegalStateException("No INFINISPAN EmbeddedCacheManager has been set");
 		}
-		this.logger.info("Initializing named INFINISPAN cache ...");
+		this.logger.info("Initializing named INFINISPAN embedded cache ...");
 		final String effectiveCacheName = obtainEffectiveCacheName();
 		this.infinispanCache = configureAndCreateNamedCache(effectiveCacheName);
-		this.logger.info("New INFINISPAN cache [" + this.infinispanCache + "] initialized");
+		this.logger.info("New INFINISPAN embedded cache [" + this.infinispanCache + "] initialized");
 	}
 
 	private Cache<Object, Object> configureAndCreateNamedCache(final String cacheName) {
@@ -276,7 +276,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBean implements FactoryBean<Cach
 	}
 
 	// ------------------------------------------------------------------------
-	// org.springframework.beans.factory.BeanNameAware
+	// org.springframework.beans.factory.DisposableBean
 	// ------------------------------------------------------------------------
 
 	/**
