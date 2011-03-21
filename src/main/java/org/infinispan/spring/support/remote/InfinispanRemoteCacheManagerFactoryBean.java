@@ -17,7 +17,7 @@
  * governing permissions and limitations under the License.
  */
 
-package org.infinispan.spring.remote;
+package org.infinispan.spring.support.remote;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -231,7 +231,7 @@ public class InfinispanRemoteCacheManagerFactoryBean implements FactoryBean<Remo
 
 	/**
 	 * @param TransportFactory
-	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setTransportFactory(java.lang.String)
+	 * @see org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setTransportFactory(java.lang.String)
 	 */
 	public void setTransportFactory(final String TransportFactory) {
 		this.configurationPropertiesOverrides.setTransportFactory(TransportFactory);
@@ -239,7 +239,7 @@ public class InfinispanRemoteCacheManagerFactoryBean implements FactoryBean<Remo
 
 	/**
 	 * @param serverList
-	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setServerList(java.util.Collection)
+	 * @see org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setServerList(java.util.Collection)
 	 */
 	public void setServerList(final Collection<InetSocketAddress> serverList) {
 		this.configurationPropertiesOverrides.setServerList(serverList);
@@ -247,7 +247,7 @@ public class InfinispanRemoteCacheManagerFactoryBean implements FactoryBean<Remo
 
 	/**
 	 * @param marshaller
-	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setMarshaller(java.lang.String)
+	 * @see org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setMarshaller(java.lang.String)
 	 */
 	public void setMarshaller(final String marshaller) {
 		this.configurationPropertiesOverrides.setMarshaller(marshaller);
@@ -255,7 +255,7 @@ public class InfinispanRemoteCacheManagerFactoryBean implements FactoryBean<Remo
 
 	/**
 	 * @param asyncExecutorFactory
-	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setAsyncExecutorFactory(java.lang.String)
+	 * @see org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setAsyncExecutorFactory(java.lang.String)
 	 */
 	public void setAsyncExecutorFactory(final String asyncExecutorFactory) {
 		this.configurationPropertiesOverrides.setAsyncExecutorFactory(asyncExecutorFactory);
@@ -263,7 +263,7 @@ public class InfinispanRemoteCacheManagerFactoryBean implements FactoryBean<Remo
 
 	/**
 	 * @param tcpNoDelay
-	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setTcpNoDelay(boolean)
+	 * @see org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setTcpNoDelay(boolean)
 	 */
 	public void setTcpNoDelay(final boolean tcpNoDelay) {
 		this.configurationPropertiesOverrides.setTcpNoDelay(tcpNoDelay);
@@ -271,7 +271,7 @@ public class InfinispanRemoteCacheManagerFactoryBean implements FactoryBean<Remo
 
 	/**
 	 * @param pingOnStartup
-	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setPingOnStartup(boolean)
+	 * @see org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setPingOnStartup(boolean)
 	 */
 	public void setPingOnStartup(final boolean pingOnStartup) {
 		this.configurationPropertiesOverrides.setPingOnStartup(pingOnStartup);
@@ -279,7 +279,7 @@ public class InfinispanRemoteCacheManagerFactoryBean implements FactoryBean<Remo
 
 	/**
 	 * @param requestBalancingStrategy
-	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setRequestBalancingStrategy(java.lang.String)
+	 * @see org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setRequestBalancingStrategy(java.lang.String)
 	 */
 	public void setRequestBalancingStrategy(final String requestBalancingStrategy) {
 		this.configurationPropertiesOverrides.setRequestBalancingStrategy(requestBalancingStrategy);
@@ -287,7 +287,7 @@ public class InfinispanRemoteCacheManagerFactoryBean implements FactoryBean<Remo
 
 	/**
 	 * @param keySizeEstimate
-	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setKeySizeEstimate(int)
+	 * @see org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setKeySizeEstimate(int)
 	 */
 	public void setKeySizeEstimate(final int keySizeEstimate) {
 		this.configurationPropertiesOverrides.setKeySizeEstimate(keySizeEstimate);
@@ -295,7 +295,7 @@ public class InfinispanRemoteCacheManagerFactoryBean implements FactoryBean<Remo
 
 	/**
 	 * @param valueSizeEstimate
-	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setValueSizeEstimate(int)
+	 * @see org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setValueSizeEstimate(int)
 	 */
 	public void setValueSizeEstimate(final int valueSizeEstimate) {
 		this.configurationPropertiesOverrides.setValueSizeEstimate(valueSizeEstimate);
@@ -303,7 +303,7 @@ public class InfinispanRemoteCacheManagerFactoryBean implements FactoryBean<Remo
 
 	/**
 	 * @param forceReturnValues
-	 * @see org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setForceReturnValues(boolean)
+	 * @see org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setForceReturnValues(boolean)
 	 */
 	public void setForceReturnValues(final boolean forceReturnValues) {
 		this.configurationPropertiesOverrides.setForceReturnValues(forceReturnValues);

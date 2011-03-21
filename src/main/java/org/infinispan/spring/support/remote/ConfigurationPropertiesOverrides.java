@@ -17,7 +17,7 @@
  * governing permissions and limitations under the License.
  */
 
-package org.infinispan.spring.remote;
+package org.infinispan.spring.support.remote;
 
 import static org.infinispan.client.hotrod.impl.ConfigurationProperties.ASYNC_EXECUTOR_FACTORY;
 import static org.infinispan.client.hotrod.impl.ConfigurationProperties.FORCE_RETURN_VALUES;

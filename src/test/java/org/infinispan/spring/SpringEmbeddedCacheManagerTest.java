@@ -17,7 +17,7 @@
  * governing permissions and limitations under the License.
  */
 
-package org.infinispan.spring.embedded;
+package org.infinispan.spring;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -27,6 +27,7 @@ import java.util.Collection;
 
 import org.infinispan.manager.DefaultCacheManager;
 import org.infinispan.manager.EmbeddedCacheManager;
+import org.infinispan.spring.SpringEmbeddedCacheManager;
 import org.junit.Test;
 import org.springframework.cache.Cache;
 
@@ -45,7 +46,7 @@ public class SpringEmbeddedCacheManagerTest {
 	private static final String NAMED_ASYNC_CACHE_CONFIG_LOCATION = "named-async-cache.xml";
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.SpringEmbeddedCacheManager#SpringEmbeddedCacheManager(org.infinispan.manager.EmbeddedCacheManager)}.
+	 * Test method for {@link org.infinispan.spring.SpringEmbeddedCacheManager#SpringEmbeddedCacheManager(org.infinispan.manager.EmbeddedCacheManager)}.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public final void springEmbeddedCacheManagerConstructorShouldRejectNullEmbeddedCacheManager() {
@@ -53,7 +54,7 @@ public class SpringEmbeddedCacheManagerTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.SpringEmbeddedCacheManager#SpringEmbeddedCacheManager(org.infinispan.manager.EmbeddedCacheManager)}.
+	 * Test method for {@link org.infinispan.spring.SpringEmbeddedCacheManager#SpringEmbeddedCacheManager(org.infinispan.manager.EmbeddedCacheManager)}.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public final void springEmbeddedCacheManagerConstructorShouldRejectStoppedEmbeddedCacheManager() {
@@ -64,7 +65,7 @@ public class SpringEmbeddedCacheManagerTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.SpringEmbeddedCacheManager#getCache(String)}.
+	 * Test method for {@link org.infinispan.spring.SpringEmbeddedCacheManager#getCache(String)}.
 	 * @throws IOException 
 	 */
 	@Test(expected = IllegalArgumentException.class)
@@ -78,7 +79,7 @@ public class SpringEmbeddedCacheManagerTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.SpringEmbeddedCacheManager#getCache(String)}.
+	 * Test method for {@link org.infinispan.spring.SpringEmbeddedCacheManager#getCache(String)}.
 	 * @throws IOException 
 	 */
 	@Test
@@ -100,7 +101,7 @@ public class SpringEmbeddedCacheManagerTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.SpringEmbeddedCacheManager#getCache(String)}.
+	 * Test method for {@link org.infinispan.spring.SpringEmbeddedCacheManager#getCache(String)}.
 	 * @throws IOException 
 	 */
 	@Test
@@ -127,7 +128,7 @@ public class SpringEmbeddedCacheManagerTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.SpringEmbeddedCacheManager#getCacheNames()}.
+	 * Test method for {@link org.infinispan.spring.SpringEmbeddedCacheManager#getCacheNames()}.
 	 * @throws IOException 
 	 */
 	@Test(expected = IllegalArgumentException.class)
@@ -141,7 +142,7 @@ public class SpringEmbeddedCacheManagerTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.SpringEmbeddedCacheManager#getCacheNames()}.
+	 * Test method for {@link org.infinispan.spring.SpringEmbeddedCacheManager#getCacheNames()}.
 	 * @throws IOException 
 	 */
 	@Test

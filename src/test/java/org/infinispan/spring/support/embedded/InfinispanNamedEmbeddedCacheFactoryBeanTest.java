@@ -17,7 +17,7 @@
  * governing permissions and limitations under the License.
  */
 
-package org.infinispan.spring.embedded;
+package org.infinispan.spring.support.embedded;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -29,6 +29,7 @@ import java.io.InputStream;
 import org.infinispan.Cache;
 import org.infinispan.lifecycle.ComponentStatus;
 import org.infinispan.manager.DefaultCacheManager;
+import org.infinispan.spring.support.embedded.InfinispanNamedEmbeddedCacheFactoryBean;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -84,7 +85,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanNamedEmbeddedCacheFactoryBean#afterPropertiesSet()}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanNamedEmbeddedCacheFactoryBean#afterPropertiesSet()}.
 	 * @throws Exception 
 	 */
 	@Test(expected = IllegalStateException.class)
@@ -97,7 +98,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanNamedEmbeddedCacheFactoryBean#setBeanName(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanNamedEmbeddedCacheFactoryBean#setBeanName(java.lang.String)}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -117,7 +118,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanNamedEmbeddedCacheFactoryBean#setCacheName(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanNamedEmbeddedCacheFactoryBean#setCacheName(java.lang.String)}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -138,7 +139,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanNamedEmbeddedCacheFactoryBean#getObjectType()}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanNamedEmbeddedCacheFactoryBean#getObjectType()}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -154,7 +155,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanNamedEmbeddedCacheFactoryBean#getObject()}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanNamedEmbeddedCacheFactoryBean#getObject()}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -175,7 +176,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanNamedEmbeddedCacheFactoryBean#isSingleton()}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanNamedEmbeddedCacheFactoryBean#isSingleton()}.
 	 */
 	@Test
 	public final void infinispanNamedEmbeddedCacheFactoryBeanShouldDeclareItselfToBeSingleton() {
@@ -187,7 +188,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanNamedEmbeddedCacheFactoryBean#destroy()}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanNamedEmbeddedCacheFactoryBean#destroy()}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -212,7 +213,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanNamedEmbeddedCacheFactoryBean#afterPropertiesSet()}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanNamedEmbeddedCacheFactoryBean#afterPropertiesSet()}.
 	 * @throws Exception 
 	 */
 	@Test(expected = IllegalStateException.class)
@@ -227,7 +228,7 @@ public class InfinispanNamedEmbeddedCacheFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanNamedEmbeddedCacheFactoryBean#afterPropertiesSet()}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanNamedEmbeddedCacheFactoryBean#afterPropertiesSet()}.
 	 * @throws Exception 
 	 */
 	@Test(expected = IllegalStateException.class)

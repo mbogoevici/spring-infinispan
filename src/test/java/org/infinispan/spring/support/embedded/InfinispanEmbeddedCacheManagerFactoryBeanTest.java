@@ -17,7 +17,7 @@
  * governing permissions and limitations under the License.
  */
 
-package org.infinispan.spring.embedded;
+package org.infinispan.spring.support.embedded;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -39,6 +39,7 @@ import org.infinispan.jmx.MBeanServerLookup;
 import org.infinispan.jmx.PlatformMBeanServerLookup;
 import org.infinispan.lifecycle.ComponentStatus;
 import org.infinispan.manager.EmbeddedCacheManager;
+import org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -58,7 +59,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	private static final String NAMED_ASYNC_CACHE_CONFIG_LOCATION = "named-async-cache.xml";
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setConfigurationFileLocation(org.springframework.core.io.Resource)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setConfigurationFileLocation(org.springframework.core.io.Resource)}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -76,7 +77,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setConfigurationFileLocation(org.springframework.core.io.Resource)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setConfigurationFileLocation(org.springframework.core.io.Resource)}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -106,7 +107,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#getObjectType()}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#getObjectType()}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -123,7 +124,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#isSingleton()}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#isSingleton()}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldDeclareItselfToOnlyProduceSingletons() {
@@ -133,7 +134,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#destroy()}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#destroy()}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -156,7 +157,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	// ~~~~ Testing overriding setters
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setExposeGlobalJmxStatistics(boolean)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setExposeGlobalJmxStatistics(boolean)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseExposeGlobalJmxStatisticsPropIfExplicitlySet()
@@ -176,7 +177,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setJmxDomain(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setJmxDomain(java.lang.String)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseJmxDomainPropIfExplicitlySet() throws Exception {
@@ -194,7 +195,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setMBeanServerProperties(java.util.Properties)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setMBeanServerProperties(java.util.Properties)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseMBeanServerPropertiesPropIfExplicitlySet()
@@ -214,7 +215,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setMBeanServerLookupClass(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setMBeanServerLookupClass(java.lang.String)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseMBeanServerLookupClassPropIfExplicitlySet()
@@ -239,7 +240,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setMBeanServerLookup(org.infinispan.jmx.MBeanServerLookup)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setMBeanServerLookup(org.infinispan.jmx.MBeanServerLookup)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseMBeanServerLookupPropIfExplicitlySet()
@@ -259,7 +260,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setAllowDuplicateDomains(boolean)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setAllowDuplicateDomains(boolean)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseAllowDuplicateDomainsPropIfExplicitlySet()
@@ -278,7 +279,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setCacheManagerName(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setCacheManagerName(java.lang.String)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseCacheManagerNamePropIfExplicitlySet()
@@ -297,7 +298,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setStrictPeerToPeer(boolean)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setStrictPeerToPeer(boolean)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseStrictPeerToPeerPropIfExplicitlySet()
@@ -316,7 +317,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setAsyncListenerExecutorFactoryClass(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setAsyncListenerExecutorFactoryClass(java.lang.String)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseAsyncListenerExecutorFactoryClassPropIfExplicitlySet()
@@ -343,7 +344,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setAsyncTransportExecutorFactoryClass(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setAsyncTransportExecutorFactoryClass(java.lang.String)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseAsyncTransportExecutorFactoryClassPropIfExplicitlySet()
@@ -363,7 +364,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setEvictionScheduledExecutorFactoryClass(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setEvictionScheduledExecutorFactoryClass(java.lang.String)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseEvictionScheduledExecutorFactoryClassPropIfExplicitlySet()
@@ -383,7 +384,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setReplicationQueueScheduledExecutorFactoryClass(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setReplicationQueueScheduledExecutorFactoryClass(java.lang.String)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseReplicationQueueScheduledExecutorFactoryClassPropIfExplicitlySet()
@@ -404,7 +405,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setMarshallerClass(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setMarshallerClass(java.lang.String)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseMarshallerClassPropIfExplicitlySet()
@@ -423,7 +424,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setTransportNodeName(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setTransportNodeName(java.lang.String)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseTransportNodeNamePropIfExplicitlySet()
@@ -442,7 +443,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setTransportClass(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setTransportClass(java.lang.String)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseTransportClassPropIfExplicitlySet()
@@ -461,7 +462,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setTransportProperties(java.util.Properties)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setTransportProperties(java.util.Properties)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseTransportPropertiesPropIfExplicitlySet()
@@ -481,7 +482,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setClusterName(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setClusterName(java.lang.String)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseClusterNamePropIfExplicitlySet()
@@ -500,7 +501,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setMachineId(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setMachineId(java.lang.String)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseMachineIdPropIfExplicitlySet() throws Exception {
@@ -518,7 +519,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setRackId(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setRackId(java.lang.String)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseRackIdPropIfExplicitlySet() throws Exception {
@@ -536,7 +537,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setSiteId(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setSiteId(java.lang.String)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseSiteIdPropIfExplicitlySet() throws Exception {
@@ -554,7 +555,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setShutdownHookBehavior(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setShutdownHookBehavior(java.lang.String)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseShutdownHookBehaviorPropIfExplicitlySet()
@@ -572,7 +573,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setAsyncListenerExecutorProperties(java.util.Properties)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setAsyncListenerExecutorProperties(java.util.Properties)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseAsyncListenerExecutorPropertiesPropIfExplicitlySet()
@@ -593,7 +594,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setAsyncTransportExecutorProperties(java.util.Properties)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setAsyncTransportExecutorProperties(java.util.Properties)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseAsyncTransportExecutorPropertiesPropIfExplicitlySet()
@@ -614,7 +615,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setEvictionScheduledExecutorProperties(java.util.Properties)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setEvictionScheduledExecutorProperties(java.util.Properties)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseEvictionScheduledExecutorPropertiesPropIfExplicitlySet()
@@ -635,7 +636,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setReplicationQueueScheduledExecutorProperties(java.util.Properties)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setReplicationQueueScheduledExecutorProperties(java.util.Properties)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseReplicationQueueScheduledExecutorPropertiesPropIfExplicitlySet()
@@ -657,7 +658,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setMarshallVersion(short)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setMarshallVersion(short)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseMarshallVersionPropIfExplicitlySet()
@@ -678,7 +679,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setDistributedSyncTimeout(long)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean#setDistributedSyncTimeout(long)}.
 	 */
 	@Test
 	public final void infinispanEmbeddedCacheManagerFactoryBeanShouldUseDistributedSyncTimeoutPropIfExplicitlySet()

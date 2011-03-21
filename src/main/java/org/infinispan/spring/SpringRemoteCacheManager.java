@@ -17,12 +17,11 @@
  * governing permissions and limitations under the License.
  */
 
-package org.infinispan.spring.remote;
+package org.infinispan.spring;
 
 import java.util.Collection;
 
 import org.infinispan.client.hotrod.RemoteCacheManager;
-import org.infinispan.spring.SpringCache;
 import org.springframework.cache.Cache;
 import org.springframework.util.Assert;
 

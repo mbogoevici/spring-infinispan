@@ -17,7 +17,7 @@
  * governing permissions and limitations under the License.
  */
 
-package org.infinispan.spring.embedded;
+package org.infinispan.spring.support.embedded;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
@@ -31,6 +31,7 @@ import org.infinispan.config.Configuration.CacheMode;
 import org.infinispan.config.CustomInterceptorConfig;
 import org.infinispan.eviction.EvictionStrategy;
 import org.infinispan.eviction.EvictionThreadPolicy;
+import org.infinispan.spring.support.embedded.ConfigurationOverrides;
 import org.infinispan.transaction.lookup.JBossTransactionManagerLookup;
 import org.infinispan.transaction.lookup.TransactionManagerLookup;
 import org.infinispan.util.concurrent.IsolationLevel;
@@ -47,7 +48,7 @@ import org.junit.Test;
 public class ConfigurationOverridesTest {
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideDeadlockSpinDetectionDurationPropIfExplicitlySet()
@@ -65,7 +66,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideEnableDeadlockDetectionPropIfExplicitlySet() throws Exception {
@@ -82,7 +83,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideUseLockStripingPropIfExplicitlySet() throws Exception {
@@ -100,7 +101,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideUnsafeUnreliableReturnValuesPropIfExplicitlySet()
@@ -119,7 +120,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideRehashRpcTimeoutPropIfExplicitlySet() throws Exception {
@@ -136,7 +137,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideWriteSkewCheckPropIfExplicitlySet() throws Exception {
@@ -153,7 +154,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideConcurrencyLevelPropIfExplicitlySet() throws Exception {
@@ -170,7 +171,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideReplQueueMaxElementsPropIfExplicitlySet() throws Exception {
@@ -187,7 +188,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideReplQueueIntervalPropIfExplicitlySet() throws Exception {
@@ -221,7 +222,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideExposeJmxStatisticsPropIfExplicitlySet() throws Exception {
@@ -238,7 +239,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideInvocationBatchingEnabledPropIfExplicitlySet()
@@ -256,7 +257,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideFetchInMemoryStatePropIfExplicitlySet() throws Exception {
@@ -273,7 +274,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideAlwaysProvideInMemoryStatePropIfExplicitlySet()
@@ -291,7 +292,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideLockAcquisitionTimeoutPropIfExplicitlySet() throws Exception {
@@ -308,7 +309,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideSyncReplTimeoutPropIfExplicitlySet() throws Exception {
@@ -342,7 +343,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideEvictionWakeUpIntervalPropIfExplicitlySet() throws Exception {
@@ -428,7 +429,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideEvictionMaxEntriesPropIfExplicitlySet() throws Exception {
@@ -445,7 +446,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideExpirationLifespanPropIfExplicitlySet() throws Exception {
@@ -462,7 +463,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideExpirationMaxIdlePropIfExplicitlySet() throws Exception {
@@ -533,7 +534,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideSyncCommitPhasePropIfExplicitlySet() throws Exception {
@@ -550,7 +551,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideSyncRollbackPhasePropIfExplicitlySet() throws Exception {
@@ -567,7 +568,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideUseEagerLockingPropIfExplicitlySet() throws Exception {
@@ -584,7 +585,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideEagerLockSingleNodePropIfExplicitlySet() throws Exception {
@@ -601,7 +602,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideUseReplQueuePropIfExplicitlySet() throws Exception {
@@ -635,7 +636,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideStateRetrievalTimeoutPropIfExplicitlySet() throws Exception {
@@ -652,7 +653,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideStateRetrievalLogFlushTimeoutPropIfExplicitlySet()
@@ -670,7 +671,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideStateRetrievalMaxNonProgressingLogWritesPropIfExplicitlySet()
@@ -689,7 +690,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideStateRetrievalInitialRetryWaitTimePropIfExplicitlySet()
@@ -708,7 +709,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideStateRetrievalRetryWaitTimeIncreaseFactorPropIfExplicitlySet()
@@ -727,7 +728,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideStateRetrievalNumRetriesPropIfExplicitlySet()
@@ -762,7 +763,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideUseLazyDeserializationPropIfExplicitlySet() throws Exception {
@@ -779,7 +780,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideL1CacheEnabledPropIfExplicitlySet() throws Exception {
@@ -796,7 +797,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideL1LifespanPropIfExplicitlySet() throws Exception {
@@ -813,7 +814,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideL1OnRehashPropIfExplicitlySet() throws Exception {
@@ -847,7 +848,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideNumOwnersPropIfExplicitlySet() throws Exception {
@@ -864,7 +865,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideRehashEnabledPropIfExplicitlySet() throws Exception {
@@ -881,7 +882,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideRehashWaitTimePropIfExplicitlySet() throws Exception {
@@ -898,7 +899,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideUseAsyncMarshallingPropIfExplicitlySet() throws Exception {
@@ -915,7 +916,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideIndexingEnabledPropIfExplicitlySet() throws Exception {
@@ -932,7 +933,7 @@ public class ConfigurationOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
+	 * Test method for {@link org.infinispan.spring.support.embedded.ConfigurationOverrides#applyOverridesTo(org.infinispan.config.Configuration)}.
 	 */
 	@Test
 	public final void configurationOverridesShouldOverrideIndexLocalOnlyPropIfExplicitlySet() throws Exception {

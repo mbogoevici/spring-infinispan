@@ -17,7 +17,7 @@
  * governing permissions and limitations under the License.
  */
 
-package org.infinispan.spring.remote;
+package org.infinispan.spring.support.remote;
 
 import static org.infinispan.client.hotrod.impl.ConfigurationProperties.ASYNC_EXECUTOR_FACTORY;
 import static org.infinispan.client.hotrod.impl.ConfigurationProperties.FORCE_RETURN_VALUES;
@@ -39,6 +39,7 @@ import java.util.Collection;
 import java.util.Properties;
 
 import org.infinispan.client.hotrod.impl.ConfigurationProperties;
+import org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides;
 import org.junit.Test;
 
 /**
@@ -54,7 +55,7 @@ public class ConfigurationPropertiesOverridesTest {
 	private final Properties defaultConfigurationProperties = new ConfigurationProperties().getProperties();
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.ConfigurationPropertiesOverrides#isEmpty()}.
+	 * Test method for {@link org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#isEmpty()}.
 	 */
 	@Test
 	public final void isEmptyShouldRecognizeThatConfigurationPropertiesOverridesAreEmpty() {
@@ -66,7 +67,7 @@ public class ConfigurationPropertiesOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.ConfigurationPropertiesOverrides#isEmpty()}.
+	 * Test method for {@link org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#isEmpty()}.
 	 */
 	@Test
 	public final void isEmptyShouldRecognizeThatConfigurationPropertiesOverridesAreNotEmpty() {
@@ -79,7 +80,7 @@ public class ConfigurationPropertiesOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setTransportFactory(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setTransportFactory(java.lang.String)}.
 	 */
 	@Test
 	public final void setTransportFactoryShouldOverrideDefaultTransportFactory() {
@@ -96,7 +97,7 @@ public class ConfigurationPropertiesOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setServerList(java.util.Collection)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setServerList(java.util.Collection)}.
 	 */
 	@Test
 	public final void setServerListShouldOverrideDefaultServerList() {
@@ -115,7 +116,7 @@ public class ConfigurationPropertiesOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setMarshaller(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setMarshaller(java.lang.String)}.
 	 */
 	@Test
 	public final void setMarshallerShouldOverrideDefaultMarshaller() {
@@ -132,7 +133,7 @@ public class ConfigurationPropertiesOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setAsyncExecutorFactory(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setAsyncExecutorFactory(java.lang.String)}.
 	 */
 	@Test
 	public final void setAsyncExecutorFactoryShouldOverrideDefaultAsyncExecutorFactory() {
@@ -149,7 +150,7 @@ public class ConfigurationPropertiesOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setTcpNoDelay(boolean)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setTcpNoDelay(boolean)}.
 	 */
 	@Test
 	public final void setTcpNoDelayShouldOverrideDefaultTcpNoDelay() {
@@ -166,7 +167,7 @@ public class ConfigurationPropertiesOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setPingOnStartup(boolean)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setPingOnStartup(boolean)}.
 	 */
 	@Test
 	public final void setPingOnStartupShouldOverrideDefaultPingOnStartup() {
@@ -183,7 +184,7 @@ public class ConfigurationPropertiesOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setRequestBalancingStrategy(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setRequestBalancingStrategy(java.lang.String)}.
 	 */
 	@Test
 	public final void setRequestBalancingStrategyShouldOverrideDefaultRequestBalancingStrategy() {
@@ -201,7 +202,7 @@ public class ConfigurationPropertiesOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setKeySizeEstimate(int)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setKeySizeEstimate(int)}.
 	 */
 	@Test
 	public final void setKeySizeEstimateShouldOverrideDefaultKeySizeEstimate() {
@@ -219,7 +220,7 @@ public class ConfigurationPropertiesOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setValueSizeEstimate(int)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setValueSizeEstimate(int)}.
 	 */
 	@Test
 	public final void setValueSizeEstimateShouldOverrideDefaultValueSizeEstimate() {
@@ -237,7 +238,7 @@ public class ConfigurationPropertiesOverridesTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.ConfigurationPropertiesOverrides#setForceReturnValues(boolean)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.ConfigurationPropertiesOverrides#setForceReturnValues(boolean)}.
 	 */
 	@Test
 	public final void setForceReturnValuesShouldOverrideDefaultForceReturnValues() {

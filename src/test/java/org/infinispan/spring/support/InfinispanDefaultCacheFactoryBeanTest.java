@@ -17,7 +17,7 @@
  * governing permissions and limitations under the License.
  */
 
-package org.infinispan.spring;
+package org.infinispan.spring.support;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -26,6 +26,7 @@ import static org.junit.Assert.assertTrue;
 import org.infinispan.Cache;
 import org.infinispan.lifecycle.ComponentStatus;
 import org.infinispan.manager.DefaultCacheManager;
+import org.infinispan.spring.support.InfinispanDefaultCacheFactoryBean;
 import org.junit.Test;
 
 /**
@@ -39,7 +40,7 @@ import org.junit.Test;
 public class InfinispanDefaultCacheFactoryBeanTest {
 
 	/**
-	 * Test method for {@link org.infinispan.spring.InfinispanDefaultCacheFactoryBean#afterPropertiesSet()}.
+	 * Test method for {@link org.infinispan.spring.support.InfinispanDefaultCacheFactoryBean#afterPropertiesSet()}.
 	 * @throws Exception 
 	 */
 	@Test(expected = IllegalStateException.class)
@@ -50,7 +51,7 @@ public class InfinispanDefaultCacheFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.InfinispanDefaultCacheFactoryBean#getObject()}.
+	 * Test method for {@link org.infinispan.spring.support.InfinispanDefaultCacheFactoryBean#getObject()}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -66,7 +67,7 @@ public class InfinispanDefaultCacheFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.InfinispanDefaultCacheFactoryBean#getObjectType()}.
+	 * Test method for {@link org.infinispan.spring.support.InfinispanDefaultCacheFactoryBean#getObjectType()}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -82,7 +83,7 @@ public class InfinispanDefaultCacheFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.InfinispanDefaultCacheFactoryBean#isSingleton()}.
+	 * Test method for {@link org.infinispan.spring.support.InfinispanDefaultCacheFactoryBean#isSingleton()}.
 	 */
 	@Test
 	public final void infinispanDefaultCacheFactoryBeanShouldDeclareItselfToBeSingleton() {
@@ -94,7 +95,7 @@ public class InfinispanDefaultCacheFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.InfinispanDefaultCacheFactoryBean#destroy()}.
+	 * Test method for {@link org.infinispan.spring.support.InfinispanDefaultCacheFactoryBean#destroy()}.
 	 * @throws Exception 
 	 */
 	@Test

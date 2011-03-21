@@ -17,7 +17,7 @@
  * governing permissions and limitations under the License.
  */
 
-package org.infinispan.spring.embedded;
+package org.infinispan.spring.support.embedded;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -452,7 +452,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param eagerDeadlockSpinDuration
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setDeadlockDetectionSpinDuration(java.lang.Long)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setDeadlockDetectionSpinDuration(java.lang.Long)
 	 */
 	public void setDeadlockDetectionSpinDuration(final Long eagerDeadlockSpinDuration) {
 		this.configurationOverrides.setDeadlockDetectionSpinDuration(eagerDeadlockSpinDuration);
@@ -460,7 +460,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param useEagerDeadlockDetection
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setEnableDeadlockDetection(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setEnableDeadlockDetection(java.lang.Boolean)
 	 */
 	public void setEnableDeadlockDetection(final Boolean useEagerDeadlockDetection) {
 		this.configurationOverrides.setEnableDeadlockDetection(useEagerDeadlockDetection);
@@ -468,7 +468,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param useLockStriping
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setUseLockStriping(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setUseLockStriping(java.lang.Boolean)
 	 */
 	public void setUseLockStriping(final Boolean useLockStriping) {
 		this.configurationOverrides.setUseLockStriping(useLockStriping);
@@ -476,7 +476,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param unsafeUnreliableReturnValues
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setUnsafeUnreliableReturnValues(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setUnsafeUnreliableReturnValues(java.lang.Boolean)
 	 */
 	public void setUnsafeUnreliableReturnValues(final Boolean unsafeUnreliableReturnValues) {
 		this.configurationOverrides.setUnsafeUnreliableReturnValues(unsafeUnreliableReturnValues);
@@ -484,7 +484,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param rehashRpcTimeout
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setRehashRpcTimeout(java.lang.Long)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setRehashRpcTimeout(java.lang.Long)
 	 */
 	public void setRehashRpcTimeout(final Long rehashRpcTimeout) {
 		this.configurationOverrides.setRehashRpcTimeout(rehashRpcTimeout);
@@ -492,7 +492,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param writeSkewCheck
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setWriteSkewCheck(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setWriteSkewCheck(java.lang.Boolean)
 	 */
 	public void setWriteSkewCheck(final Boolean writeSkewCheck) {
 		this.configurationOverrides.setWriteSkewCheck(writeSkewCheck);
@@ -500,7 +500,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param concurrencyLevel
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setConcurrencyLevel(java.lang.Integer)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setConcurrencyLevel(java.lang.Integer)
 	 */
 	public void setConcurrencyLevel(final Integer concurrencyLevel) {
 		this.configurationOverrides.setConcurrencyLevel(concurrencyLevel);
@@ -508,7 +508,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param replQueueMaxElements
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setReplQueueMaxElements(java.lang.Integer)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setReplQueueMaxElements(java.lang.Integer)
 	 */
 	public void setReplQueueMaxElements(final Integer replQueueMaxElements) {
 		this.configurationOverrides.setReplQueueMaxElements(replQueueMaxElements);
@@ -516,7 +516,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param replQueueInterval
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setReplQueueInterval(java.lang.Long)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setReplQueueInterval(java.lang.Long)
 	 */
 	public void setReplQueueInterval(final Long replQueueInterval) {
 		this.configurationOverrides.setReplQueueInterval(replQueueInterval);
@@ -524,7 +524,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param replQueueClass
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setReplQueueClass(java.lang.String)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setReplQueueClass(java.lang.String)
 	 */
 	public void setReplQueueClass(final String replQueueClass) {
 		this.configurationOverrides.setReplQueueClass(replQueueClass);
@@ -532,7 +532,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param exposeJmxStatistics
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setExposeJmxStatistics(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setExposeJmxStatistics(java.lang.Boolean)
 	 */
 	public void setExposeJmxStatistics(final Boolean exposeJmxStatistics) {
 		this.configurationOverrides.setExposeJmxStatistics(exposeJmxStatistics);
@@ -540,7 +540,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param invocationBatchingEnabled
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setInvocationBatchingEnabled(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setInvocationBatchingEnabled(java.lang.Boolean)
 	 */
 	public void setInvocationBatchingEnabled(final Boolean invocationBatchingEnabled) {
 		this.configurationOverrides.setInvocationBatchingEnabled(invocationBatchingEnabled);
@@ -548,7 +548,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param fetchInMemoryState
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setFetchInMemoryState(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setFetchInMemoryState(java.lang.Boolean)
 	 */
 	public void setFetchInMemoryState(final Boolean fetchInMemoryState) {
 		this.configurationOverrides.setFetchInMemoryState(fetchInMemoryState);
@@ -556,7 +556,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param alwaysProvideInMemoryState
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setAlwaysProvideInMemoryState(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setAlwaysProvideInMemoryState(java.lang.Boolean)
 	 */
 	public void setAlwaysProvideInMemoryState(final Boolean alwaysProvideInMemoryState) {
 		this.configurationOverrides.setAlwaysProvideInMemoryState(alwaysProvideInMemoryState);
@@ -564,7 +564,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param lockAcquisitionTimeout
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setLockAcquisitionTimeout(java.lang.Long)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setLockAcquisitionTimeout(java.lang.Long)
 	 */
 	public void setLockAcquisitionTimeout(final Long lockAcquisitionTimeout) {
 		this.configurationOverrides.setLockAcquisitionTimeout(lockAcquisitionTimeout);
@@ -572,7 +572,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param syncReplTimeout
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setSyncReplTimeout(java.lang.Long)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setSyncReplTimeout(java.lang.Long)
 	 */
 	public void setSyncReplTimeout(final Long syncReplTimeout) {
 		this.configurationOverrides.setSyncReplTimeout(syncReplTimeout);
@@ -580,7 +580,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param cacheModeString
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setCacheModeString(java.lang.String)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setCacheModeString(java.lang.String)
 	 */
 	public void setCacheModeString(final String cacheModeString) {
 		this.configurationOverrides.setCacheModeString(cacheModeString);
@@ -588,7 +588,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param evictionWakeUpInterval
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setEvictionWakeUpInterval(java.lang.Long)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setEvictionWakeUpInterval(java.lang.Long)
 	 */
 	public void setEvictionWakeUpInterval(final Long evictionWakeUpInterval) {
 		this.configurationOverrides.setEvictionWakeUpInterval(evictionWakeUpInterval);
@@ -596,7 +596,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param evictionStrategy
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setEvictionStrategy(org.infinispan.eviction.EvictionStrategy)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setEvictionStrategy(org.infinispan.eviction.EvictionStrategy)
 	 */
 	public void setEvictionStrategy(final EvictionStrategy evictionStrategy) {
 		this.configurationOverrides.setEvictionStrategy(evictionStrategy);
@@ -604,7 +604,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param evictionStrategyClass
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setEvictionStrategyClass(java.lang.String)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setEvictionStrategyClass(java.lang.String)
 	 */
 	public void setEvictionStrategyClass(final String evictionStrategyClass) {
 		this.configurationOverrides.setEvictionStrategyClass(evictionStrategyClass);
@@ -612,7 +612,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param evictionThreadPolicy
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setEvictionThreadPolicy(org.infinispan.eviction.EvictionThreadPolicy)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setEvictionThreadPolicy(org.infinispan.eviction.EvictionThreadPolicy)
 	 */
 	public void setEvictionThreadPolicy(final EvictionThreadPolicy evictionThreadPolicy) {
 		this.configurationOverrides.setEvictionThreadPolicy(evictionThreadPolicy);
@@ -620,7 +620,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param evictionThreadPolicyClass
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setEvictionThreadPolicyClass(java.lang.String)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setEvictionThreadPolicyClass(java.lang.String)
 	 */
 	public void setEvictionThreadPolicyClass(final String evictionThreadPolicyClass) {
 		this.configurationOverrides.setEvictionThreadPolicyClass(evictionThreadPolicyClass);
@@ -628,7 +628,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param evictionMaxEntries
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setEvictionMaxEntries(java.lang.Integer)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setEvictionMaxEntries(java.lang.Integer)
 	 */
 	public void setEvictionMaxEntries(final Integer evictionMaxEntries) {
 		this.configurationOverrides.setEvictionMaxEntries(evictionMaxEntries);
@@ -636,7 +636,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param expirationLifespan
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setExpirationLifespan(java.lang.Long)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setExpirationLifespan(java.lang.Long)
 	 */
 	public void setExpirationLifespan(final Long expirationLifespan) {
 		this.configurationOverrides.setExpirationLifespan(expirationLifespan);
@@ -644,7 +644,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param expirationMaxIdle
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setExpirationMaxIdle(java.lang.Long)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setExpirationMaxIdle(java.lang.Long)
 	 */
 	public void setExpirationMaxIdle(final Long expirationMaxIdle) {
 		this.configurationOverrides.setExpirationMaxIdle(expirationMaxIdle);
@@ -652,7 +652,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param transactionManagerLookupClass
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setTransactionManagerLookupClass(java.lang.String)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setTransactionManagerLookupClass(java.lang.String)
 	 */
 	public void setTransactionManagerLookupClass(final String transactionManagerLookupClass) {
 		this.configurationOverrides.setTransactionManagerLookupClass(transactionManagerLookupClass);
@@ -660,7 +660,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param transactionManagerLookup
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setTransactionManagerLookup(org.infinispan.transaction.lookup.TransactionManagerLookup)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setTransactionManagerLookup(org.infinispan.transaction.lookup.TransactionManagerLookup)
 	 */
 	public void setTransactionManagerLookup(final TransactionManagerLookup transactionManagerLookup) {
 		this.configurationOverrides.setTransactionManagerLookup(transactionManagerLookup);
@@ -668,7 +668,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param cacheLoaderManagerConfig
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setCacheLoaderManagerConfig(org.infinispan.config.CacheLoaderManagerConfig)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setCacheLoaderManagerConfig(org.infinispan.config.CacheLoaderManagerConfig)
 	 */
 	public void setCacheLoaderManagerConfig(final CacheLoaderManagerConfig cacheLoaderManagerConfig) {
 		this.configurationOverrides.setCacheLoaderManagerConfig(cacheLoaderManagerConfig);
@@ -676,7 +676,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param syncCommitPhase
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setSyncCommitPhase(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setSyncCommitPhase(java.lang.Boolean)
 	 */
 	public void setSyncCommitPhase(final Boolean syncCommitPhase) {
 		this.configurationOverrides.setSyncCommitPhase(syncCommitPhase);
@@ -684,7 +684,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param syncRollbackPhase
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setSyncRollbackPhase(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setSyncRollbackPhase(java.lang.Boolean)
 	 */
 	public void setSyncRollbackPhase(final Boolean syncRollbackPhase) {
 		this.configurationOverrides.setSyncRollbackPhase(syncRollbackPhase);
@@ -692,7 +692,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param useEagerLocking
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setUseEagerLocking(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setUseEagerLocking(java.lang.Boolean)
 	 */
 	public void setUseEagerLocking(final Boolean useEagerLocking) {
 		this.configurationOverrides.setUseEagerLocking(useEagerLocking);
@@ -700,7 +700,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param eagerLockSingleNode
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setEagerLockSingleNode(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setEagerLockSingleNode(java.lang.Boolean)
 	 */
 	public void setEagerLockSingleNode(final Boolean eagerLockSingleNode) {
 		this.configurationOverrides.setEagerLockSingleNode(eagerLockSingleNode);
@@ -708,7 +708,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param useReplQueue
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setUseReplQueue(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setUseReplQueue(java.lang.Boolean)
 	 */
 	public void setUseReplQueue(final Boolean useReplQueue) {
 		this.configurationOverrides.setUseReplQueue(useReplQueue);
@@ -716,7 +716,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param isolationLevel
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setIsolationLevel(org.infinispan.util.concurrent.IsolationLevel)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setIsolationLevel(org.infinispan.util.concurrent.IsolationLevel)
 	 */
 	public void setIsolationLevel(final IsolationLevel isolationLevel) {
 		this.configurationOverrides.setIsolationLevel(isolationLevel);
@@ -724,7 +724,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param stateRetrievalTimeout
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setStateRetrievalTimeout(java.lang.Long)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setStateRetrievalTimeout(java.lang.Long)
 	 */
 	public void setStateRetrievalTimeout(final Long stateRetrievalTimeout) {
 		this.configurationOverrides.setStateRetrievalTimeout(stateRetrievalTimeout);
@@ -732,7 +732,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param stateRetrievalLogFlushTimeout
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setStateRetrievalLogFlushTimeout(java.lang.Long)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setStateRetrievalLogFlushTimeout(java.lang.Long)
 	 */
 	public void setStateRetrievalLogFlushTimeout(final Long stateRetrievalLogFlushTimeout) {
 		this.configurationOverrides.setStateRetrievalLogFlushTimeout(stateRetrievalLogFlushTimeout);
@@ -740,7 +740,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param stateRetrievalMaxNonProgressingLogWrites
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setStateRetrievalMaxNonProgressingLogWrites(java.lang.Integer)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setStateRetrievalMaxNonProgressingLogWrites(java.lang.Integer)
 	 */
 	public void setStateRetrievalMaxNonProgressingLogWrites(final Integer stateRetrievalMaxNonProgressingLogWrites) {
 		this.configurationOverrides
@@ -749,7 +749,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param stateRetrievalInitialRetryWaitTime
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setStateRetrievalInitialRetryWaitTime(java.lang.Long)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setStateRetrievalInitialRetryWaitTime(java.lang.Long)
 	 */
 	public void setStateRetrievalInitialRetryWaitTime(final Long stateRetrievalInitialRetryWaitTime) {
 		this.configurationOverrides.setStateRetrievalInitialRetryWaitTime(stateRetrievalInitialRetryWaitTime);
@@ -757,7 +757,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param stateRetrievalRetryWaitTimeIncreaseFactor
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setStateRetrievalRetryWaitTimeIncreaseFactor(java.lang.Integer)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setStateRetrievalRetryWaitTimeIncreaseFactor(java.lang.Integer)
 	 */
 	public void setStateRetrievalRetryWaitTimeIncreaseFactor(final Integer stateRetrievalRetryWaitTimeIncreaseFactor) {
 		this.configurationOverrides
@@ -766,7 +766,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param stateRetrievalNumRetries
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setStateRetrievalNumRetries(java.lang.Integer)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setStateRetrievalNumRetries(java.lang.Integer)
 	 */
 	public void setStateRetrievalNumRetries(final Integer stateRetrievalNumRetries) {
 		this.configurationOverrides.setStateRetrievalNumRetries(stateRetrievalNumRetries);
@@ -774,7 +774,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param isolationLevelClass
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setIsolationLevelClass(java.lang.String)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setIsolationLevelClass(java.lang.String)
 	 */
 	public void setIsolationLevelClass(final String isolationLevelClass) {
 		this.configurationOverrides.setIsolationLevelClass(isolationLevelClass);
@@ -782,7 +782,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param useLazyDeserialization
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setUseLazyDeserialization(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setUseLazyDeserialization(java.lang.Boolean)
 	 */
 	public void setUseLazyDeserialization(final Boolean useLazyDeserialization) {
 		this.configurationOverrides.setUseLazyDeserialization(useLazyDeserialization);
@@ -790,7 +790,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param l1CacheEnabled
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setL1CacheEnabled(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setL1CacheEnabled(java.lang.Boolean)
 	 */
 	public void setL1CacheEnabled(final Boolean l1CacheEnabled) {
 		this.configurationOverrides.setL1CacheEnabled(l1CacheEnabled);
@@ -798,7 +798,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param l1Lifespan
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setL1Lifespan(java.lang.Long)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setL1Lifespan(java.lang.Long)
 	 */
 	public void setL1Lifespan(final Long l1Lifespan) {
 		this.configurationOverrides.setL1Lifespan(l1Lifespan);
@@ -806,7 +806,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param l1OnRehash
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setL1OnRehash(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setL1OnRehash(java.lang.Boolean)
 	 */
 	public void setL1OnRehash(final Boolean l1OnRehash) {
 		this.configurationOverrides.setL1OnRehash(l1OnRehash);
@@ -814,7 +814,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param consistentHashClass
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setConsistentHashClass(java.lang.String)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setConsistentHashClass(java.lang.String)
 	 */
 	public void setConsistentHashClass(final String consistentHashClass) {
 		this.configurationOverrides.setConsistentHashClass(consistentHashClass);
@@ -822,7 +822,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param numOwners
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setNumOwners(java.lang.Integer)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setNumOwners(java.lang.Integer)
 	 */
 	public void setNumOwners(final Integer numOwners) {
 		this.configurationOverrides.setNumOwners(numOwners);
@@ -830,7 +830,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param rehashEnabled
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setRehashEnabled(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setRehashEnabled(java.lang.Boolean)
 	 */
 	public void setRehashEnabled(final Boolean rehashEnabled) {
 		this.configurationOverrides.setRehashEnabled(rehashEnabled);
@@ -838,7 +838,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param rehashWaitTime
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setRehashWaitTime(java.lang.Long)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setRehashWaitTime(java.lang.Long)
 	 */
 	public void setRehashWaitTime(final Long rehashWaitTime) {
 		this.configurationOverrides.setRehashWaitTime(rehashWaitTime);
@@ -846,7 +846,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param useAsyncMarshalling
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setUseAsyncMarshalling(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setUseAsyncMarshalling(java.lang.Boolean)
 	 */
 	public void setUseAsyncMarshalling(final Boolean useAsyncMarshalling) {
 		this.configurationOverrides.setUseAsyncMarshalling(useAsyncMarshalling);
@@ -854,7 +854,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param indexingEnabled
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setIndexingEnabled(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setIndexingEnabled(java.lang.Boolean)
 	 */
 	public void setIndexingEnabled(final Boolean indexingEnabled) {
 		this.configurationOverrides.setIndexingEnabled(indexingEnabled);
@@ -862,7 +862,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param indexLocalOnly
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setIndexLocalOnly(java.lang.Boolean)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setIndexLocalOnly(java.lang.Boolean)
 	 */
 	public void setIndexLocalOnly(final Boolean indexLocalOnly) {
 		this.configurationOverrides.setIndexLocalOnly(indexLocalOnly);
@@ -870,7 +870,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean implements FactoryBean<Em
 
 	/**
 	 * @param customInterceptors
-	 * @see org.infinispan.spring.embedded.ConfigurationOverrides#setCustomInterceptors(java.util.List)
+	 * @see org.infinispan.spring.support.embedded.ConfigurationOverrides#setCustomInterceptors(java.util.List)
 	 */
 	public void setCustomInterceptors(final List<CustomInterceptorConfig> customInterceptors) {
 		this.configurationOverrides.setCustomInterceptors(customInterceptors);

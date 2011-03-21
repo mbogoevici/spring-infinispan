@@ -17,7 +17,7 @@
  * governing permissions and limitations under the License.
  */
 
-package org.infinispan.spring.remote;
+package org.infinispan.spring.support.remote;
 
 import static org.infinispan.client.hotrod.impl.ConfigurationProperties.ASYNC_EXECUTOR_FACTORY;
 import static org.infinispan.client.hotrod.impl.ConfigurationProperties.FORCE_RETURN_VALUES;
@@ -51,6 +51,7 @@ import org.infinispan.client.hotrod.impl.transport.tcp.RequestBalancingStrategy;
 import org.infinispan.executors.ExecutorFactory;
 import org.infinispan.io.ByteBuffer;
 import org.infinispan.marshall.Marshaller;
+import org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -69,7 +70,7 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 			InfinispanRemoteCacheManagerFactoryBeanTest.class);
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#afterPropertiesSet()}.
+	 * Test method for {@link org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean#afterPropertiesSet()}.
 	 * @throws Exception 
 	 */
 	@Test(expected = IllegalStateException.class)
@@ -83,7 +84,7 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#afterPropertiesSet()}.
+	 * Test method for {@link org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean#afterPropertiesSet()}.
 	 * @throws Exception 
 	 */
 	@Test(expected = IllegalStateException.class)
@@ -97,7 +98,7 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#getObjectType()}.
+	 * Test method for {@link org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean#getObjectType()}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -111,7 +112,7 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#getObject()}.
+	 * Test method for {@link org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean#getObject()}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -130,7 +131,7 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#isSingleton()}.
+	 * Test method for {@link org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean#isSingleton()}.
 	 */
 	@Test
 	public final void isSingletonShouldAlwaysReturnTrue() {
@@ -143,7 +144,7 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#destroy()}.
+	 * Test method for {@link org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean#destroy()}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -161,7 +162,7 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#setConfigurationProperties(java.util.Properties)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean#setConfigurationProperties(java.util.Properties)}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -195,7 +196,7 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#setConfigurationPropertiesFileLocation(org.springframework.core.io.Resource)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean#setConfigurationPropertiesFileLocation(org.springframework.core.io.Resource)}.
 	 */
 	@Test
 	public final void shouldProduceACacheConfiguredUsingPropertiesLoadedFromALocationDeclaredThroughSetConfigurationPropertiesFileLocation()
@@ -213,7 +214,7 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#setStartAutomatically(boolean)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean#setStartAutomatically(boolean)}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -231,7 +232,7 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#setTransportFactory(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean#setTransportFactory(java.lang.String)}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -294,7 +295,7 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#setServerList(java.util.Collection)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean#setServerList(java.util.Collection)}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -314,7 +315,7 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#setMarshaller(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean#setMarshaller(java.lang.String)}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -368,7 +369,7 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#setAsyncExecutorFactory(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean#setAsyncExecutorFactory(java.lang.String)}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -395,7 +396,7 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#setTcpNoDelay(boolean)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean#setTcpNoDelay(boolean)}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -413,7 +414,7 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#setPingOnStartup(boolean)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean#setPingOnStartup(boolean)}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -431,7 +432,7 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#setRequestBalancingStrategy(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean#setRequestBalancingStrategy(java.lang.String)}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -462,7 +463,7 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#setKeySizeEstimate(int)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean#setKeySizeEstimate(int)}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -480,7 +481,7 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#setValueSizeEstimate(int)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean#setValueSizeEstimate(int)}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -498,7 +499,7 @@ public class InfinispanRemoteCacheManagerFactoryBeanTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.remote.InfinispanRemoteCacheManagerFactoryBean#setForceReturnValues(boolean)}.
+	 * Test method for {@link org.infinispan.spring.support.remote.InfinispanRemoteCacheManagerFactoryBean#setForceReturnValues(boolean)}.
 	 * @throws Exception 
 	 */
 	@Test

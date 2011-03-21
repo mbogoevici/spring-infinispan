@@ -17,7 +17,7 @@
  * governing permissions and limitations under the License.
  */
 
-package org.infinispan.spring.remote;
+package org.infinispan.spring.support.remote;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

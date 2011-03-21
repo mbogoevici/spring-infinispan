@@ -25,7 +25,7 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import org.infinispan.manager.DefaultCacheManager;
-import org.infinispan.spring.embedded.InfinispanNamedEmbeddedCacheFactoryBean;
+import org.infinispan.spring.support.embedded.InfinispanNamedEmbeddedCacheFactoryBean;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.cache.Cache;
