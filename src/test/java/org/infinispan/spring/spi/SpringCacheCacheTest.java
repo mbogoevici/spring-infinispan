@@ -17,7 +17,7 @@
  * governing permissions and limitations under the License.
  */
 
-package org.infinispan.spring;
+package org.infinispan.spring.spi;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -25,6 +25,7 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import org.infinispan.manager.DefaultCacheManager;
+import org.infinispan.spring.spi.SpringCache;
 import org.infinispan.spring.support.embedded.InfinispanNamedEmbeddedCacheFactoryBean;
 import org.junit.Before;
 import org.junit.Test;
@@ -172,7 +173,7 @@ public class SpringCacheCacheTest {
 	}
 
 	private org.infinispan.Cache<Object, Object> createNativeCache() throws Exception {
-		final InfinispanNamedEmbeddedCacheFactoryBean fb = new InfinispanNamedEmbeddedCacheFactoryBean();
+		final InfinispanNamedEmbeddedCacheFactoryBean<Object, Object> fb = new InfinispanNamedEmbeddedCacheFactoryBean<Object, Object>();
 		fb.setInfinispanEmbeddedCacheManager(new DefaultCacheManager());
 		fb.setBeanName(CACHE_NAME);
 		fb.setCacheName(CACHE_NAME);

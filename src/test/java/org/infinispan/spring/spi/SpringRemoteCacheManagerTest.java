@@ -17,13 +17,13 @@
  * governing permissions and limitations under the License.
  */
 
-package org.infinispan.spring;
+package org.infinispan.spring.spi;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.infinispan.client.hotrod.RemoteCacheManager;
-import org.infinispan.spring.SpringRemoteCacheManager;
+import org.infinispan.spring.spi.SpringRemoteCacheManager;
 import org.junit.Test;
 import org.springframework.cache.Cache;
 
@@ -38,7 +38,7 @@ import org.springframework.cache.Cache;
 public class SpringRemoteCacheManagerTest {
 
 	/**
-	 * Test method for {@link org.infinispan.spring.SpringRemoteCacheManager#SpringRemoteCacheManager(org.infinispan.client.hotrod.RemoteCacheManager)}.
+	 * Test method for {@link org.infinispan.spring.spi.SpringRemoteCacheManager#SpringRemoteCacheManager(org.infinispan.client.hotrod.RemoteCacheManager)}.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public final void springRemoteCacheManagerConstructorShouldRejectNullRemoteCacheManager() {
@@ -46,7 +46,7 @@ public class SpringRemoteCacheManagerTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.SpringRemoteCacheManager#SpringRemoteCacheManager(org.infinispan.client.hotrod.RemoteCacheManager)}.
+	 * Test method for {@link org.infinispan.spring.spi.SpringRemoteCacheManager#SpringRemoteCacheManager(org.infinispan.client.hotrod.RemoteCacheManager)}.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public final void springRemoteCacheManagerConstructorShouldRejectStoppedRemoteCacheManager() {
@@ -55,7 +55,7 @@ public class SpringRemoteCacheManagerTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.SpringRemoteCacheManager#getCache(java.lang.String)}.
+	 * Test method for {@link org.infinispan.spring.spi.SpringRemoteCacheManager#getCache(java.lang.String)}.
 	 */
 	@Test
 	public final void springRemoteCacheManagerShouldProperlyCreateCache() {
@@ -74,7 +74,7 @@ public class SpringRemoteCacheManagerTest {
 	}
 
 	/**
-	 * Test method for {@link org.infinispan.spring.SpringRemoteCacheManager#getCacheNames()}.
+	 * Test method for {@link org.infinispan.spring.spi.SpringRemoteCacheManager#getCacheNames()}.
 	 */
 	@Test(expected = UnsupportedOperationException.class)
 	public final void getCacheNamesShouldThrowAnUnsupportedOperationException() {

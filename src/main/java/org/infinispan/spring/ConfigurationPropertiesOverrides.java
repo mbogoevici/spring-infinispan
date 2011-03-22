@@ -17,7 +17,7 @@
  * governing permissions and limitations under the License.
  */
 
-package org.infinispan.spring.support.remote;
+package org.infinispan.spring;
 
 import static org.infinispan.client.hotrod.impl.ConfigurationProperties.ASYNC_EXECUTOR_FACTORY;
 import static org.infinispan.client.hotrod.impl.ConfigurationProperties.FORCE_RETURN_VALUES;
@@ -44,7 +44,7 @@ import java.util.Properties;
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>
  *
  */
-class ConfigurationPropertiesOverrides {
+public class ConfigurationPropertiesOverrides {
 
 	private final Properties overridingProperties = new Properties();
 

@@ -17,7 +17,7 @@
  * governing permissions and limitations under the License.
  */
 
-package org.infinispan.spring.support.embedded;
+package org.infinispan.spring;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ import org.infinispan.util.concurrent.IsolationLevel;
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>
  *
  */
-class ConfigurationOverrides {
+public final class ConfigurationOverrides {
 
 	private final Log logger = LogFactory.getLog(getClass());
 
@@ -152,375 +152,375 @@ class ConfigurationOverrides {
 	/**
 	 * @param eagerDeadlockSpinDuration the eagerDeadlockSpinDuration to set
 	 */
-	void setDeadlockDetectionSpinDuration(final Long eagerDeadlockSpinDuration) {
+	public void setDeadlockDetectionSpinDuration(final Long eagerDeadlockSpinDuration) {
 		this.eagerDeadlockSpinDuration = eagerDeadlockSpinDuration;
 	}
 
 	/**
 	 * @param useEagerDeadlockDetection the useEagerDeadlockDetection to set
 	 */
-	void setEnableDeadlockDetection(final Boolean useEagerDeadlockDetection) {
+	public void setEnableDeadlockDetection(final Boolean useEagerDeadlockDetection) {
 		this.useEagerDeadlockDetection = useEagerDeadlockDetection;
 	}
 
 	/**
 	 * @param useLockStriping the useLockStriping to set
 	 */
-	void setUseLockStriping(final Boolean useLockStriping) {
+	public void setUseLockStriping(final Boolean useLockStriping) {
 		this.useLockStriping = useLockStriping;
 	}
 
 	/**
 	 * @param unsafeUnreliableReturnValues the unsafeUnreliableReturnValues to set
 	 */
-	void setUnsafeUnreliableReturnValues(final Boolean unsafeUnreliableReturnValues) {
+	public void setUnsafeUnreliableReturnValues(final Boolean unsafeUnreliableReturnValues) {
 		this.unsafeUnreliableReturnValues = unsafeUnreliableReturnValues;
 	}
 
 	/**
 	 * @param rehashRpcTimeout the rehashRpcTimeout to set
 	 */
-	void setRehashRpcTimeout(final Long rehashRpcTimeout) {
+	public void setRehashRpcTimeout(final Long rehashRpcTimeout) {
 		this.rehashRpcTimeout = rehashRpcTimeout;
 	}
 
 	/**
 	 * @param writeSkewCheck the writeSkewCheck to set
 	 */
-	void setWriteSkewCheck(final Boolean writeSkewCheck) {
+	public void setWriteSkewCheck(final Boolean writeSkewCheck) {
 		this.writeSkewCheck = writeSkewCheck;
 	}
 
 	/**
 	 * @param concurrencyLevel the concurrencyLevel to set
 	 */
-	void setConcurrencyLevel(final Integer concurrencyLevel) {
+	public void setConcurrencyLevel(final Integer concurrencyLevel) {
 		this.concurrencyLevel = concurrencyLevel;
 	}
 
 	/**
 	 * @param replQueueMaxElements the replQueueMaxElements to set
 	 */
-	void setReplQueueMaxElements(final Integer replQueueMaxElements) {
+	public void setReplQueueMaxElements(final Integer replQueueMaxElements) {
 		this.replQueueMaxElements = replQueueMaxElements;
 	}
 
 	/**
 	 * @param replQueueInterval the replQueueInterval to set
 	 */
-	void setReplQueueInterval(final Long replQueueInterval) {
+	public void setReplQueueInterval(final Long replQueueInterval) {
 		this.replQueueInterval = replQueueInterval;
 	}
 
 	/**
 	 * @param replQueueClass the replQueueClass to set
 	 */
-	void setReplQueueClass(final String replQueueClass) {
+	public void setReplQueueClass(final String replQueueClass) {
 		this.replQueueClass = replQueueClass;
 	}
 
 	/**
 	 * @param exposeJmxStatistics the exposeJmxStatistics to set
 	 */
-	void setExposeJmxStatistics(final Boolean exposeJmxStatistics) {
+	public void setExposeJmxStatistics(final Boolean exposeJmxStatistics) {
 		this.exposeJmxStatistics = exposeJmxStatistics;
 	}
 
 	/**
 	 * @param invocationBatchingEnabled the invocationBatchingEnabled to set
 	 */
-	void setInvocationBatchingEnabled(final Boolean invocationBatchingEnabled) {
+	public void setInvocationBatchingEnabled(final Boolean invocationBatchingEnabled) {
 		this.invocationBatchingEnabled = invocationBatchingEnabled;
 	}
 
 	/**
 	 * @param fetchInMemoryState the fetchInMemoryState to set
 	 */
-	void setFetchInMemoryState(final Boolean fetchInMemoryState) {
+	public void setFetchInMemoryState(final Boolean fetchInMemoryState) {
 		this.fetchInMemoryState = fetchInMemoryState;
 	}
 
 	/**
 	 * @param alwaysProvideInMemoryState the alwaysProvideInMemoryState to set
 	 */
-	void setAlwaysProvideInMemoryState(final Boolean alwaysProvideInMemoryState) {
+	public void setAlwaysProvideInMemoryState(final Boolean alwaysProvideInMemoryState) {
 		this.alwaysProvideInMemoryState = alwaysProvideInMemoryState;
 	}
 
 	/**
 	 * @param lockAcquisitionTimeout the lockAcquisitionTimeout to set
 	 */
-	void setLockAcquisitionTimeout(final Long lockAcquisitionTimeout) {
+	public void setLockAcquisitionTimeout(final Long lockAcquisitionTimeout) {
 		this.lockAcquisitionTimeout = lockAcquisitionTimeout;
 	}
 
 	/**
 	 * @param syncReplTimeout the syncReplTimeout to set
 	 */
-	void setSyncReplTimeout(final Long syncReplTimeout) {
+	public void setSyncReplTimeout(final Long syncReplTimeout) {
 		this.syncReplTimeout = syncReplTimeout;
 	}
 
 	/**
 	 * @param cacheModeString the cacheModeString to set
 	 */
-	void setCacheModeString(final String cacheModeString) {
+	public void setCacheModeString(final String cacheModeString) {
 		this.cacheModeString = cacheModeString;
 	}
 
 	/**
 	 * @param evictionWakeUpInterval the evictionWakeUpInterval to set
 	 */
-	void setEvictionWakeUpInterval(final Long evictionWakeUpInterval) {
+	public void setEvictionWakeUpInterval(final Long evictionWakeUpInterval) {
 		this.evictionWakeUpInterval = evictionWakeUpInterval;
 	}
 
 	/**
 	 * @param evictionStrategy the evictionStrategy to set
 	 */
-	void setEvictionStrategy(final EvictionStrategy evictionStrategy) {
+	public void setEvictionStrategy(final EvictionStrategy evictionStrategy) {
 		this.evictionStrategy = evictionStrategy;
 	}
 
 	/**
 	 * @param evictionStrategyClass the evictionStrategyClass to set
 	 */
-	void setEvictionStrategyClass(final String evictionStrategyClass) {
+	public void setEvictionStrategyClass(final String evictionStrategyClass) {
 		this.evictionStrategyClass = evictionStrategyClass;
 	}
 
 	/**
 	 * @param evictionThreadPolicy the evictionThreadPolicy to set
 	 */
-	void setEvictionThreadPolicy(final EvictionThreadPolicy evictionThreadPolicy) {
+	public void setEvictionThreadPolicy(final EvictionThreadPolicy evictionThreadPolicy) {
 		this.evictionThreadPolicy = evictionThreadPolicy;
 	}
 
 	/**
 	 * @param evictionThreadPolicyClass the evictionThreadPolicyClass to set
 	 */
-	void setEvictionThreadPolicyClass(final String evictionThreadPolicyClass) {
+	public void setEvictionThreadPolicyClass(final String evictionThreadPolicyClass) {
 		this.evictionThreadPolicyClass = evictionThreadPolicyClass;
 	}
 
 	/**
 	 * @param evictionMaxEntries the evictionMaxEntries to set
 	 */
-	void setEvictionMaxEntries(final Integer evictionMaxEntries) {
+	public void setEvictionMaxEntries(final Integer evictionMaxEntries) {
 		this.evictionMaxEntries = evictionMaxEntries;
 	}
 
 	/**
 	 * @param expirationLifespan the expirationLifespan to set
 	 */
-	void setExpirationLifespan(final Long expirationLifespan) {
+	public void setExpirationLifespan(final Long expirationLifespan) {
 		this.expirationLifespan = expirationLifespan;
 	}
 
 	/**
 	 * @param expirationMaxIdle the expirationMaxIdle to set
 	 */
-	void setExpirationMaxIdle(final Long expirationMaxIdle) {
+	public void setExpirationMaxIdle(final Long expirationMaxIdle) {
 		this.expirationMaxIdle = expirationMaxIdle;
 	}
 
 	/**
 	 * @param transactionManagerLookupClass the transactionManagerLookupClass to set
 	 */
-	void setTransactionManagerLookupClass(final String transactionManagerLookupClass) {
+	public void setTransactionManagerLookupClass(final String transactionManagerLookupClass) {
 		this.transactionManagerLookupClass = transactionManagerLookupClass;
 	}
 
 	/**
 	 * @param transactionManagerLookup the transactionManagerLookup to set
 	 */
-	void setTransactionManagerLookup(final TransactionManagerLookup transactionManagerLookup) {
+	public void setTransactionManagerLookup(final TransactionManagerLookup transactionManagerLookup) {
 		this.transactionManagerLookup = transactionManagerLookup;
 	}
 
 	/**
 	 * @param cacheLoaderManagerConfig the cacheLoaderManagerConfig to set
 	 */
-	void setCacheLoaderManagerConfig(final CacheLoaderManagerConfig cacheLoaderManagerConfig) {
+	public void setCacheLoaderManagerConfig(final CacheLoaderManagerConfig cacheLoaderManagerConfig) {
 		this.cacheLoaderManagerConfig = cacheLoaderManagerConfig;
 	}
 
 	/**
 	 * @param syncCommitPhase the syncCommitPhase to set
 	 */
-	void setSyncCommitPhase(final Boolean syncCommitPhase) {
+	public void setSyncCommitPhase(final Boolean syncCommitPhase) {
 		this.syncCommitPhase = syncCommitPhase;
 	}
 
 	/**
 	 * @param syncRollbackPhase the syncRollbackPhase to set
 	 */
-	void setSyncRollbackPhase(final Boolean syncRollbackPhase) {
+	public void setSyncRollbackPhase(final Boolean syncRollbackPhase) {
 		this.syncRollbackPhase = syncRollbackPhase;
 	}
 
 	/**
 	 * @param useEagerLocking the useEagerLocking to set
 	 */
-	void setUseEagerLocking(final Boolean useEagerLocking) {
+	public void setUseEagerLocking(final Boolean useEagerLocking) {
 		this.useEagerLocking = useEagerLocking;
 	}
 
 	/**
 	 * @param eagerLockSingleNode the eagerLockSingleNode to set
 	 */
-	void setEagerLockSingleNode(final Boolean eagerLockSingleNode) {
+	public void setEagerLockSingleNode(final Boolean eagerLockSingleNode) {
 		this.eagerLockSingleNode = eagerLockSingleNode;
 	}
 
 	/**
 	 * @param useReplQueue the useReplQueue to set
 	 */
-	void setUseReplQueue(final Boolean useReplQueue) {
+	public void setUseReplQueue(final Boolean useReplQueue) {
 		this.useReplQueue = useReplQueue;
 	}
 
 	/**
 	 * @param isolationLevel the isolationLevel to set
 	 */
-	void setIsolationLevel(final IsolationLevel isolationLevel) {
+	public void setIsolationLevel(final IsolationLevel isolationLevel) {
 		this.isolationLevel = isolationLevel;
 	}
 
 	/**
 	 * @param stateRetrievalTimeout the stateRetrievalTimeout to set
 	 */
-	void setStateRetrievalTimeout(final Long stateRetrievalTimeout) {
+	public void setStateRetrievalTimeout(final Long stateRetrievalTimeout) {
 		this.stateRetrievalTimeout = stateRetrievalTimeout;
 	}
 
 	/**
 	 * @param stateRetrievalLogFlushTimeout the stateRetrievalLogFlushTimeout to set
 	 */
-	void setStateRetrievalLogFlushTimeout(final Long stateRetrievalLogFlushTimeout) {
+	public void setStateRetrievalLogFlushTimeout(final Long stateRetrievalLogFlushTimeout) {
 		this.stateRetrievalLogFlushTimeout = stateRetrievalLogFlushTimeout;
 	}
 
 	/**
 	 * @param stateRetrievalMaxNonProgressingLogWrites the stateRetrievalMaxNonProgressingLogWrites to set
 	 */
-	void setStateRetrievalMaxNonProgressingLogWrites(final Integer stateRetrievalMaxNonProgressingLogWrites) {
+	public void setStateRetrievalMaxNonProgressingLogWrites(final Integer stateRetrievalMaxNonProgressingLogWrites) {
 		this.stateRetrievalMaxNonProgressingLogWrites = stateRetrievalMaxNonProgressingLogWrites;
 	}
 
 	/**
 	 * @param stateRetrievalInitialRetryWaitTime the stateRetrievalInitialRetryWaitTime to set
 	 */
-	void setStateRetrievalInitialRetryWaitTime(final Long stateRetrievalInitialRetryWaitTime) {
+	public void setStateRetrievalInitialRetryWaitTime(final Long stateRetrievalInitialRetryWaitTime) {
 		this.stateRetrievalInitialRetryWaitTime = stateRetrievalInitialRetryWaitTime;
 	}
 
 	/**
 	 * @param stateRetrievalRetryWaitTimeIncreaseFactor the stateRetrievalRetryWaitTimeIncreaseFactor to set
 	 */
-	void setStateRetrievalRetryWaitTimeIncreaseFactor(final Integer stateRetrievalRetryWaitTimeIncreaseFactor) {
+	public void setStateRetrievalRetryWaitTimeIncreaseFactor(final Integer stateRetrievalRetryWaitTimeIncreaseFactor) {
 		this.stateRetrievalRetryWaitTimeIncreaseFactor = stateRetrievalRetryWaitTimeIncreaseFactor;
 	}
 
 	/**
 	 * @param stateRetrievalNumRetries the stateRetrievalNumRetries to set
 	 */
-	void setStateRetrievalNumRetries(final Integer stateRetrievalNumRetries) {
+	public void setStateRetrievalNumRetries(final Integer stateRetrievalNumRetries) {
 		this.stateRetrievalNumRetries = stateRetrievalNumRetries;
 	}
 
 	/**
 	 * @param isolationLevelClass the isolationLevelClass to set
 	 */
-	void setIsolationLevelClass(final String isolationLevelClass) {
+	public void setIsolationLevelClass(final String isolationLevelClass) {
 		this.isolationLevelClass = isolationLevelClass;
 	}
 
 	/**
 	 * @param useLazyDeserialization the useLazyDeserialization to set
 	 */
-	void setUseLazyDeserialization(final Boolean useLazyDeserialization) {
+	public void setUseLazyDeserialization(final Boolean useLazyDeserialization) {
 		this.useLazyDeserialization = useLazyDeserialization;
 	}
 
 	/**
 	 * @param l1CacheEnabled the l1CacheEnabled to set
 	 */
-	void setL1CacheEnabled(final Boolean l1CacheEnabled) {
+	public void setL1CacheEnabled(final Boolean l1CacheEnabled) {
 		this.l1CacheEnabled = l1CacheEnabled;
 	}
 
 	/**
 	 * @param l1Lifespan the l1Lifespan to set
 	 */
-	void setL1Lifespan(final Long l1Lifespan) {
+	public void setL1Lifespan(final Long l1Lifespan) {
 		this.l1Lifespan = l1Lifespan;
 	}
 
 	/**
 	 * @param l1OnRehash the l1OnRehash to set
 	 */
-	void setL1OnRehash(final Boolean l1OnRehash) {
+	public void setL1OnRehash(final Boolean l1OnRehash) {
 		this.l1OnRehash = l1OnRehash;
 	}
 
 	/**
 	 * @param consistentHashClass the consistentHashClass to set
 	 */
-	void setConsistentHashClass(final String consistentHashClass) {
+	public void setConsistentHashClass(final String consistentHashClass) {
 		this.consistentHashClass = consistentHashClass;
 	}
 
 	/**
 	 * @param numOwners the numOwners to set
 	 */
-	void setNumOwners(final Integer numOwners) {
+	public void setNumOwners(final Integer numOwners) {
 		this.numOwners = numOwners;
 	}
 
 	/**
 	 * @param rehashEnabled the rehashEnabled to set
 	 */
-	void setRehashEnabled(final Boolean rehashEnabled) {
+	public void setRehashEnabled(final Boolean rehashEnabled) {
 		this.rehashEnabled = rehashEnabled;
 	}
 
 	/**
 	 * @param rehashWaitTime the rehashWaitTime to set
 	 */
-	void setRehashWaitTime(final Long rehashWaitTime) {
+	public void setRehashWaitTime(final Long rehashWaitTime) {
 		this.rehashWaitTime = rehashWaitTime;
 	}
 
 	/**
 	 * @param useAsyncMarshalling the useAsyncMarshalling to set
 	 */
-	void setUseAsyncMarshalling(final Boolean useAsyncMarshalling) {
+	public void setUseAsyncMarshalling(final Boolean useAsyncMarshalling) {
 		this.useAsyncMarshalling = useAsyncMarshalling;
 	}
 
 	/**
 	 * @param indexingEnabled the indexingEnabled to set
 	 */
-	void setIndexingEnabled(final Boolean indexingEnabled) {
+	public void setIndexingEnabled(final Boolean indexingEnabled) {
 		this.indexingEnabled = indexingEnabled;
 	}
 
 	/**
 	 * @param indexLocalOnly the indexLocalOnly to set
 	 */
-	void setIndexLocalOnly(final Boolean indexLocalOnly) {
+	public void setIndexLocalOnly(final Boolean indexLocalOnly) {
 		this.indexLocalOnly = indexLocalOnly;
 	}
 
 	/**
 	 * @param customInterceptors the customInterceptors to set
 	 */
-	void setCustomInterceptors(final List<CustomInterceptorConfig> customInterceptors) {
+	public void setCustomInterceptors(final List<CustomInterceptorConfig> customInterceptors) {
 		this.customInterceptors = customInterceptors;
 	}
 
-	void applyOverridesTo(final Configuration configurationToOverride) {
+	public void applyOverridesTo(final Configuration configurationToOverride) {
 		this.logger.debug("Applying configuration overrides to Configuration [" + configurationToOverride + "] ...");
 
 		if (this.eagerDeadlockSpinDuration != null) {

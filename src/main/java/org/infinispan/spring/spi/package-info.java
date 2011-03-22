@@ -102,5 +102,5 @@
  * </pre>
  * </p>
  */
-package org.infinispan.spring;
+package org.infinispan.spring.spi;
 

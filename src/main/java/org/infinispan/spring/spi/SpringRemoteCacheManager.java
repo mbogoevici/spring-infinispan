@@ -17,65 +17,62 @@
  * governing permissions and limitations under the License.
  */
 
-package org.infinispan.spring;
+package org.infinispan.spring.spi;
 
 import java.util.Collection;
-import java.util.Collections;
 
-import org.infinispan.lifecycle.ComponentStatus;
-import org.infinispan.manager.EmbeddedCacheManager;
+import org.infinispan.client.hotrod.RemoteCacheManager;
 import org.springframework.cache.Cache;
-import org.springframework.cache.CacheManager;
 import org.springframework.util.Assert;
 
 /**
  * <p>
  * A {@link org.springframework.cache.CacheManager <code>CacheManager</code>} implementation that is backed
- * by an {@link org.infinispan.manager.EmbeddedCacheManager <code>INFINISPAN EmbeddedCacheManager</code>}
+ * by an {@link org.infinispan.client.hotrod.RemoteCacheManager <code>INFINISPAN RemoteCacheManager</code>}
  * instance.
- * </p>
- * <p>
- * Note that this <code>CacheManager</code> <strong>does</strong> support adding new
- * {@link org.infinispan.Cache <code>Caches</code>} at runtime, i.e. <code>Caches</code> added programmatically
- * to the backing <code>EmbeddedCacheManager</code> after this <code>CacheManager</code> has been constructed 
- * will be seen by this <code>CacheManager</code>.
  * </p>
  *
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>
  *
  */
-public class SpringEmbeddedCacheManager implements CacheManager {
+public class SpringRemoteCacheManager implements org.springframework.cache.CacheManager {
 
-	private final EmbeddedCacheManager nativeCacheManager;
+	private final RemoteCacheManager nativeCacheManager;
 
 	/**
 	 * @param nativeCacheManager
 	 */
-	public SpringEmbeddedCacheManager(final EmbeddedCacheManager nativeCacheManager) {
+	public SpringRemoteCacheManager(final RemoteCacheManager nativeCacheManager) {
 		Assert.notNull(nativeCacheManager, "A non-null instance of EmbeddedCacheManager needs to be supplied");
 		checkNativeCacheManagerStatus(nativeCacheManager);
 		this.nativeCacheManager = nativeCacheManager;
 	}
 
-	/**
-	 * @param nativeCacheManager
-	 */
-	private void checkNativeCacheManagerStatus(final EmbeddedCacheManager nativeCacheManager) {
-		final ComponentStatus currentCacheManagerStatus = nativeCacheManager.getStatus();
-		Assert.isTrue(currentCacheManagerStatus == ComponentStatus.RUNNING,
-				"The supplied EmbeddedCacheManager instance [" + nativeCacheManager
-						+ "] is required to be in state RUNNING. Actual state: " + currentCacheManagerStatus);
+	private void checkNativeCacheManagerStatus(final RemoteCacheManager nativeCacheManager) {
+		Assert.isTrue(nativeCacheManager.isStarted(), "The supplied RemoteCacheManager instance [" + nativeCacheManager
+				+ "] is required to be running");
 	}
 
+	/**
+	 * @see org.springframework.cache.CacheManager#getCache(java.lang.String)
+	 */
 	@Override
 	public <K, V> Cache<K, V> getCache(final String name) {
 		checkNativeCacheManagerStatus(this.nativeCacheManager);
 		return new SpringCache<K, V>(this.nativeCacheManager.<K, V> getCache(name));
 	}
 
+	/**
+	 * <p>
+	 * As of INFINISPAN 4.2.0.FINAL <code>org.infinispan.client.hotrod.RemoteCache</code> does <strong>not</strong>
+	 * support retrieving the set of all cache names from the hotrod server. This restriction may be lifted in
+	 * the future. Currently, this operation will always throw an <code>UnsupportedOperationException</code>.
+	 * </p>
+	 *  
+	 * @see org.springframework.cache.CacheManager#getCacheNames()
+	 */
 	@Override
 	public Collection<String> getCacheNames() {
-		checkNativeCacheManagerStatus(this.nativeCacheManager);
-		return Collections.unmodifiableSet(this.nativeCacheManager.getCacheNames());
+		throw new UnsupportedOperationException("Operation getCacheNames() is currently not supported.");
 	}
 }

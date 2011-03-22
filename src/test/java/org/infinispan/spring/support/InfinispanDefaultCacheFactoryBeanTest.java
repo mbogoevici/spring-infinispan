@@ -26,7 +26,6 @@ import static org.junit.Assert.assertTrue;
 import org.infinispan.Cache;
 import org.infinispan.lifecycle.ComponentStatus;
 import org.infinispan.manager.DefaultCacheManager;
-import org.infinispan.spring.support.InfinispanDefaultCacheFactoryBean;
 import org.junit.Test;
 
 /**
@@ -46,7 +45,7 @@ public class InfinispanDefaultCacheFactoryBeanTest {
 	@Test(expected = IllegalStateException.class)
 	public final void afterPropertiesSetShouldThrowAnIllegalStateExceptionIfNoCacheContainerHasBeenSet()
 			throws Exception {
-		final InfinispanDefaultCacheFactoryBean objectUnderTest = new InfinispanDefaultCacheFactoryBean();
+		final InfinispanDefaultCacheFactoryBean<Object, Object> objectUnderTest = new InfinispanDefaultCacheFactoryBean<Object, Object>();
 		objectUnderTest.afterPropertiesSet();
 	}
 
@@ -56,7 +55,7 @@ public class InfinispanDefaultCacheFactoryBeanTest {
 	 */
 	@Test
 	public final void infinispanDefaultCacheFactoryBeanShouldProduceANonNullInfinispanCache() throws Exception {
-		final InfinispanDefaultCacheFactoryBean objectUnderTest = new InfinispanDefaultCacheFactoryBean();
+		final InfinispanDefaultCacheFactoryBean<Object, Object> objectUnderTest = new InfinispanDefaultCacheFactoryBean<Object, Object>();
 		objectUnderTest.setInfinispanCacheContainer(new DefaultCacheManager());
 		objectUnderTest.afterPropertiesSet();
 
@@ -72,14 +71,13 @@ public class InfinispanDefaultCacheFactoryBeanTest {
 	 */
 	@Test
 	public final void getObjectTypeShouldReturnTheMostDerivedTypeOfTheProducedInfinispanCache() throws Exception {
-		final InfinispanDefaultCacheFactoryBean objectUnderTest = new InfinispanDefaultCacheFactoryBean();
+		final InfinispanDefaultCacheFactoryBean<Object, Object> objectUnderTest = new InfinispanDefaultCacheFactoryBean<Object, Object>();
 		objectUnderTest.setInfinispanCacheContainer(new DefaultCacheManager());
 		objectUnderTest.afterPropertiesSet();
 
-		final Class<? extends Cache> cacheType = objectUnderTest.getObjectType();
-
 		assertEquals("getObjectType() should have returned the produced INFINISPAN cache's most derived type. "
-				+ "However, it returned a more generic type.", objectUnderTest.getObject().getClass(), cacheType);
+				+ "However, it returned a more generic type.", objectUnderTest.getObject().getClass(),
+				objectUnderTest.getObjectType());
 	}
 
 	/**
@@ -87,7 +85,7 @@ public class InfinispanDefaultCacheFactoryBeanTest {
 	 */
 	@Test
 	public final void infinispanDefaultCacheFactoryBeanShouldDeclareItselfToBeSingleton() {
-		final InfinispanDefaultCacheFactoryBean objectUnderTest = new InfinispanDefaultCacheFactoryBean();
+		final InfinispanDefaultCacheFactoryBean<Object, Object> objectUnderTest = new InfinispanDefaultCacheFactoryBean<Object, Object>();
 
 		assertTrue(
 				"InfinispanDefaultCacheFactoryBean should declare itself to produce a singleton. However, it didn't.",
@@ -101,7 +99,7 @@ public class InfinispanDefaultCacheFactoryBeanTest {
 	@Test
 	public final void infinispanDefaultCacheFactoryBeanShouldStopTheCreatedInfinispanCacheWhenItIsDestroyed()
 			throws Exception {
-		final InfinispanDefaultCacheFactoryBean objectUnderTest = new InfinispanDefaultCacheFactoryBean();
+		final InfinispanDefaultCacheFactoryBean<Object, Object> objectUnderTest = new InfinispanDefaultCacheFactoryBean<Object, Object>();
 		objectUnderTest.setInfinispanCacheContainer(new DefaultCacheManager());
 		objectUnderTest.afterPropertiesSet();
 
