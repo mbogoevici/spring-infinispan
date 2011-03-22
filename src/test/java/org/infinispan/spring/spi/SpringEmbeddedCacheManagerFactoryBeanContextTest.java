@@ -22,6 +22,8 @@ package org.infinispan.spring.spi;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
@@ -33,6 +35,7 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>
  *
  */
+@DirtiesContext(classMode = ClassMode.AFTER_CLASS)
 @ContextConfiguration("classpath:/org/infinispan/spring/spi/SpringEmbeddedCacheManagerFactoryBeanContextTest.xml")
 public class SpringEmbeddedCacheManagerFactoryBeanContextTest extends AbstractJUnit4SpringContextTests {
 

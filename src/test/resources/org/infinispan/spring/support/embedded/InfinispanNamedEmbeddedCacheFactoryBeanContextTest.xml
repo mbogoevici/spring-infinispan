@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2010.
+    Olaf Bergner.
+    Hamburg, Germany. olaf.bergner@gmx.de
+    All rights reserved.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an "AS IS"
+    BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+    express or implied. See the License for the specific language
+    governing permissions and limitations under the License.
+
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="infinispanEmbeddedCacheManager" class="org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean"
+        p:configurationFileLocation="classpath:/org/infinispan/spring/support/embedded/named-async-cache.xml" />
+
+    <bean id="infinispanNamedEmbeddedCacheWithoutFurtherConfiguration" class="org.infinispan.spring.support.embedded.InfinispanNamedEmbeddedCacheFactoryBean"
+        p:infinispanEmbeddedCacheManager-ref="infinispanEmbeddedCacheManager" p:cacheName="customCacheNameWithoutFurtherConfiguration" />
+
+    <bean id="infinispanNamedEmbeddedCacheConfiguredUsingModeNONE" class="org.infinispan.spring.support.embedded.InfinispanNamedEmbeddedCacheFactoryBean"
+        p:infinispanEmbeddedCacheManager-ref="infinispanEmbeddedCacheManager" p:cacheName="customCacheNameConfiguredUsingModeNONE"
+        p:configurationTemplateMode="NONE" p:enableDeadlockDetection="true" p:useEagerLocking="true" />
+
+    <bean id="infinispanNamedEmbeddedCacheConfiguredUsingModeDEFAULT" class="org.infinispan.spring.support.embedded.InfinispanNamedEmbeddedCacheFactoryBean"
+        p:infinispanEmbeddedCacheManager-ref="infinispanEmbeddedCacheManager" p:cacheName="customCacheNameConfiguredUsingModeDEFAULT"
+        p:configurationTemplateMode="DEFAULT" p:enableDeadlockDetection="true" p:useEagerLocking="true" />
+
+    <bean id="infinispanNamedEmbeddedCacheConfiguredUsingModeNAMED" class="org.infinispan.spring.support.embedded.InfinispanNamedEmbeddedCacheFactoryBean"
+        p:infinispanEmbeddedCacheManager-ref="infinispanEmbeddedCacheManager" p:cacheName="asyncCache"
+        p:configurationTemplateMode="NAMED" p:enableDeadlockDetection="true" p:useEagerLocking="true" />
+
+</beans>
