@@ -38,6 +38,8 @@ import org.infinispan.config.InfinispanConfiguration;
 import org.infinispan.eviction.EvictionStrategy;
 import org.infinispan.eviction.EvictionThreadPolicy;
 import org.infinispan.jmx.MBeanServerLookup;
+import org.infinispan.manager.DefaultCacheManager;
+import org.infinispan.manager.EmbeddedCacheManager;
 import org.infinispan.transaction.lookup.TransactionManagerLookup;
 import org.infinispan.util.concurrent.IsolationLevel;
 import org.springframework.core.io.Resource;
@@ -59,6 +61,29 @@ public class AbstractInfinispanEmbeddedCacheManagerBackedCacheManagerFactory {
 	protected final GlobalConfigurationOverrides globalConfigurationOverrides = new GlobalConfigurationOverrides();
 
 	protected final ConfigurationOverrides configurationOverrides = new ConfigurationOverrides();
+
+	// ------------------------------------------------------------------------
+	// Create fully configured EmbeddedCacheManager instance
+	// ------------------------------------------------------------------------
+
+	protected EmbeddedCacheManager createBackingEmbeddedCacheManager() throws ConfigurationException, IOException {
+		final ConfigurationContainer templateConfiguration = createTemplateConfiguration();
+
+		this.globalConfigurationOverrides.applyOverridesTo(templateConfiguration.globalConfiguration);
+		this.configurationOverrides.applyOverridesTo(templateConfiguration.defaultConfiguration);
+
+		final EmbeddedCacheManager nativeEmbeddedCacheManager = new DefaultCacheManager(
+				templateConfiguration.globalConfiguration, templateConfiguration.defaultConfiguration);
+		for (final Map.Entry<String, Configuration> namedCacheConfig : templateConfiguration.namedCaches.entrySet()) {
+			nativeEmbeddedCacheManager.defineConfiguration(namedCacheConfig.getKey(), namedCacheConfig.getValue());
+		}
+
+		return nativeEmbeddedCacheManager;
+	}
+
+	// ------------------------------------------------------------------------
+	// Create ConfigurationContainer
+	// ------------------------------------------------------------------------
 
 	protected ConfigurationContainer createTemplateConfiguration() throws ConfigurationException, IOException {
 		final ConfigurationContainer templateConfiguration;

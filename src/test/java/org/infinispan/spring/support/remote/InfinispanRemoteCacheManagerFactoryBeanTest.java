@@ -41,6 +41,7 @@ import java.util.Collection;
 import java.util.Properties;
 
 import org.infinispan.client.hotrod.RemoteCacheManager;
+import org.infinispan.spring.AbstractInfinispanRemoteCacheManagerBackedCacheManagerFactory;
 import org.infinispan.spring.mock.MockExecutorFatory;
 import org.infinispan.spring.mock.MockMarshaller;
 import org.infinispan.spring.mock.MockRequestBalancingStrategy;

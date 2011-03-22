@@ -19,10 +19,6 @@
 
 package org.infinispan.spring.support.embedded;
 
-import java.util.Map;
-
-import org.infinispan.config.Configuration;
-import org.infinispan.manager.DefaultCacheManager;
 import org.infinispan.manager.EmbeddedCacheManager;
 import org.infinispan.spring.AbstractInfinispanEmbeddedCacheManagerBackedCacheManagerFactory;
 import org.springframework.beans.factory.DisposableBean;
@@ -83,16 +79,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean extends
 	public void afterPropertiesSet() throws Exception {
 		this.logger.info("Initializing INFINISPAN EmbeddedCacheManager instance ...");
 
-		final ConfigurationContainer templateConfiguration = createTemplateConfiguration();
-
-		this.globalConfigurationOverrides.applyOverridesTo(templateConfiguration.globalConfiguration);
-		this.configurationOverrides.applyOverridesTo(templateConfiguration.defaultConfiguration);
-
-		this.cacheManager = new DefaultCacheManager(templateConfiguration.globalConfiguration,
-				templateConfiguration.defaultConfiguration);
-		for (final Map.Entry<String, Configuration> namedCacheConfig : templateConfiguration.namedCaches.entrySet()) {
-			this.cacheManager.defineConfiguration(namedCacheConfig.getKey(), namedCacheConfig.getValue());
-		}
+		this.cacheManager = createBackingEmbeddedCacheManager();
 
 		this.logger.info("Successfully initialized INFINISPAN EmbeddedCacheManager instance [" + this.cacheManager
 				+ "]");
