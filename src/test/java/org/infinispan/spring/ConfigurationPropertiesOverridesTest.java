@@ -39,7 +39,6 @@ import java.util.Collection;
 import java.util.Properties;
 
 import org.infinispan.client.hotrod.impl.ConfigurationProperties;
-import org.infinispan.spring.ConfigurationPropertiesOverrides;
 import org.junit.Test;
 
 /**

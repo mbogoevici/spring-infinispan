@@ -25,7 +25,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.infinispan.Cache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
-import org.infinispan.spring.support.remote.InfinispanNamedRemoteCacheFactoryBean;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

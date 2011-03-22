@@ -20,10 +20,14 @@
 package org.infinispan.spring.spi;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+
+import java.io.IOException;
 
 import org.infinispan.client.hotrod.RemoteCacheManager;
-import org.infinispan.spring.spi.SpringRemoteCacheManager;
 import org.junit.Test;
 import org.springframework.cache.Cache;
 
@@ -43,15 +47,6 @@ public class SpringRemoteCacheManagerTest {
 	@Test(expected = IllegalArgumentException.class)
 	public final void springRemoteCacheManagerConstructorShouldRejectNullRemoteCacheManager() {
 		new SpringRemoteCacheManager(null);
-	}
-
-	/**
-	 * Test method for {@link org.infinispan.spring.spi.SpringRemoteCacheManager#SpringRemoteCacheManager(org.infinispan.client.hotrod.RemoteCacheManager)}.
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public final void springRemoteCacheManagerConstructorShouldRejectStoppedRemoteCacheManager() {
-		final RemoteCacheManager nativeStoppedCacheManager = new RemoteCacheManager(false);
-		new SpringRemoteCacheManager(nativeStoppedCacheManager);
 	}
 
 	/**
@@ -85,4 +80,49 @@ public class SpringRemoteCacheManagerTest {
 		objectUnderTest.getCacheNames();
 	}
 
+	/**
+	 * Test method for {@link org.infinispan.spring.spi.SpringRemoteCacheManager#start()}.
+	 * @throws IOException 
+	 */
+	@Test
+	public final void startShouldStartTheNativeRemoteCacheManager() throws IOException {
+		final RemoteCacheManager nativeCacheManager = new RemoteCacheManager(true);
+		final SpringRemoteCacheManager objectUnderTest = new SpringRemoteCacheManager(nativeCacheManager);
+
+		objectUnderTest.start();
+
+		assertTrue("Calling start() on SpringRemoteCacheManager should start the enclosed "
+				+ "INFINISPAN RemoteCacheManager. However, it is still not running.", nativeCacheManager.isStarted());
+	}
+
+	/**
+	 * Test method for {@link org.infinispan.spring.spi.SpringRemoteCacheManager#stop()}.
+	 * @throws IOException 
+	 */
+	@Test
+	public final void stopShouldStopTheNativeRemoteCacheManager() throws IOException {
+		final RemoteCacheManager nativeCacheManager = new RemoteCacheManager(true);
+		final SpringRemoteCacheManager objectUnderTest = new SpringRemoteCacheManager(nativeCacheManager);
+
+		objectUnderTest.stop();
+
+		assertFalse("Calling stop() on SpringRemoteCacheManager should stop the enclosed "
+				+ "INFINISPAN RemoteCacheManager. However, it is still running.", nativeCacheManager.isStarted());
+	}
+
+	/**
+	 * Test method for {@link org.infinispan.spring.spi.SpringRemoteCacheManager#getNativeCache()}.
+	 * @throws IOException 
+	 */
+	@Test
+	public final void getNativeCacheShouldReturnTheRemoteCacheManagerSuppliedAtConstructionTime() throws IOException {
+		final RemoteCacheManager nativeCacheManager = new RemoteCacheManager(true);
+		final SpringRemoteCacheManager objectUnderTest = new SpringRemoteCacheManager(nativeCacheManager);
+
+		final RemoteCacheManager nativeCacheManagerReturned = objectUnderTest.getNativeCacheManager();
+
+		assertSame(
+				"getNativeCacheManager() should have returned the RemoteCacheManager supplied at construction time. However, it retuned a different one.",
+				nativeCacheManager, nativeCacheManagerReturned);
+	}
 }

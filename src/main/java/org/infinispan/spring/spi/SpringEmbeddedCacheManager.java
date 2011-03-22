@@ -22,9 +22,7 @@ package org.infinispan.spring.spi;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.infinispan.lifecycle.ComponentStatus;
 import org.infinispan.manager.EmbeddedCacheManager;
-import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.util.Assert;
 
@@ -53,29 +51,35 @@ public class SpringEmbeddedCacheManager implements CacheManager {
 	 */
 	public SpringEmbeddedCacheManager(final EmbeddedCacheManager nativeCacheManager) {
 		Assert.notNull(nativeCacheManager, "A non-null instance of EmbeddedCacheManager needs to be supplied");
-		checkNativeCacheManagerStatus(nativeCacheManager);
 		this.nativeCacheManager = nativeCacheManager;
 	}
 
-	/**
-	 * @param nativeCacheManager
-	 */
-	private void checkNativeCacheManagerStatus(final EmbeddedCacheManager nativeCacheManager) {
-		final ComponentStatus currentCacheManagerStatus = nativeCacheManager.getStatus();
-		Assert.isTrue(currentCacheManagerStatus == ComponentStatus.RUNNING,
-				"The supplied EmbeddedCacheManager instance [" + nativeCacheManager
-						+ "] is required to be in state RUNNING. Actual state: " + currentCacheManagerStatus);
-	}
-
 	@Override
-	public <K, V> Cache<K, V> getCache(final String name) {
-		checkNativeCacheManagerStatus(this.nativeCacheManager);
+	public <K, V> SpringCache<K, V> getCache(final String name) {
 		return new SpringCache<K, V>(this.nativeCacheManager.<K, V> getCache(name));
 	}
 
 	@Override
 	public Collection<String> getCacheNames() {
-		checkNativeCacheManagerStatus(this.nativeCacheManager);
 		return Collections.unmodifiableSet(this.nativeCacheManager.getCacheNames());
+	}
+
+	/**
+	 * Return the {@link org.infinispan.manager.EmbeddedCacheManager <code>org.infinispan.manager.EmbeddedCacheManager</code>}
+	 * that backs this <code>CacheManager</code>.
+	 * 
+	 * @return The {@link org.infinispan.manager.EmbeddedCacheManager <code>org.infinispan.manager.EmbeddedCacheManager</code>}
+	 *         that backs this <code>CacheManager</code>
+	 */
+	public EmbeddedCacheManager getNativeCacheManager() {
+		return this.nativeCacheManager;
+	}
+
+	/**
+	 * Stop the {@link EmbeddedCacheManager <code>EmbeddedCacheManager</code>} this <code>CacheManager</code>
+	 * delegates to. 
+	 */
+	public void stop() {
+		this.nativeCacheManager.stop();
 	}
 }

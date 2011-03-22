@@ -17,7 +17,7 @@
  * governing permissions and limitations under the License.
  */
 
-package org.infinispan.spring.support.embedded;
+package org.infinispan.spring.spi;
 
 import java.util.Map;
 
@@ -33,18 +33,18 @@ import org.springframework.core.io.Resource;
 /**
  * <p>
  * A {@link org.springframework.beans.factory.FactoryBean <code>FactoryBean</code>} for creating an
- * {@link org.infinispan.manager.EmbeddedCacheManager <code>INFINISPAN EmbeddedCacheManager</code>}
+ * {@link org.infinispan.spring.spi.SpringEmbeddedCacheManager <code>SpringEmbeddedCacheManager</code>}
  * instance. The location of the INFINISPAN configuration file used to provide the default
  * {@link org.infinispan.config.Configuration configuration} for the <code>EmbeddedCacheManager</code>
  * instance created by this <code>FactoryBean</code> is {@link #setConfigurationFileLocation(Resource) configurable}.
  * </p>
  * <p>
- * If no configuration file location is set the <code>EmbeddedCacheManager</code> instance created by this
+ * If no configuration file location is set the <code>SpringEmbeddedCacheManager</code> instance created by this
  * <code>FactoryBean</code> will use INFINISPAN's default settings. See INFINISPAN's 
  * <a href="http://www.jboss.org/infinispan/docs">documentation</a> for what those default settings are.
  * </p>
  * <p>
- * A user may further customize the <code>EmbeddedCacheManager</code>'s configuration using explicit setters
+ * A user may further customize the <code>SpringEmbeddedCacheManager</code>'s configuration using explicit setters
  * on this <code>FactoryBean</code>. The properties thus defined will be applied either to the configuration
  * loaded from INFINISPAN's configuration file in case one has been specified, or to a configuration initialized
  * with INFINISPAN's default settings. Either way, the net effect is that explicitly set configuration
@@ -52,25 +52,26 @@ import org.springframework.core.io.Resource;
  * default settings.
  * </p>
  * <p>
- * In addition to creating an <code>EmbeddedCacheManager</code> this <code>FactoryBean</code> does also
- * control that <code>EmbeddedCacheManagers</code>'s {@link org.infinispan.lifecycly.Lifecycle lifecycle}
+ * In addition to creating an <code>SpringEmbeddedCacheManager</code> this <code>FactoryBean</code> does also
+ * control that <code>SpringEmbeddedCacheManager</code>'s {@link org.infinispan.lifecycly.Lifecycle lifecycle}
  * by shutting it down when the enclosing Spring application context is closed. It is therefore advisable
- * to <em>always</em> use this <code>FactoryBean</code> when creating an <code>EmbeddedCacheManager</code>.
+ * to <em>always</em> use this <code>FactoryBean</code> when creating an <code>SpringEmbeddedCacheManager</code>.
  * </p>
  *
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>
  * 
  * @see #setConfigurationFileLocation(Resource)
  * @see #destroy()
+ * @see org.infinispan.spring.spi.SpringEmbeddedCacheManager
  * @see org.infinispan.manager.EmbeddedCacheManager
  * @see org.infinispan.config.Configuration
  *
  */
-public class InfinispanEmbeddedCacheManagerFactoryBean extends
-		AbstractInfinispanEmbeddedCacheManagerBackedCacheManagerFactory implements FactoryBean<EmbeddedCacheManager>,
-		InitializingBean, DisposableBean {
+public class SpringEmbeddedCacheManagerFactoryBean extends
+		AbstractInfinispanEmbeddedCacheManagerBackedCacheManagerFactory implements
+		FactoryBean<SpringEmbeddedCacheManager>, InitializingBean, DisposableBean {
 
-	private EmbeddedCacheManager cacheManager;
+	private SpringEmbeddedCacheManager cacheManager;
 
 	// ------------------------------------------------------------------------
 	// org.springframework.beans.factory.InitializingBean
@@ -81,21 +82,22 @@ public class InfinispanEmbeddedCacheManagerFactoryBean extends
 	 */
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		this.logger.info("Initializing INFINISPAN EmbeddedCacheManager instance ...");
+		this.logger.info("Initializing SpringEmbeddedCacheManager instance ...");
 
 		final ConfigurationContainer templateConfiguration = createTemplateConfiguration();
 
 		this.globalConfigurationOverrides.applyOverridesTo(templateConfiguration.globalConfiguration);
 		this.configurationOverrides.applyOverridesTo(templateConfiguration.defaultConfiguration);
 
-		this.cacheManager = new DefaultCacheManager(templateConfiguration.globalConfiguration,
-				templateConfiguration.defaultConfiguration);
+		final EmbeddedCacheManager nativeEmbeddedCacheManager = new DefaultCacheManager(
+				templateConfiguration.globalConfiguration, templateConfiguration.defaultConfiguration);
 		for (final Map.Entry<String, Configuration> namedCacheConfig : templateConfiguration.namedCaches.entrySet()) {
-			this.cacheManager.defineConfiguration(namedCacheConfig.getKey(), namedCacheConfig.getValue());
+			nativeEmbeddedCacheManager.defineConfiguration(namedCacheConfig.getKey(), namedCacheConfig.getValue());
 		}
 
-		this.logger.info("Successfully initialized INFINISPAN EmbeddedCacheManager instance [" + this.cacheManager
-				+ "]");
+		this.cacheManager = new SpringEmbeddedCacheManager(nativeEmbeddedCacheManager);
+
+		this.logger.info("Successfully initialized SpringEmbeddedCacheManager instance [" + this.cacheManager + "]");
 	}
 
 	// ------------------------------------------------------------------------
@@ -106,7 +108,7 @@ public class InfinispanEmbeddedCacheManagerFactoryBean extends
 	 * @see org.springframework.beans.factory.FactoryBean#getObject()
 	 */
 	@Override
-	public EmbeddedCacheManager getObject() throws Exception {
+	public SpringEmbeddedCacheManager getObject() throws Exception {
 		return this.cacheManager;
 	}
 
@@ -114,8 +116,8 @@ public class InfinispanEmbeddedCacheManagerFactoryBean extends
 	 * @see org.springframework.beans.factory.FactoryBean#getObjectType()
 	 */
 	@Override
-	public Class<? extends EmbeddedCacheManager> getObjectType() {
-		return this.cacheManager != null ? this.cacheManager.getClass() : EmbeddedCacheManager.class;
+	public Class<? extends SpringEmbeddedCacheManager> getObjectType() {
+		return this.cacheManager != null ? this.cacheManager.getClass() : SpringEmbeddedCacheManager.class;
 	}
 
 	/**
@@ -135,10 +137,10 @@ public class InfinispanEmbeddedCacheManagerFactoryBean extends
 	// ------------------------------------------------------------------------
 
 	/**
-	 * Shuts down the <code>EmbeddedCacheManager</code> instance created by this <code>FactoryBean</code>.
+	 * Shuts down the <code>SpringEmbeddedCacheManager</code> instance created by this <code>FactoryBean</code>.
 	 * 
 	 * @see org.springframework.beans.factory.DisposableBean#destroy()
-	 * @see org.infinispan.manager.EmbeddedCacheManager#stop()
+	 * @see org.infinispan.spring.spi.SpringEmbeddedCacheManager#stop()
 	 */
 	@Override
 	public void destroy() throws Exception {

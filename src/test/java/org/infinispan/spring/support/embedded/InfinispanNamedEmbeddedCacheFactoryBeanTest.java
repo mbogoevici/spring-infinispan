@@ -29,7 +29,6 @@ import java.io.InputStream;
 import org.infinispan.Cache;
 import org.infinispan.lifecycle.ComponentStatus;
 import org.infinispan.manager.DefaultCacheManager;
-import org.infinispan.spring.support.embedded.InfinispanNamedEmbeddedCacheFactoryBean;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
