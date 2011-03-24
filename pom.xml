@@ -321,7 +321,11 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${plugins.javadoc.version}</version>
                 <configuration>
-                    <show>package</show>
+                    <show>public</show>
+                    <links>
+                        <link>http://static.springsource.org/spring/docs/3.1.0.M1/javadoc-api/</link>
+                        <link>http://docs.jboss.org/infinispan/4.2/apidocs/</link>
+                    </links>
                 </configuration>
                 <executions>
                     <execution>
