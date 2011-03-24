@@ -89,7 +89,7 @@ import org.springframework.util.StringUtils;
  * </p>
  * <p>
  * In addition to creating a named <code>Cache</code> this <code>FactoryBean</code> does also control that <code>Cache</code>'s 
- * {@link org.infinispan.lifecycly.Lifecycle lifecycle} by shutting it down when the enclosing Spring application context 
+ * {@link org.infinispan.lifecycle.Lifecycle lifecycle} by shutting it down when the enclosing Spring application context 
  * is closed. It is therefore advisable to <em>always</em> use this <code>FactoryBean</code> when creating a named 
  * <code>Cache</code>.
  * </p>

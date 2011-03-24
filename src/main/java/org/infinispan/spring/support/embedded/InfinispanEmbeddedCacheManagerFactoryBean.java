@@ -24,7 +24,6 @@ import org.infinispan.spring.AbstractInfinispanEmbeddedCacheManagerBackedCacheMa
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.core.io.Resource;
 
 /**
  * <p>
@@ -32,7 +31,7 @@ import org.springframework.core.io.Resource;
  * {@link org.infinispan.manager.EmbeddedCacheManager <code>INFINISPAN EmbeddedCacheManager</code>}
  * instance. The location of the INFINISPAN configuration file used to provide the default
  * {@link org.infinispan.config.Configuration configuration} for the <code>EmbeddedCacheManager</code>
- * instance created by this <code>FactoryBean</code> is {@link #setConfigurationFileLocation(Resource) configurable}.
+ * instance created by this <code>FactoryBean</code> is {@link #setConfigurationFileLocation(org.springframework.core.io.Resource) configurable}.
  * </p>
  * <p>
  * If no configuration file location is set the <code>EmbeddedCacheManager</code> instance created by this
@@ -49,14 +48,14 @@ import org.springframework.core.io.Resource;
  * </p>
  * <p>
  * In addition to creating an <code>EmbeddedCacheManager</code> this <code>FactoryBean</code> does also
- * control that <code>EmbeddedCacheManagers</code>'s {@link org.infinispan.lifecycly.Lifecycle lifecycle}
+ * control that <code>EmbeddedCacheManagers</code>'s {@link org.infinispan.lifecycle.Lifecycle lifecycle}
  * by shutting it down when the enclosing Spring application context is closed. It is therefore advisable
  * to <em>always</em> use this <code>FactoryBean</code> when creating an <code>EmbeddedCacheManager</code>.
  * </p>
  *
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>
  * 
- * @see #setConfigurationFileLocation(Resource)
+ * @see #setConfigurationFileLocation(org.springframework.core.io.Resource)
  * @see #destroy()
  * @see org.infinispan.manager.EmbeddedCacheManager
  * @see org.infinispan.config.Configuration
