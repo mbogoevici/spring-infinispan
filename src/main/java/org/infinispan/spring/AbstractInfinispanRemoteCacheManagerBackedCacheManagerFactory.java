@@ -31,8 +31,7 @@ import org.springframework.core.io.Resource;
 
 /**
  * <p>
- * An abstract base class for factories creating cache manager that are backed by an INFINISPAN
- * RemoteCacheManager.
+ * An abstract base class for factories creating cache manager that are backed by an INFINISPAN RemoteCacheManager.
  * </p>
  *
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>

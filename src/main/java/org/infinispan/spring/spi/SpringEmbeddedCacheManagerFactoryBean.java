@@ -31,7 +31,8 @@ import org.springframework.beans.factory.InitializingBean;
  * {@link org.infinispan.spring.spi.SpringEmbeddedCacheManager <code>SpringEmbeddedCacheManager</code>}
  * instance. The location of the INFINISPAN configuration file used to provide the default
  * {@link org.infinispan.config.Configuration configuration} for the <code>EmbeddedCacheManager</code>
- * instance created by this <code>FactoryBean</code> is {@link #setConfigurationFileLocation(org.springframework.core.io.Resource) configurable}.
+ * instance created by this <code>FactoryBean</code> is 
+ * {@link #setConfigurationFileLocation(org.springframework.core.io.Resource) configurable}.
  * </p>
  * <p>
  * If no configuration file location is set the <code>SpringEmbeddedCacheManager</code> instance created by this

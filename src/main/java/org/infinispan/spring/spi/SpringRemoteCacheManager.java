@@ -70,27 +70,31 @@ public class SpringRemoteCacheManager implements org.springframework.cache.Cache
 	}
 
 	/**
-	 * Return the {@link org.infinispan.client.hotrod.RemoteCacheManager <code>org.infinispan.client.hotrod.RemoteCacheManager</code>}
-	 * that backs this <code>SpringRemoteCacheManager</code>.
+	 * Return the {@link org.infinispan.client.hotrod.RemoteCacheManager 
+	 * <code>org.infinispan.client.hotrod.RemoteCacheManager</code>} that backs this
+	 * <code>SpringRemoteCacheManager</code>.
 	 * 
-	 * @return The {@link org.infinispan.client.hotrod.RemoteCacheManager <code>org.infinispan.client.hotrod.RemoteCacheManager</code>}
-	 *         that backs this <code>SpringRemoteCacheManager</code>
+	 * @return The {@link org.infinispan.client.hotrod.RemoteCacheManager 
+	 *         <code>org.infinispan.client.hotrod.RemoteCacheManager</code>} that backs this 
+	 *         <code>SpringRemoteCacheManager</code>
 	 */
 	public RemoteCacheManager getNativeCacheManager() {
 		return this.nativeCacheManager;
 	}
 
 	/**
-	 * Start the {@link org.infinispan.client.hotrod.RemoteCacheManager <code>org.infinispan.client.hotrod.RemoteCacheManager</code>}
-	 * that backs this <code>SpringRemoteCacheManager</code>.
+	 * Start the {@link org.infinispan.client.hotrod.RemoteCacheManager 
+	 * <code>org.infinispan.client.hotrod.RemoteCacheManager</code>} that backs this 
+	 * <code>SpringRemoteCacheManager</code>.
 	 */
 	public void start() {
 		this.nativeCacheManager.start();
 	}
 
 	/**
-	 * Stop the {@link org.infinispan.client.hotrod.RemoteCacheManager <code>org.infinispan.client.hotrod.RemoteCacheManager</code>}
-	 * that backs this <code>SpringRemoteCacheManager</code>.
+	 * Stop the {@link org.infinispan.client.hotrod.RemoteCacheManager 
+	 * <code>org.infinispan.client.hotrod.RemoteCacheManager</code>} that backs this 
+	 * <code>SpringRemoteCacheManager</code>.
 	 */
 	public void stop() {
 		this.nativeCacheManager.stop();

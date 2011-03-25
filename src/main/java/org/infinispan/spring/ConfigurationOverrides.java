@@ -33,7 +33,8 @@ import org.infinispan.util.concurrent.IsolationLevel;
 
 /**
  * <p>
- * TODO: Document ConfigurationOverrides.
+ * Helper class to override select values in an INFINISPAN {@link org.infinispan.config.Configuration
+ * <code>Configuration</code>}.
  * </p>
  *
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>

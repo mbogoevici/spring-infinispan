@@ -65,11 +65,11 @@ public class SpringEmbeddedCacheManager implements CacheManager {
 	}
 
 	/**
-	 * Return the {@link org.infinispan.manager.EmbeddedCacheManager <code>org.infinispan.manager.EmbeddedCacheManager</code>}
-	 * that backs this <code>CacheManager</code>.
+	 * Return the {@link org.infinispan.manager.EmbeddedCacheManager 
+	 * <code>org.infinispan.manager.EmbeddedCacheManager</code>} that backs this <code>CacheManager</code>.
 	 * 
-	 * @return The {@link org.infinispan.manager.EmbeddedCacheManager <code>org.infinispan.manager.EmbeddedCacheManager</code>}
-	 *         that backs this <code>CacheManager</code>
+	 * @return The {@link org.infinispan.manager.EmbeddedCacheManager 
+	 *         <code>org.infinispan.manager.EmbeddedCacheManager</code>} that backs this <code>CacheManager</code>
 	 */
 	public EmbeddedCacheManager getNativeCacheManager() {
 		return this.nativeCacheManager;

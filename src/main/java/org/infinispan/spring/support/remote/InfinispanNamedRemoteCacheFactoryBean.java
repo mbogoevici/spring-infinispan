@@ -134,14 +134,15 @@ public class InfinispanNamedRemoteCacheFactoryBean<K, V> implements FactoryBean<
 
 	/**
 	 * <p>
-	 * Sets the {@link org.infinispan.Cache#getName() name} of the {@link org.infinispan.Cache <code>org.infinispan.Cache</code>}
-	 * to be created. If no explicit <code>cacheName</code> is set, this <code>FactoryBean</code> will use its
-	 * {@link #setBeanName(String) <code>beanName</code>} as the <code>cacheName</code>.
+	 * Sets the {@link org.infinispan.Cache#getName() name} of the {@link org.infinispan.Cache 
+	 * <code>org.infinispan.Cache</code>} to be created. If no explicit <code>cacheName</code> is set, this 
+	 * <code>FactoryBean</code> will use its {@link #setBeanName(String) <code>beanName</code>} as the 
+	 * <code>cacheName</code>.
 	 * </p>
 	 * 
 	 * @param cacheName 
-	 * 			The {@link org.infinispan.Cache#getName() name} of the {@link org.infinispan.Cache <code>org.infinispan.Cache</code>}
-	 * 			to be created
+	 * 			The {@link org.infinispan.Cache#getName() name} of the {@link org.infinispan.Cache 
+	 *          <code>org.infinispan.Cache</code>} to be created
 	 */
 	public void setCacheName(final String cacheName) {
 		this.cacheName = cacheName;
@@ -149,14 +150,16 @@ public class InfinispanNamedRemoteCacheFactoryBean<K, V> implements FactoryBean<
 
 	/**
 	 * <p>
-	 * Sets the {@link org.infinispan.client.hotrod.RemoteCacheManager <code>org.infinispan.client.hotrod.RemoteCacheManager</code>} to 
-	 * be used for creating our {@link org.infinispan.Cache <code>Cache</code>} instance. Note that this is a 
-	 * <strong>mandatory</strong> property.
+	 * Sets the {@link org.infinispan.client.hotrod.RemoteCacheManager 
+	 * <code>org.infinispan.client.hotrod.RemoteCacheManager</code>} to be used for creating our
+	 * {@link org.infinispan.Cache <code>Cache</code>} instance. Note that this is a <strong>mandatory</strong> 
+	 * property.
 	 * </p>
 	 * 
 	 * @param infinispanRemoteCacheManager 
-	 * 			The {@link org.infinispan.client.hotrod.RemoteCacheManager <code>org.infinispan.client.hotrod.RemoteCacheManager</code>} to
-	 *          be used for creating our {@link org.infinispan.Cache <code>Cache</code>} instance
+	 * 			The {@link org.infinispan.client.hotrod.RemoteCacheManager 
+	 *          <code>org.infinispan.client.hotrod.RemoteCacheManager</code>} to be used for creating our 
+	 *          {@link org.infinispan.Cache <code>Cache</code>} instance
 	 */
 	public void setInfinispanRemoteCacheManager(final RemoteCacheManager infinispanRemoteCacheManager) {
 		this.infinispanRemoteCacheManager = infinispanRemoteCacheManager;

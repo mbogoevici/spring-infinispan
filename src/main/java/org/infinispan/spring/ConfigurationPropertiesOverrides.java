@@ -37,8 +37,8 @@ import java.util.Properties;
 
 /**
  * <p>
- * Provides a mechanism to override selected configuration properties using
- * explicit setters for each configuration setting.
+ * Provides a mechanism to override selected configuration properties using explicit setters for each configuration
+ * setting.
  * </p>
  *
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>

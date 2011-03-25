@@ -50,9 +50,9 @@ import org.springframework.util.StringUtils;
  * </p>
  * <p>
  * Beyond merely creating named <code>Cache</code> instances, this <code>FactoryBean</code> offers great flexibility
- * in configuring those <code>Caches</code>. It has setters for all non-global configuration settings, i.e. all settings
- * that are specific to a single <code>Cache</code>. The configuration settings thus defined override those settings
- * obtained from the <code>EmbeddedCacheManager</code>.
+ * in configuring those <code>Caches</code>. It has setters for all non-global configuration settings, i.e. all 
+ * settings that are specific to a single <code>Cache</code>. The configuration settings thus defined override those 
+ * settings obtained from the <code>EmbeddedCacheManager</code>.
  * </p>
  * <p>
  * There are different configuration {@link #setConfigurationTemplateMode(String) <code>modes</code>} that control
@@ -88,10 +88,10 @@ import org.springframework.util.StringUtils;
  * </ul>
  * </p>
  * <p>
- * In addition to creating a named <code>Cache</code> this <code>FactoryBean</code> does also control that <code>Cache</code>'s 
- * {@link org.infinispan.lifecycle.Lifecycle lifecycle} by shutting it down when the enclosing Spring application context 
- * is closed. It is therefore advisable to <em>always</em> use this <code>FactoryBean</code> when creating a named 
- * <code>Cache</code>.
+ * In addition to creating a named <code>Cache</code> this <code>FactoryBean</code> does also control that 
+ * <code>Cache</code>' {@link org.infinispan.lifecycle.Lifecycle lifecycle} by shutting it down when the enclosing 
+ * Spring application context is closed. It is therefore advisable to <em>always</em> use this <code>FactoryBean</code>
+ * when creating a named <code>Cache</code>.
  * </p>
  *
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>
@@ -129,7 +129,8 @@ public class InfinispanNamedEmbeddedCacheFactoryBean<K, V> implements FactoryBea
 	 * &quot;cacheName&quot; this is the configuration section named &quot;cacheName&quot; as defined in the 
 	 * <code>EmbeddedCacheManager</code>'s configuration file. Subsequently, its settings are overridden with those 
 	 * properties that have been explicitly set on this <code>FactoryBean</code>. Note that this mode is only useful
-	 * if such a named configuration section does indeed exist. Otherwise, it is equivalent to using <code>DEFAULT</code>. 
+	 * if such a named configuration section does indeed exist. Otherwise, it is equivalent to using 
+	 * <code>DEFAULT</code>. 
 	 * </li>
 	 * </ul>
 	 * </p>
@@ -300,14 +301,15 @@ public class InfinispanNamedEmbeddedCacheFactoryBean<K, V> implements FactoryBea
 
 	/**
 	 * <p>
-	 * Sets the {@link org.infinispan.Cache#getName() name} of the {@link org.infinispan.Cache <code>org.infinispan.Cache</code>}
-	 * to be created. If no explicit <code>cacheName</code> is set, this <code>FactoryBean</code> will use its
-	 * {@link #setBeanName(String) <code>beanName</code>} as the <code>cacheName</code>.
+	 * Sets the {@link org.infinispan.Cache#getName() name} of the 
+	 * {@link org.infinispan.Cache <code>org.infinispan.Cache</code>} to be created. If no explicit 
+	 * <code>cacheName</code> is set, this <code>FactoryBean</code> will use its {@link #setBeanName(String)
+	 * <code>beanName</code>} as the <code>cacheName</code>.
 	 * </p>
 	 * 
 	 * @param cacheName 
-	 * 			The {@link org.infinispan.Cache#getName() name} of the {@link org.infinispan.Cache <code>org.infinispan.Cache</code>}
-	 * 			to be created
+	 * 			The {@link org.infinispan.Cache#getName() name} of the {@link org.infinispan.Cache 
+	 *          <code>org.infinispan.Cache</code>} to be created
 	 */
 	public void setCacheName(final String cacheName) {
 		this.cacheName = cacheName;

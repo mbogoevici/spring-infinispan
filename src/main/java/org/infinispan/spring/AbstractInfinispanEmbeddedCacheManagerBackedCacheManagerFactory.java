@@ -120,21 +120,22 @@ public class AbstractInfinispanEmbeddedCacheManagerBackedCacheManagerFactory {
 	/**
 	 * <p>
 	 * Sets the {@link org.springframework.core.io.Resource <code>location</code>} of the configuration
-	 * file which will be used to configure the {@link org.infinispan.manager.EmbeddedCacheManager <code>EmbeddedCacheManager</code>}
-	 * the {@link org.infinispan.spring.spi.SpringEmbeddedCacheManager <code>SpringEmbeddedCacheManager</code>} 
-	 * created by this <code>FactoryBean</code> delegates to. If no location is supplied, <tt>INFINISPAN</tt>'s 
-	 * default configuration will be used. 
+	 * file which will be used to configure the {@link org.infinispan.manager.EmbeddedCacheManager 
+	 * <code>EmbeddedCacheManager</code>} the {@link org.infinispan.spring.spi.SpringEmbeddedCacheManager
+	 * <code>SpringEmbeddedCacheManager</code>} created by this <code>FactoryBean</code> delegates to. If no location
+	 * is supplied, <tt>INFINISPAN</tt>'s default configuration will be used. 
 	 * </p>
 	 * <p>
 	 * Note that configuration settings defined via using explicit setters exposed by this <code>FactoryBean</code>
-	 * take precedence over those defined in the configuration file pointed to by <code>configurationFileLocation</code>.
+	 * take precedence over those defined in the configuration file pointed to by
+	 * <code>configurationFileLocation</code>.
 	 * </p>
 	 * 
 	 * @param configurationFileLocation 
 	 * 			The {@link org.springframework.core.io.Resource <code>location</code>} of the configuration
-	 *          file which will be used to configure the {@link org.infinispan.manager.EmbeddedCacheManager <code>EmbeddedCacheManager</code>}
-	 *          the {@link org.infinispan.spring.spi.SpringEmbeddedCacheManager <code>SpringEmbeddedCacheManager</code>} 
-	 *          created by this <code>FactoryBean</code> delegates to
+	 *          file which will be used to configure the {@link org.infinispan.manager.EmbeddedCacheManager 
+	 *          <code>EmbeddedCacheManager</code>} the {@link org.infinispan.spring.spi.SpringEmbeddedCacheManager
+	 *          <code>SpringEmbeddedCacheManager</code>} created by this <code>FactoryBean</code> delegates to
 	 */
 	public void setConfigurationFileLocation(final Resource configurationFileLocation) {
 		this.configurationFileLocation = configurationFileLocation;

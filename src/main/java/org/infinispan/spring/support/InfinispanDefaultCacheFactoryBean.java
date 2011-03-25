@@ -30,19 +30,18 @@ import org.springframework.beans.factory.InitializingBean;
 /**
  * <p>
  * A {@link org.springframework.beans.factory.FactoryBean <code>FactoryBean</code>} for creating a native
- * <em>default</em> INFINISPAN {@link org.infinispan.Cache <code>org.infinispan.Cache</code>}, 
- * delegating to a {@link #setInfinispanCacheContainer(CacheContainer) <code>configurable</code>} 
- * {@link org.infinispan.manager.CacheContainer <code>org.infinispan.manager.CacheContainer</code>}. A
- * default <code>Cache</code> is a <code>Cache</code> that uses its <code>CacheContainer</code>'s default
- * settings. This is contrary to a <em>named</em> <code>Cache</code> where select settings from a
- * <code>CacheContainer</code>'s default configuration may be overridden with settings specific to that
- * <code>Cache</code>.
+ * <em>default</em> INFINISPAN {@link org.infinispan.Cache <code>org.infinispan.Cache</code>}, delegating to a
+ * {@link #setInfinispanCacheContainer(CacheContainer) <code>configurable</code>} 
+ * {@link org.infinispan.manager.CacheContainer <code>org.infinispan.manager.CacheContainer</code>}. A default
+ * <code>Cache</code> is a <code>Cache</code> that uses its <code>CacheContainer</code>'s default settings. This is
+ * contrary to a <em>named</em> <code>Cache</code> where select settings from a <code>CacheContainer</code>'s default
+ * configuration may be overridden with settings specific to that <code>Cache</code>.
  * </p>
  * <p>
- * In addition to creating a <code>Cache</code> this <code>FactoryBean</code> does also control that 
- * <code>Cache</code>'s {@link org.infinispan.lifecycle.Lifecycle lifecycle} by shutting it down when the 
- * enclosing Spring application context is closed. It is therefore advisable to <em>always</em> use this 
- * <code>FactoryBean</code> when creating a <code>Cache</code>.
+ * In addition to creating a <code>Cache</code> this <code>FactoryBean</code> does also control that
+ * <code>Cache</code>'s {@link org.infinispan.lifecycle.Lifecycle lifecycle} by shutting it down when the enclosing
+ * Spring application context is closed. It is therefore advisable to <em>always</em> use this <code>FactoryBean</code>
+ * when creating a <code>Cache</code>.
  * </p>
  *
  * @author <a href="mailto:olaf.bergner@gmx.de">Olaf Bergner</a>

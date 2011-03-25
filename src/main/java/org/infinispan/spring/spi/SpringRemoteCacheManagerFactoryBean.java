@@ -39,17 +39,19 @@ import org.springframework.beans.factory.InitializingBean;
  * {@link java.util.Properties <code>Properties</code>} object. For an exhaustive list of valid properties
  * to be used see <code>RemoteCacheManager</code>'s {@link org.infinispan.client.hotrod.RemoteCacheManager javadocs}.
  * This <code>FactoryBean</code> provides means to either {@link #setConfigurationProperties(Properties) inject}
- * a user-defined <code>Properties</code> instance or to {@link #setConfigurationPropertiesFileLocation(org.springframework.core.io.Resource) set}
- * the location of a properties file to load those properties from. Note that it is <em>illegal</em> to use
- * both mechanisms simultaneously.<br/>
+ * a user-defined <code>Properties</code> instance or to 
+ * {@link #setConfigurationPropertiesFileLocation(org.springframework.core.io.Resource) set} the location of a 
+ * properties file to load those properties from. Note that it is <em>illegal</em> to use both mechanisms 
+ * simultaneously.
  * </p>
  * <p>
- * Alternatively or in combination with {@link #setConfigurationPropertiesFileLocation(org.springframework.core.io.Resource) setting} 
- * the location of a <code>Properties</code> file to load the configuration from, this <code>FactoryBean</code>
- * provides (typed) setters for all configuration settings. Settings thus defined take precedence over those
- * defined in the injected <code>Properties</code> instance. This flexibility enables users to use e.g. a
- * company-wide <code>Properties</code> file containing default settings while simultaneously overriding
- * select settings whenever special requirements warrant this.<br/>
+ * Alternatively or in combination with 
+ * {@link #setConfigurationPropertiesFileLocation(org.springframework.core.io.Resource) setting} the location of a 
+ * <code>Properties</code> file to load the configuration from, this <code>FactoryBean</code> provides (typed) setters 
+ * for all configuration settings. Settings thus defined take precedence over those defined in the injected 
+ * <code>Properties</code> instance. This flexibility enables users to use e.g. a company-wide <code>Properties</code>
+ * file containing default settings while simultaneously overriding select settings whenever special requirements warrant
+ * this.<br/>
  * Note that it is illegal to use setters in conjunction with {@link #setConfigurationProperties(Properties) injecting}
  * a <code>Properties</code> instance.
  * </p>
