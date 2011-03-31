@@ -20,7 +20,6 @@
 package org.infinispan.spring.spi;
 
 import java.util.Collection;
-import java.util.Collections;
 
 import org.infinispan.manager.EmbeddedCacheManager;
 import org.springframework.cache.CacheManager;
@@ -61,7 +60,7 @@ public class SpringEmbeddedCacheManager implements CacheManager {
 
 	@Override
 	public Collection<String> getCacheNames() {
-		return Collections.unmodifiableSet(this.nativeCacheManager.getCacheNames());
+		return this.nativeCacheManager.getCacheNames();
 	}
 
 	/**
